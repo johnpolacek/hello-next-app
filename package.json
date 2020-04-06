@@ -1,0 +1,35 @@
+{
+  "name": "hello-next-app",
+  "description": "React Web App Project Template with Next.js, Firebase, Theme UI, MDX and more.",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "NODE_ENV=development next dev",
+    "build": "NODE_ENV=production next build",
+    "start": "NODE_ENV=production next start",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "format-watch": "npm run format && onchange \"**/*.{js,jsx,json,md}\" -- prettier --write {{changed}}",
+    "test": "cypress run",
+    "deploy": "npm run test && git push origin master && now --prod"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@mdx-js/loader": "^1.5.8",
+    "@next/mdx": "^9.3.4",
+    "cookie-session": "1.4.0",
+    "dotenv": "8.2.0",
+    "firebase": "^7.13.2",
+    "firebase-admin": "^8.9.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "lodash": "4.17.15",
+    "next": "^9.3.4",
+    "prop-types": "15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "theme-ui": "^0.3.1"
+  },
+  "devDependencies": {
+    "cypress": "^4.3.0",
+    "onchange": "^6.1.0",
+    "prettier": "^2.0.2"
+  }
+}
