@@ -15,8 +15,8 @@ const Index = (props) => {
   return (
     <Wrapper
       url="/"
-      title="Hello Web App"
-      description="Project Starter for building Web Apps with Next.js, Firebase, Theme UI, Cypress"
+      title="Hello Next App | Next.js Web App Project Template"
+      description="React Web App Project Template for building application websites with the Next.js Framework, a Firebase Serverless Backend, Theme UI Components and more."
     >
       <IndexView isSignedIn={AuthUserInfo && AuthUserInfo.AuthUser != null} />
     </Wrapper>

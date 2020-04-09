@@ -3,6 +3,7 @@ import Router from "next/router"
 import firebase from "firebase/app"
 import "firebase/auth"
 import initFirebase from "../../../utils/auth/initFirebase"
+import { Flex, Heading, Text, Label, Input, Button } from "theme-ui"
 
 // Init the Firebase app.
 initFirebase()
@@ -29,32 +30,32 @@ export default () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <p>Fill in the form below to create an account.</p>
-      <div>
-        <input
-          placeholder="Email"
+    <Flex sx={{ justifyContent: "center", width: "100%" }}>
+      <form onSubmit={handleSubmit}>
+        <Heading as="h2" sx={{ mb: 4, color: "primary" }}>
+          Create a new account
+        </Heading>
+        <Label htmlFor="email">Email</Label>
+        <Input
           name="email"
           type="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
-        ></input>
-      </div>
-      <div>
-        <input
-          placeholder="Password"
+          mb={3}
+        />
+        <Label htmlFor="password">Password</Label>
+        <Input
           name="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           type="password"
-        ></input>
-      </div>
-      <div>
-        {error && <p>{error}</p>}
-        <button disabled={isSubmitting} type="submit">
+          mb={3}
+        />
+        {error && <Text sx={{ color: "red" }}>{error}</Text>}
+        <Button disabled={isSubmitting} type="submit">
           Sign Up
-        </button>
-      </div>
-    </form>
+        </Button>
+      </form>
+    </Flex>
   )
 }

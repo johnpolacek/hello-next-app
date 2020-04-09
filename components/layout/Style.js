@@ -199,8 +199,6 @@ export default (props) => (
     input,
     select,
     textarea {
-      padding: 4px;
-      border: solid 2px #aed7ff;
       font-size: 16px;
       font-family: inherit;
     }

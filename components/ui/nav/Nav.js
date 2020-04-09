@@ -1,17 +1,17 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import Router from 'next/router'
+import Router from "next/router"
 import NavHome from "./NavHome"
 import NavLink from "./NavLink"
-import Button from "../buttons/Button"
 import GithubLink from "./GithubLink"
 import logout from "../../../utils/auth/logout"
 import withAuthUserInfo from "../../../utils/context/withAuthUserInfo"
+import { Flex, Box, Button } from "theme-ui"
 
 const Nav = (props) => {
   return (
-    <nav sx={{ display: "flex", flexWrap: "wrap", py: [2, 0] }}>
-      <div
+    <Flex as="nav" sx={{ flexWrap: "wrap", py: [2, 0] }}>
+      <Box
         sx={{
           width: ["100%", "50%"],
           pl: [0, 3],
@@ -20,8 +20,8 @@ const Nav = (props) => {
         }}
       >
         <NavHome />
-      </div>
-      <div
+      </Box>
+      <Box
         sx={{
           width: ["100%", "50%"],
           textAlign: ["center", "right"],
@@ -53,8 +53,8 @@ const Nav = (props) => {
           </>
         )}
         <GithubLink />
-      </div>
-    </nav>
+      </Box>
+    </Flex>
   )
 }
 

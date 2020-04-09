@@ -12,18 +12,14 @@ export default (props) => (
       <>
         <p sx={{ pb: 2 }}>You’re not signed in yet...</p>
         <div>
-          <div sx={{display:'inline-block', mx:2}}>
+          <div sx={{ display: "inline-block", mx: 2 }}>
             <Link href="/signin">
-              <ButtonLink href="/signin">
-                Sign in to Your Account
-              </ButtonLink>
+              <ButtonLink href="/signin">Sign in to Your Account</ButtonLink>
             </Link>
           </div>
-          <div sx={{display:'inline-block', mx:2}}>
+          <div sx={{ display: "inline-block", mx: 2 }}>
             <Link href="/signup">
-              <ButtonLink href="/signin">
-                Create New Account
-              </ButtonLink>
+              <ButtonLink href="/signin">Create New Account</ButtonLink>
             </Link>
           </div>
         </div>
