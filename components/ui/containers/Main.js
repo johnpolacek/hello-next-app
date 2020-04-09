@@ -1,12 +1,11 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+import { Flex } from "theme-ui"
 import React, { useContext, useEffect } from "react"
 
 export default (props) => {
   return (
-    <main
+    <Flex
+      as="main"
       sx={{
-        display: "flex",
         flex: 1,
         px: [3, 4],
         pb: 4,

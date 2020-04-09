@@ -36,7 +36,7 @@ const Nav = (props) => {
               sx={{
                 bg: "white",
                 color: "primary",
-                fontWeight: 200,
+                fontWeight: "lite",
                 fontSize: 4,
               }}
               onClick={async () => {

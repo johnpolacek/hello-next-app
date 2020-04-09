@@ -1,33 +1,35 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+import { Box, Text, Link } from "theme-ui"
 
 export default (props) => (
-  <footer
+  <Box
+    as="header"
     sx={{
       p: 4,
-      color: "#AAA",
+      color: "gray",
       textAlign: "center",
       fontSize: 3,
     }}
   >
-    <div>
-      <span sx={{ mx: 3, display: "inline-block" }}>
-        Created by <a href="https://johnpolacek">John Polacek</a>
-      </span>
-      <span sx={{ mx: 3, display: "inline-block" }}>
+    <Box>
+      <Text sx={{ mx: 3, display: "inline-block" }}>
+        Created by <Link href="https://johnpolacek">John Polacek</Link>
+      </Text>
+      <Text sx={{ mx: 3, display: "inline-block" }}>
         Open sourced on{" "}
-        <a href="https://github.com/johnpolacek/project-starter">Github</a>
-      </span>
-      <span sx={{ mx: 3, display: "inline-block" }}>
-        Follow <a href="https://twitter.com/johnpolacek">@johnpolacek</a>
-      </span>
-    </div>
-    <div sx={{ fontSize: 0, pt: 3, mb: -3 }}>
+        <Link href="https://github.com/johnpolacek/project-starter">
+          Github
+        </Link>
+      </Text>
+      <Text sx={{ mx: 3, display: "inline-block" }}>
+        Follow <Link href="https://twitter.com/johnpolacek">@johnpolacek</Link>
+      </Text>
+    </Box>
+    <Box sx={{ fontSize: 0, pt: 3, mb: -3 }}>
       Hello Icon by{" "}
-      <a href="https://www.flaticon.com/authors/vitaly-gorbachev">
+      <Link href="https://www.flaticon.com/authors/vitaly-gorbachev">
         Vitaly Gorbachev
-      </a>{" "}
-      from <a href="https://www.flaticon.com/">flaticon.com</a>
-    </div>
-  </footer>
+      </Link>{" "}
+      from <Link href="https://www.flaticon.com/">flaticon.com</Link>
+    </Box>
+  </Box>
 )
