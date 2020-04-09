@@ -1,16 +1,10 @@
-WIP:
-Setting up hello-next-app Firebase project
-
----
-
 #Hello Next App
 
 ## Next.js Web App Project Template
 
-
 - Next.js Framework
 - Serverless Firebase API
-- Chakra UI Components
+- Theme UI Components
 - MDX Authoring
 - Cypress Testing
 - Now Deployments
@@ -25,6 +19,20 @@ Set the environment variables SESSION_SECRET_CURRENT and SESSION_SECRET_PREVIOUS
 
 Duplicate the `.env` as `.env.build` and add the `FIREBASE_PRIVATE_KEY` var and set it to the value from the json credentials file you downloaded from Firebase (tt should start with `-----BEGIN PRIVATE KEY-----` and end with `\n-----END PRIVATE KEY-----\n`).
 
+## Install
+
+Rename the `hello-next-app` project directory to your project name. At the top level of the project directory, open a terminal window and install the dependencies.
+
+```
+npm install
+```
+
+Run the app in a local environment.
+
+```
+npm run dev
+```
+
 ## Deployment
 
 For deployment to `now`, you will need to get a zeit.co account at [zeit.co/signup](https://zeit.co/signup). Once you have an account, you will need to install the Now CLI:
@@ -33,7 +41,7 @@ For deployment to `now`, you will need to get a zeit.co account at [zeit.co/sign
 npm install -g now
 ```
 
-Next, we will use the Now CLI to add the secret vars for Firebase that correspond our local `.env`. *Note that for the multiline private key, you will need the `--` modifier and to enclose the value in quotes.*
+Next, we will use the Now CLI to add the secret vars for Firebase that correspond our local `.env`. _Note that for the multiline private key, you will need the `--` modifier and to enclose the value in quotes._
 
 ```
 now secrets add session-secret-previous <secret-value>
@@ -74,4 +82,8 @@ Now that we have stored these to our zeit account, we need to create a `now.json
 }
 ```
 
+With that done, we can issue the `now` command from the Now CLI. This is a new project (not existing) in `zeit` so we will follow the prompts to set it up for our first deployment:
 
+```
+now
+```

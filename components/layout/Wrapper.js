@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui"
 import { ThemeProvider } from "theme-ui"
 import Layout from "./Layout"
-import Theme from "./Theme"
+import theme from "../theme"
 
 export default (props) => {
   // Want Google Analytics? --> https://github.com/react-ga/react-ga --> add your UI code below
@@ -13,7 +13,7 @@ export default (props) => {
   // }
 
   return (
-    <ThemeProvider theme={Theme}>
+    <ThemeProvider theme={theme}>
       <Layout {...props} />
     </ThemeProvider>
   )
