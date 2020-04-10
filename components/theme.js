@@ -6,24 +6,29 @@ const heading = {
 }
 
 const inputStyles = {
-  padding: "4px",
-  border: "solid 2px #aed7ff",
+  px: 3,
+  py: 2,
+  borderColor: "gray",
+  borderWidth: 1,
+  bg: "white",
 }
 
 export const base = {
-  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  space: [0, 4, 8, 16, 32, 48, 64, 96, 128, 256, 512],
   fonts: {
     body:
       'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     heading: "inherit",
     monospace: "Menlo, monospace",
   },
-  fontSizes: [12, 14, 16, 18, 20, 24, 30, 36, 40, 48, 64, 72, 96],
+  fontSizes: [12, 14, 16, 18, 24, 30, 36, 48, 64, 72, 96, 120],
   fontWeights: {
     lite: 200,
     body: 400,
+    semibold: 600,
     heading: 700,
     bold: 700,
+    heavy: 900,
   },
   lineHeights: {
     body: 1.5,
@@ -33,12 +38,12 @@ export const base = {
     text: "#1b1e21",
     background: "#fff",
     primary: "#4169e1",
-    secondary: "#41e169",
+    secondary: "#ee5555",
     muted: "#f6f6f6",
     blue: "#4169e1",
     cyan: "#41b9e1",
     gray: "#aeb3c0",
-    green: "#41e169",
+    green: "#0a9800",
     purple: "#6941e1",
     orange: "#fba100",
     pink: "#e141b9",
@@ -46,10 +51,46 @@ export const base = {
     white: "#fff",
     yellow: "#FFDD22",
   },
+  buttons: {
+    primary: {
+      color: "background",
+      bg: "primary",
+    },
+    secondary: {
+      color: "background",
+      bg: "secondary",
+    },
+    large: {
+      fontSize: 3,
+      px: 3,
+      py: 2,
+    },
+  },
   forms: {
     input: inputStyles,
     select: inputStyles,
     textArea: inputStyles,
+  },
+  links: {
+    reverse: {
+      color: "white",
+    },
+  },
+  cards: {
+    primary: {
+      bg: "white",
+      pt: 5,
+      px: 5,
+      pb: 6,
+      borderRadius: 8,
+      boxShadow: "0 0 8px rgba(0, 0, 0, 0.125)",
+    },
+    compact: {
+      padding: 1,
+      borderRadius: 2,
+      border: "1px solid",
+      borderColor: "muted",
+    },
   },
   styles: {
     root: {

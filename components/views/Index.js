@@ -1,27 +1,39 @@
 import { Box, Heading, Text } from "theme-ui"
 import Link from "next/link"
 import ButtonLink from "../ui/nav/ButtonLink"
+import appConfig from "../../app.config"
 
 export default (props) => (
-  <Box sx={{ textAlign: "center", width: "100%", pb: 6 }}>
-    <Heading as="h2" sx={{ fontSize: 8, fontWeight: "lite", pb: 4 }}>
-      Hello!
-    </Heading>
+  <Box sx={{ textAlign: "center", width: "100%", color: "white" }}>
     {props.isSignedIn ? (
       <Text>You're signed in.</Text>
     ) : (
       <>
-        <p sx={{ pb: 2 }}>You’re not signed in yet...</p>
+        <Heading as="h1" sx={{ fontSize: 7, pb: 4 }}>
+          {appConfig.headline}
+        </Heading>
+        <Heading
+          as="h2"
+          sx={{
+            fontSize: 5,
+            fontWeight: "lite",
+            pb: 5,
+            maxWidth: "1200px",
+            mx: "auto",
+          }}
+        >
+          {appConfig.subhead}
+        </Heading>
         <Box>
-          <Box sx={{ display: "inline-block", mx: 2 }}>
-            <Link href="/signin">
-              <ButtonLink href="/signin">Sign in to Your Account</ButtonLink>
-            </Link>
+          <Box sx={{ display: "inline-block", mx: 3 }}>
+            <ButtonLink fontSize={4} bg="red" href="/signup">
+              Get Started
+            </ButtonLink>
           </Box>
-          <Box sx={{ display: "inline-block", mx: 2 }}>
-            <Link href="/signup">
-              <ButtonLink href="/signin">Create New Account</ButtonLink>
-            </Link>
+          <Box sx={{ display: "inline-block", mx: 3 }}>
+            <ButtonLink fontSize={4} bg="white" href="/tour">
+              Take a Tour
+            </ButtonLink>
           </Box>
         </Box>
       </>

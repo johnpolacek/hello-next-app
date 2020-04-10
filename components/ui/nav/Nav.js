@@ -3,14 +3,13 @@ import { jsx } from "theme-ui"
 import Router from "next/router"
 import NavHome from "./NavHome"
 import NavLink from "./NavLink"
-import GithubLink from "./GithubLink"
 import logout from "../../../utils/auth/logout"
 import withAuthUserInfo from "../../../utils/context/withAuthUserInfo"
 import { Flex, Box, Button } from "theme-ui"
 
 const Nav = (props) => {
   return (
-    <Flex as="nav" sx={{ flexWrap: "wrap", py: [2, 0] }}>
+    <Flex as="nav" sx={{ flexWrap: "wrap", py: [2, 0], bg: "primary" }}>
       <Box
         sx={{
           width: ["100%", "50%"],
@@ -20,6 +19,10 @@ const Nav = (props) => {
         }}
       >
         <NavHome />
+        <Box sx={{ pl: 3, display: "inline-block" }}>
+          <NavLink href="/about">About</NavLink>
+          <NavLink href="/docs">Docs</NavLink>
+        </Box>
       </Box>
       <Box
         sx={{
@@ -28,8 +31,7 @@ const Nav = (props) => {
           pr: [0, 3],
         }}
       >
-        <NavLink href="/about">About</NavLink>
-        {props.AuthUserInfo.AuthUser && (
+        {props.AuthUserInfo.AuthUser ? (
           <>
             <NavLink href="/account">Account</NavLink>
             <Button
@@ -37,7 +39,7 @@ const Nav = (props) => {
                 bg: "white",
                 color: "primary",
                 fontWeight: "lite",
-                fontSize: 4,
+                fontSize: 3,
               }}
               onClick={async () => {
                 try {
@@ -51,8 +53,24 @@ const Nav = (props) => {
               Logout
             </Button>
           </>
+        ) : (
+          <>
+            <NavLink href="/login">Login</NavLink>
+            <NavLink href="/signup">
+              <Button
+                sx={{
+                  bg: "rgba(0,0,0,.25)",
+                  fontWeight: "lite",
+                  px: 3,
+                  py: 1,
+                  my: -2,
+                }}
+              >
+                Sign Up
+              </Button>
+            </NavLink>
+          </>
         )}
-        <GithubLink />
       </Box>
     </Flex>
   )

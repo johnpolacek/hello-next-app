@@ -5,31 +5,41 @@ export default (props) => (
     as="header"
     sx={{
       p: 4,
-      color: "gray",
+      color: "white",
       textAlign: "center",
       fontSize: 3,
+      bg: "primary",
     }}
   >
     <Box>
       <Text sx={{ mx: 3, display: "inline-block" }}>
-        Created by <Link href="https://johnpolacek">John Polacek</Link>
-      </Text>
-      <Text sx={{ mx: 3, display: "inline-block" }}>
-        Open sourced on{" "}
-        <Link href="https://github.com/johnpolacek/project-starter">
-          Github
+        Created by{" "}
+        <Link variant="reverse" href="https://johnpolacek">
+          John Polacek
         </Link>
       </Text>
       <Text sx={{ mx: 3, display: "inline-block" }}>
-        Follow <Link href="https://twitter.com/johnpolacek">@johnpolacek</Link>
+        Open sourced on{" "}
+        <Link
+          variant="reverse"
+          href="https://github.com/johnpolacek/project-starter"
+        >
+          Github
+        </Link>
       </Text>
     </Box>
     <Box sx={{ fontSize: 0, pt: 3, mb: -3 }}>
       Hello Icon by{" "}
-      <Link href="https://www.flaticon.com/authors/vitaly-gorbachev">
+      <Link
+        variant="reverse"
+        href="https://www.flaticon.com/authors/vitaly-gorbachev"
+      >
         Vitaly Gorbachev
       </Link>{" "}
-      from <Link href="https://www.flaticon.com/">flaticon.com</Link>
+      from{" "}
+      <Link variant="reverse" href="https://www.flaticon.com/">
+        flaticon.com
+      </Link>
     </Box>
   </Box>
 )
