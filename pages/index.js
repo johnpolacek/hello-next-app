@@ -4,6 +4,7 @@ import { get } from "lodash/object"
 import withAuthUser from "../utils/context/withAuthUser"
 import withAuthUserInfo from "../utils/context/withAuthUserInfo"
 import IndexView from "../components/views/Index"
+import appConfig from "../app.config"
 
 import Wrapper from "../components/layout/Wrapper"
 // Note: It is recommended for SEO that you have a different title and description for each page
@@ -12,13 +13,16 @@ const Index = (props) => {
   const { AuthUserInfo } = props
   const AuthUser = get(AuthUserInfo, "AuthUser", null)
 
+  const isSignedIn = AuthUserInfo && AuthUserInfo.AuthUser != null
+
   return (
     <Wrapper
       url="/"
-      title="Hello Next App | Next.js Web App Project Template"
-      description="React Web App Project Template for building application websites with the Next.js Framework, a Firebase Serverless Backend, Theme UI Components and more."
+      title={appConfig.name + " | " + appConfig.shortDescription}
+      description={appConfig.longDescription}
+      bg={isSignedIn ? "white" : "primary"}
     >
-      <IndexView isSignedIn={AuthUserInfo && AuthUserInfo.AuthUser != null} />
+      <IndexView isSignedIn={isSignedIn} />
     </Wrapper>
   )
 }

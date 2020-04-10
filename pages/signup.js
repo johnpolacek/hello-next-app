@@ -8,6 +8,7 @@ export default () => {
       url="/"
       title="Hello Web App | Sign Up"
       description="Hello Web App Demo of creating a new account"
+      bg="primary"
     >
       <SignUpForm />
     </Wrapper>

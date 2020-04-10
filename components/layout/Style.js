@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import theme from "./Theme"
+import theme from "../theme"
 
 export default (props) => (
   <style jsx global>{`

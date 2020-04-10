@@ -19,7 +19,7 @@ const Layout = (props) => (
       }}
     >
       <Header />
-      <Main>{props.children}</Main>
+      <Main bg={props.bg}>{props.children}</Main>
       <Footer />
     </Flex>
 
@@ -33,6 +33,7 @@ Layout.propTypes = {
   url: PropTypes.string.isRequired,
   imageUrl: PropTypes.string,
   imageAlt: PropTypes.string,
+  bg: PropTypes.string,
 }
 
 export default Layout

@@ -1,9 +1,20 @@
 import React, { useState } from "react"
 import Router from "next/router"
 import firebase from "firebase/app"
+import Link from "next/link"
 import "firebase/auth"
 import initFirebase from "../../../utils/auth/initFirebase"
-import { Flex, Heading, Text, Label, Input, Button } from "theme-ui"
+import {
+  Flex,
+  Box,
+  Card,
+  Heading,
+  Text,
+  Label,
+  Input,
+  Checkbox,
+  Button,
+} from "theme-ui"
 
 // Init the Firebase app.
 initFirebase()
@@ -31,9 +42,18 @@ export default () => {
 
   return (
     <Flex sx={{ justifyContent: "center", width: "100%" }}>
-      <form onSubmit={handleSubmit}>
-        <Heading as="h2" sx={{ mb: 4, color: "primary" }}>
-          Create a new account
+      <Card as="form" sx={{ bg: "white" }} onSubmit={handleSubmit}>
+        <Heading
+          as="h2"
+          sx={{
+            pb: 4,
+            px: 4,
+            fontSize: 5,
+            fontWeight: "semibold",
+            color: "primary",
+          }}
+        >
+          Create an account
         </Heading>
         <Label htmlFor="email">Email</Label>
         <Input
@@ -51,11 +71,30 @@ export default () => {
           type="password"
           mb={3}
         />
+        <Box sx={{ pb: 3 }}>
+          <Label mb={3}>
+            <Checkbox />I agree to the&nbsp;
+            <Link href="/terms" passHref>
+              <a>terms and conditions</a>
+            </Link>
+          </Label>
+        </Box>
         {error && <Text sx={{ color: "red" }}>{error}</Text>}
-        <Button disabled={isSubmitting} type="submit">
+        <Button
+          variant="large"
+          sx={{ width: "100%" }}
+          disabled={isSubmitting}
+          type="submit"
+        >
           Sign Up
         </Button>
-      </form>
+        <Text sx={{ pt: 4, width: "100%", textAlign: "center" }}>
+          Already have an account?{" "}
+          <Link href="/login" passHref>
+            <a>Login</a>
+          </Link>
+        </Text>
+      </Card>
     </Flex>
   )
 }

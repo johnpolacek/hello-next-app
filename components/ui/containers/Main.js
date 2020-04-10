@@ -10,9 +10,7 @@ export default (props) => {
         px: [3, 4],
         pb: 4,
         alignItems: "center",
-        borderBottom: "solid 1px",
-        borderTop: "solid 1px",
-        borderColor: "#EEE",
+        bg: props.bg || "transparent",
       }}
       {...props}
     />

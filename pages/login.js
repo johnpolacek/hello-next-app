@@ -6,8 +6,8 @@ export default () => {
   return (
     <Wrapper
       url="/"
-      title="Hello Web App | Sign In"
-      description="Hello Web App Demo of Signing in to your account"
+      title="Login to Your Account"
+      description="The account login page for Hello Next App"
     >
       <SignInForm />
     </Wrapper>

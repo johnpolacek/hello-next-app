@@ -1,12 +1,13 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import NavLink from "./NavLink"
+import appConfig from "../../../app.config"
 
 export default (props) => (
   <NavLink href="/">
     <h1
       sx={{
-        color: "black",
+        color: "white",
         fontWeight: "inherit",
         m: 0,
         fontSize: "inherit",
@@ -20,9 +21,9 @@ export default (props) => (
           color: "primary",
         }}
       >
-        <img width="27" height="27" src="/hello.svg" />
+        <img width="24" height="24" src="/hello.svg" />
       </span>
-      <span>Hello Next App</span>
+      <span>{appConfig.name}</span>
     </h1>
   </NavLink>
 )
