@@ -1,5 +1,5 @@
-import Wrapper from "../src/layout/Wrapper"
-import Docs from "../src/views/Docs"
+import Wrapper from "../components/layout/Wrapper"
+import Docs from "../components/views/Docs"
 
 // Note: It is recommended for SEO that you have a different title and description for each page
 
