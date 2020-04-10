@@ -71,6 +71,11 @@ export default () => {
           type="password"
           mb={3}
         />
+        <Box sx={{ pb: 4 }}>
+          <Link href="/forgot" passHref>
+            <a>Forgot password?</a>
+          </Link>
+        </Box>
         {error && <Text sx={{ color: "red" }}>{error}</Text>}
         <Button
           variant="large"

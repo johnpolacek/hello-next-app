@@ -4,6 +4,7 @@ import { get } from "lodash/object"
 import withAuthUser from "../utils/context/withAuthUser"
 import withAuthUserInfo from "../utils/context/withAuthUserInfo"
 import logout from "../utils/auth/logout"
+import appConfig from "../app.config"
 
 import Wrapper from "../components/layout/Wrapper"
 // Note: It is recommended for SEO that you have a different title and description for each page
@@ -16,7 +17,7 @@ const Index = (props) => {
   return (
     <Wrapper
       url="/"
-      title="Hello Web App | Account"
+      title={appConfig.name + " | Account"}
       description="Your Hello Web App account information"
     >
       <p>Hi there!</p>

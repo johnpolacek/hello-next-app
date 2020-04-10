@@ -3,11 +3,12 @@ import Link from "next/link"
 import Wrapper from "../components/layout/Wrapper"
 import withAuthUser from "../utils/context/withAuthUser"
 import withAuthUserInfo from "../utils/context/withAuthUserInfo"
+import appConfig from "../app.config"
 
 const About = (props) => (
   <Wrapper
     url="/"
-    title="Hello Web App | About"
+    title={appConfig.name + " | About"}
     description="More information about the Hello Web App project"
   >
     <p>

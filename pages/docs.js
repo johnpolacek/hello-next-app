@@ -1,12 +1,12 @@
+import appConfig from "../app.config"
 import Wrapper from "../components/layout/Wrapper"
 import Docs from "../components/views/Docs"
-
-// Note: It is recommended for SEO that you have a different title and description for each page
+import appConfig from "../app.config"
 
 export default () => (
   <Wrapper
     url="/docs"
-    title="Project Starter Docs"
+    title={appConfig.name + " | Docs"}
     description="Project Starter Docs for building Web Apps with Next.js, Theme UI, Cypress"
   >
     <Docs />

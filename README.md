@@ -19,9 +19,10 @@ Displays page content
 
 - Landing Page - Headline and subhead - Main Buttons - Start Free Trial (sign up link) - Take Tour (video link) - Features - Pricing
 
+- Sign In Page
 - Sign Up Page
 - Add Card
-- Sign In Page
+
 - Reset password page
 - Account page
 - About page
