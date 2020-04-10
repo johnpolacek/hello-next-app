@@ -9,5 +9,5 @@ module.exports = {
   // headline: appears as landing page headline (recommend keep it to )
   headline: "Next.js Web App Template",
   subhead:
-    "Launch your next web application with serverless backend, user authentication, automated testing, Stripe integration and custom design theme.",
+    "Launch your next web application with serverless backend, user authentication, automated testing, Stripe integration, a custom design theme and more.",
 }

@@ -1,6 +1,6 @@
 import React from "react"
 import Wrapper from "../components/layout/Wrapper"
-import SignInForm from "../components/ui/forms/SignInForm"
+import LoginForm from "../components/ui/forms/LoginForm"
 
 export default () => {
   return (
@@ -8,8 +8,9 @@ export default () => {
       url="/"
       title="Login to Your Account"
       description="The account login page for Hello Next App"
+      bg="primary"
     >
-      <SignInForm />
+      <LoginForm />
     </Wrapper>
   )
 }

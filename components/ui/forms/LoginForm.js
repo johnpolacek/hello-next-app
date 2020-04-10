@@ -1,9 +1,20 @@
 import React, { useState } from "react"
 import Router from "next/router"
 import firebase from "firebase/app"
+import Link from "next/link"
 import "firebase/auth"
 import initFirebase from "../../../utils/auth/initFirebase"
-import { Flex, Heading, Text, Label, Input, Button } from "theme-ui"
+import {
+  Flex,
+  Box,
+  Card,
+  Heading,
+  Text,
+  Label,
+  Input,
+  Checkbox,
+  Button,
+} from "theme-ui"
 
 // Init the Firebase app.
 initFirebase()
@@ -31,9 +42,18 @@ export default () => {
 
   return (
     <Flex sx={{ justifyContent: "center", width: "100%" }}>
-      <form onSubmit={handleSubmit}>
-        <Heading as="h2" sx={{ mb: 4, color: "primary" }}>
-          Sign in to your account
+      <Card as="form" sx={{ bg: "white" }} onSubmit={handleSubmit}>
+        <Heading
+          as="h2"
+          sx={{
+            pb: 4,
+            px: 4,
+            fontSize: 5,
+            fontWeight: "semibold",
+            color: "primary",
+          }}
+        >
+          Login to your Account
         </Heading>
         <Label htmlFor="email">Email</Label>
         <Input
@@ -52,10 +72,21 @@ export default () => {
           mb={3}
         />
         {error && <Text sx={{ color: "red" }}>{error}</Text>}
-        <Button disabled={isSubmitting} type="submit">
-          Sign In
+        <Button
+          variant="large"
+          sx={{ width: "100%" }}
+          disabled={isSubmitting}
+          type="submit"
+        >
+          Login
         </Button>
-      </form>
+        <Text sx={{ pt: 4, width: "100%", textAlign: "center" }}>
+          Don’t have an account?{" "}
+          <Link href="/signup" passHref>
+            <a>Sign Up</a>
+          </Link>
+        </Text>
+      </Card>
     </Flex>
   )
 }

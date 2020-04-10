@@ -17,8 +17,9 @@ export default (props) => (
           sx={{
             fontSize: 5,
             fontWeight: "lite",
-            pb: 5,
-            maxWidth: "1200px",
+            pb: 6,
+            px: 3,
+            maxWidth: "1000px",
             mx: "auto",
           }}
         >
