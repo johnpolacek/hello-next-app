@@ -1,6 +1,7 @@
 WIP
 
-- Make Form Wrapper component and any other ones to keep it DRY
+- Make Form Wrapper component
+- Make Heading variants
 - Require Terms and Conditions
 - Create Terms and Privacy Policy Pages
 
