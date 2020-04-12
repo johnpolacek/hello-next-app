@@ -1,5 +1,4 @@
 import { Flex } from "theme-ui"
-import React, { useContext, useEffect } from "react"
 
 export default (props) => {
   return (

@@ -33,18 +33,16 @@ const Nav = (props) => {
       >
         {props.AuthUserInfo.AuthUser ? (
           <>
-            <NavLink href="/account">Account</NavLink>
             <Button
               sx={{
-                bg: "white",
-                color: "primary",
+                color: "white",
                 fontWeight: "lite",
                 fontSize: 3,
               }}
               onClick={async () => {
                 try {
                   await logout()
-                  Router.push("/signin")
+                  Router.push("/login")
                 } catch (e) {
                   console.error(e)
                 }
@@ -52,6 +50,7 @@ const Nav = (props) => {
             >
               Logout
             </Button>
+            <NavLink href="/account">Account</NavLink>
           </>
         ) : (
           <>

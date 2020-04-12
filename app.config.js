@@ -1,4 +1,9 @@
 module.exports = {
+  url: {
+    production: "https://hello-next-app.now.sh",
+    staging: "https://hello-next-app.now.sh",
+    local: "http://localhost:3000",
+  },
   // name : appears in page titles, header nav
   name: "Hello Next App",
   // shortDescription : appears in landing page title

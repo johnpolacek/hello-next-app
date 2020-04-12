@@ -1,3 +1,11 @@
+WIP
+
+- Make Form Wrapper component and any other ones to keep it DRY
+- Require Terms and Conditions
+- Create Terms and Privacy Policy Pages
+
+---
+
 ##To Do
 
 Separate Marketing Site and SaaS App Template:  
@@ -21,8 +29,7 @@ Displays page content
 
 - Sign In Page
 - Sign Up Page
-- Add Card
-
+- Add Credit Card
 - Reset password page
 - Account page
 - About page
@@ -62,9 +69,13 @@ Displays page content
 
 ### Firebase
 
-First, you will need to create a new Firebase account at [firebase.google.com](https://firebase.google.com/) then create a project at the Firebase console.
+First, you will need to create a new Firebase account at [firebase.google.com](https://firebase.google.com/) then create a project at the Firebase console. Under the General Settings, give your app a Public-facing name.
 
 Get your account credentials from the Firebase console at Project settings > Service accounts, where you can click on Generate new private key and download the credentials as a json file. It will contain keys such as project_id, client_email and client_id. Set them as environment variables in the .env file at the root of this project.
+
+We will also need to set up the Authentication settings for our app. In the Firebase console, go to the Authentication section for your app. Under Sign-in providers, enable 'Email/Password' and Email link (passwordless login).
+
+Next, add a new Web App to your project.
 
 Set the environment variables SESSION_SECRET_CURRENT and SESSION_SECRET_PREVIOUS in the .env file. These are used by cookie-session.
 
