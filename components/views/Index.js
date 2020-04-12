@@ -6,7 +6,7 @@ import appConfig from "../../app.config"
 export default (props) => (
   <Box sx={{ textAlign: "center", width: "100%", color: "white" }}>
     {props.isSignedIn ? (
-      <Text>You're signed in.</Text>
+      <Text color="primary">Signed In View = Show App</Text>
     ) : (
       <>
         <Heading as="h1" sx={{ fontSize: 7, pb: 4 }}>
