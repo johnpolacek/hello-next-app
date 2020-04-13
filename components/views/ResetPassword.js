@@ -10,10 +10,7 @@ export default (props) => {
 
   useEffect(() => {
     if (isReady && !props.isSignedIn) {
-      loginWithEmail().then((result) => {
-        console.log("loginWithEmail result", result)
-        // window.location.reload() // on reload, user will be logged in, then can change password
-      })
+      loginWithEmail()
     }
   }, [isReady])
 

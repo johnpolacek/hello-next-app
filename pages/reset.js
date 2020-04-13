@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { get } from "lodash/object"
 import withAuthUser from "../utils/context/withAuthUser"
 import withAuthUserInfo from "../utils/context/withAuthUserInfo"
-import ResetView from "../components/views/Reset"
+import ResetPassword from "../components/views/ResetPassword"
 import appConfig from "../app.config"
 
 import Wrapper from "../components/layout/Wrapper"
@@ -22,7 +22,7 @@ const Reset = (props) => {
       description={appConfig.longDescription}
       bg="primary"
     >
-      <ResetView isSignedIn={isSignedIn} />
+      <ResetPassword isSignedIn={isSignedIn} />
     </Wrapper>
   )
 }

@@ -6,7 +6,7 @@ import { Label, Input } from "theme-ui"
 export default (props) => {
   const [email, setEmail] = useState("")
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     await reset(email)
     props.onComplete()
   }
@@ -23,7 +23,6 @@ export default (props) => {
         type="email"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
-        mb={3}
       />
     </Form>
   )

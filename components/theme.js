@@ -8,6 +8,7 @@ const heading = {
 const inputStyles = {
   px: 3,
   py: 2,
+  mb: 3,
   borderColor: "gray",
   borderWidth: 1,
   bg: "white",
@@ -51,6 +52,32 @@ export const base = {
     white: "#fff",
     yellow: "#FFDD22",
   },
+  text: {
+    caps: {
+      textTransform: "uppercase",
+      letterSpacing: ".2em",
+    },
+    heading: { pb: 3, color: "white", fontSize: 5, fontWeight: "bold" },
+    headline: {
+      fontSize: 7,
+      pb: 4,
+    },
+    subhead: {
+      fontSize: 4,
+      fontWeight: "lite",
+      pb: 4,
+      px: 3,
+      maxWidth: "1000px",
+      mx: "auto",
+    },
+    cardheading: {
+      pb: 4,
+      px: 4,
+      fontSize: 5,
+      fontWeight: "semibold",
+      color: "primary",
+    },
+  },
   buttons: {
     primary: {
       color: "background",
@@ -70,6 +97,7 @@ export const base = {
     input: inputStyles,
     select: inputStyles,
     textArea: inputStyles,
+    label: { display: "block" },
   },
   links: {
     reverse: {

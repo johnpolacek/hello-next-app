@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import reset from "../../../utils/auth/reset"
 import { Flex, Box, Card, Heading, Text, Button } from "theme-ui"
@@ -7,6 +7,13 @@ const Form = (props) => {
   const [error, setError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  useEffect(() => {
+    // if the controller had an error, allow submit after error is fixed
+    if (props.error === "") {
+      setIsSubmitting(false)
+    }
+  }, [props.error])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError("")
@@ -14,33 +21,36 @@ const Form = (props) => {
     try {
       props.onSubmit()
     } catch (err) {
+      console.log("err", err)
       setError(err.message)
       setIsSubmitting(false)
     }
   }
 
+  const disabled =
+    isSubmitting || (typeof props.enabled !== "undefined" && !props.enabled)
+
+  const ErrorMessage = (props) => (
+    <Text sx={{ pb: 3, maxWidth: "300px" }} color="red">
+      {props.children}
+    </Text>
+  )
+
   return (
     <Flex sx={{ justifyContent: "center", width: "100%" }}>
       <Card as="form" sx={{ bg: "white" }} onSubmit={handleSubmit}>
         {props.heading && (
-          <Heading
-            as="h2"
-            sx={{
-              pb: 4,
-              px: 4,
-              fontSize: 5,
-              fontWeight: "semibold",
-              color: "primary",
-            }}
-          >
+          <Heading as="h2" variant="cardheading">
             {props.heading}
           </Heading>
         )}
         {props.children}
+        {error !== "" && <ErrorMessage children={{ error }} />}
+        {props.error !== "" && <ErrorMessage children={props.error} />}
         <Button
           variant="large"
-          sx={{ width: "100%", mt: 2 }}
-          disabled={isSubmitting}
+          sx={{ width: "100%", mt: 2, bg: disabled ? "gray" : "primary" }}
+          disabled={disabled}
           type="submit"
         >
           {props.buttonText}
@@ -55,6 +65,8 @@ Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   after: PropTypes.object,
   heading: PropTypes.string,
+  enabled: PropTypes.bool,
+  error: PropTypes.string,
 }
 
 export default Form

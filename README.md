@@ -1,12 +1,3 @@
-WIP
-
-- Make Form Wrapper component
-- Make Heading variants
-- Require Terms and Conditions
-- Create Terms and Privacy Policy Pages
-
----
-
 ##To Do
 
 Separate Marketing Site and SaaS App Template:  

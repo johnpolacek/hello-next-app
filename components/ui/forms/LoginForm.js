@@ -1,16 +1,13 @@
 import React, { useState } from "react"
 import Router from "next/router"
-import firebase from "firebase/app"
 import Link from "next/link"
+import firebase from "firebase/app"
 import "firebase/auth"
 import initFirebase from "../../../utils/auth/initFirebase"
 import { Box, Text, Label, Input, Checkbox } from "theme-ui"
 import Form from "./Form"
 
-// Init the Firebase app.
-initFirebase()
-
-const Signup = () => (
+const SignupLink = () => (
   <Text sx={{ pt: 4, width: "100%", textAlign: "center" }}>
     Don’t have an account?{" "}
     <Link href="/signup" passHref>
@@ -22,18 +19,24 @@ const Signup = () => (
 export default () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
 
   const handleSubmit = async () => {
-    setError("")
-    setIsSubmitting(true)
     try {
       let result = await firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
       Router.push("/")
     } catch (err) {
-      setError(err.message)
-      setIsSubmitting(false)
+      if (
+        err.code === "auth/user-not-found" ||
+        err.code === "auth/wrong-password"
+      ) {
+        setError("This login was not valid. Please try again")
+      } else {
+        setError(err.message)
+      }
+      console.log(err)
     }
   }
 
@@ -42,23 +45,30 @@ export default () => {
       onSubmit={handleSubmit}
       heading="Login to your Account"
       buttonText="Login"
-      after={<Signup />}
+      after={<SignupLink />}
+      error={error}
     >
       <Label htmlFor="email">Email</Label>
       <Input
         name="email"
         type="email"
-        onChange={(e) => setEmail(e.target.value)}
+        required="required"
+        onChange={(e) => {
+          setEmail(e.target.value)
+          setError("")
+        }}
         value={email}
-        mb={3}
       />
       <Label htmlFor="password">Password</Label>
       <Input
         name="password"
-        onChange={(e) => setPassword(e.target.value)}
+        required="required"
+        onChange={(e) => {
+          setPassword(e.target.value)
+          setError("")
+        }}
         value={password}
         type="password"
-        mb={3}
       />
       <Box sx={{ pb: 4 }}>
         <Link href="/forgot" passHref>
