@@ -11,4 +11,12 @@ describe("Landing Page", function () {
       cy.get("#SignupForm").should("be.visible")
     })
   })
+
+  describe("Take a Tour Button", function () {
+    it("links to the Tour Page", function () {
+      cy.visit("/")
+      cy.get("a").contains("Take a Tour").click()
+      cy.get("h1").contains("Tour").should("be.visible")
+    })
+  })
 })
