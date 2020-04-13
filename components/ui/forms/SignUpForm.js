@@ -1,100 +1,87 @@
 import React, { useState } from "react"
 import Router from "next/router"
-import firebase from "firebase/app"
 import Link from "next/link"
+import firebase from "firebase/app"
 import "firebase/auth"
 import initFirebase from "../../../utils/auth/initFirebase"
-import {
-  Flex,
-  Box,
-  Card,
-  Heading,
-  Text,
-  Label,
-  Input,
-  Checkbox,
-  Button,
-} from "theme-ui"
+import { Box, Text, Label, Input, Checkbox } from "theme-ui"
+import Form from "./Form"
 
-// Init the Firebase app.
-initFirebase()
+const LoginLink = () => (
+  <Text sx={{ pt: 4, width: "100%", textAlign: "center" }}>
+    Already have an account?{" "}
+    <Link href="/login" passHref>
+      <a>Login</a>
+    </Link>
+  </Text>
+)
 
 export default () => {
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
   const [error, setError] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [password, setPassword] = useState("")
+  const [checked, setChecked] = useState(false)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const onCheck = () => {
     setError("")
-    setIsSubmitting(true)
-    try {
-      let result = await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-      Router.push("/")
-    } catch (err) {
-      setError(err.message)
-      setIsSubmitting(false)
+    setChecked(!checked)
+  }
+
+  const handleSubmit = async () => {
+    if (checked) {
+      setError("")
+      setIsSubmitting(true)
+      try {
+        let result = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password)
+        Router.push("/")
+      } catch (err) {
+        setError(err.message)
+        setIsSubmitting(false)
+      }
+    } else {
+      setError("Please agree to the terms and conditions to create an account.")
     }
   }
 
   return (
-    <Flex sx={{ justifyContent: "center", width: "100%" }}>
-      <Card as="form" sx={{ bg: "white" }} onSubmit={handleSubmit}>
-        <Heading
-          as="h2"
-          sx={{
-            pb: 4,
-            px: 4,
-            fontSize: 5,
-            fontWeight: "semibold",
-            color: "primary",
-          }}
-        >
-          Create an account
-        </Heading>
-        <Label htmlFor="email">Email</Label>
-        <Input
-          name="email"
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          mb={3}
-        />
-        <Label htmlFor="password">Password</Label>
-        <Input
-          name="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          type="password"
-          mb={3}
-        />
-        <Box sx={{ pb: 3 }}>
-          <Label mb={3}>
-            <Checkbox />I agree to the&nbsp;
-            <Link href="/terms" passHref>
-              <a>terms and conditions</a>
-            </Link>
-          </Label>
-        </Box>
-        {error && <Text sx={{ color: "red" }}>{error}</Text>}
-        <Button
-          variant="large"
-          sx={{ width: "100%" }}
-          disabled={isSubmitting}
-          type="submit"
-        >
-          Sign Up
-        </Button>
-        <Text sx={{ pt: 4, width: "100%", textAlign: "center" }}>
-          Already have an account?{" "}
-          <Link href="/login" passHref>
-            <a>Login</a>
-          </Link>
+    <Form
+      onSubmit={handleSubmit}
+      heading="Create an account"
+      buttonText="Sign Up"
+      after={<LoginLink />}
+      error={error}
+    >
+      <Label htmlFor="email">Email</Label>
+      <Input
+        name="email"
+        type="email"
+        onChange={(e) => setEmail(e.target.value)}
+        required="required"
+        value={email}
+      />
+      <Label htmlFor="password">
+        Password{" "}
+        <Text as="small" sx={{ fontSize: 0 }}>
+          (at least 8 characters)
         </Text>
-      </Card>
-    </Flex>
+      </Label>
+      <Input
+        name="password"
+        type="password"
+        onChange={(e) => setPassword(e.target.value)}
+        value={password}
+        required="required"
+      />
+      <Box sx={{ pb: 4 }}>
+        <Label sx={{ display: "flex", cursor: "pointer" }}>
+          <Checkbox onChange={onCheck} checked={checked} />I agree to the&nbsp;
+          <Link href="/terms" passHref>
+            <a>terms and conditions</a>
+          </Link>
+        </Label>
+      </Box>
+    </Form>
   )
 }

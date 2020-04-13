@@ -15,4 +15,6 @@ module.exports = {
   headline: "Next.js Web App Template",
   subhead:
     "Launch your next web application with serverless backend, user authentication, automated testing, Stripe integration, a custom design theme and more.",
+  // contact appears in the privacy policy page
+  contact: "hellonextapp@gmail.com",
 }
