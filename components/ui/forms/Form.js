@@ -38,7 +38,12 @@ const Form = (props) => {
 
   return (
     <Flex sx={{ justifyContent: "center", width: "100%" }}>
-      <Card as="form" sx={{ bg: "white" }} onSubmit={handleSubmit}>
+      <Card
+        id={props.id}
+        as="form"
+        sx={{ bg: "white" }}
+        onSubmit={handleSubmit}
+      >
         {props.heading && (
           <Heading as="h2" variant="cardheading">
             {props.heading}
@@ -63,6 +68,7 @@ const Form = (props) => {
 
 Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
   after: PropTypes.object,
   heading: PropTypes.string,
   enabled: PropTypes.bool,

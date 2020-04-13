@@ -7,7 +7,7 @@ export default (props) => {
       sx={{
         flex: 1,
         px: [3, 4],
-        pb: 4,
+        py: 4,
         alignItems: "center",
         bg: props.bg || "transparent",
       }}
