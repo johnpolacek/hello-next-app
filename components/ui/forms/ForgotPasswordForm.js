@@ -16,6 +16,7 @@ export default (props) => {
       onSubmit={handleSubmit}
       heading="Password Reset"
       buttonText="Request Password Reset"
+      id="ForgotPasswordForm"
     >
       <Label htmlFor="email">Enter your email</Label>
       <Input

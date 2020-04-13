@@ -42,6 +42,7 @@ export default () => {
           onSubmit={handleSubmit}
           heading="Reset Password"
           buttonText="Save Password"
+          id="ResetPasswordForm"
         >
           <Label htmlFor="password">New Password</Label>
           <Input

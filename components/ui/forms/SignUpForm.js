@@ -52,6 +52,7 @@ export default () => {
       buttonText="Sign Up"
       after={<LoginLink />}
       error={error}
+      id="SignupForm"
     >
       <Label htmlFor="email">Email</Label>
       <Input
