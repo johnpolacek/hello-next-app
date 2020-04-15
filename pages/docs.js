@@ -1,7 +1,8 @@
+import { MDXProvider } from "@mdx-js/react"
 import appConfig from "../app.config"
 import Wrapper from "../components/layout/Wrapper"
-import { MDXProvider } from "@mdx-js/react"
-import Docs from "../components/markdown/docs.mdx"
+import Container from "../components/ui/containers/Container"
+import Docs from "../README.md"
 
 export default () => (
   <Wrapper
@@ -10,7 +11,9 @@ export default () => (
     description={"Technical documentation for " + appConfig.name}
   >
     <MDXProvider>
-      <Docs />
+      <Container id="docs">
+        <Docs />
+      </Container>
     </MDXProvider>
   </Wrapper>
 )

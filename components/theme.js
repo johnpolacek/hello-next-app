@@ -69,6 +69,7 @@ export const base = {
       px: 3,
       maxWidth: "1000px",
       mx: "auto",
+      lineHeight: 1.3,
     },
     cardheading: {
       pb: 4,

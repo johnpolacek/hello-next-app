@@ -1,69 +1,12 @@
-##To Do
-
-Separate Marketing Site and SaaS App Template:  
-hellonextapp.com / app.hellonextapp.com
-
-### App Template
-
-- Model after [this example](https://demo.themesberg.com/rocket/pages/index.html) - Other Examples - [Example 1](https://5studios.net/themes/dashcore/saas.html) - [Example 2](https://themes.3rdwavemedia.com/startup-kit/bs4/4.1/) - [Example 3](https://vivaco.com/demo/startuply/index-main.html)
-
-#### Header
-
-- Left Side - Logo Home - About - Docs
-
-- Right Side - Signed Out: Sign In / Sign Up - Signed In: Sign Out / Account
-
-#### Main
-
-Displays page content
-
-- Landing Page - Headline and subhead - Main Buttons - Start Free Trial (sign up link) - Take Tour (video link) - Features - Pricing
-
-- Sign In Page
-- Sign Up Page
-- Add Credit Card
-- Reset password page
-- Account page
-- About page
-- Tour Page
-- Docs page
-- Pricing page
-- App View _(replaces landing page)_ - Collect Feedback from prospects?
-
-#### Footer
-
-- Page links - About - Pricing - Docs - Sign Up / Sign Out
-- Social links
-- Legal links - Privacy - Terms of Service
-
-### Marketing Site
-
-- Landing Page with Buy Now/Preview - [Example](https://thetheme.io/thesaas/)
-
-<br>
+# Hello Next App
 
 ---
 
----
-
-#Hello Next App
-
-## Next.js Web App Project Template
-
-- Next.js Framework
-- Serverless Firebase API
-- Theme UI Components
-- MDX Authoring
-- Cypress Testing
-- Now Deployments
-
-## Setup
-
-### Firebase
+## Setup Firebase
 
 First, you will need to create a new Firebase account at [firebase.google.com](https://firebase.google.com/) then create a project at the Firebase console. Under the General Settings, give your app a Public-facing name.
 
-Get your account credentials from the Firebase console at Project settings > Service accounts, where you can click on Generate new private key and download the credentials as a json file. It will contain keys such as project_id, client_email and client_id. Set them as environment variables in the .env file at the root of this project.
+Get your account credentials from the Firebase console at _Project settings > Service accounts_ where you can click on Generate new private key and download the credentials as a json file. It will contain keys such as `project_id`, `client_email` and `client_id`. Set them as environment variables in the `.env` file at the root of this project.
 
 We will also need to set up the Authentication settings for our app. In the Firebase console, go to the Authentication section for your app. Under Sign-in providers, enable 'Email/Password' and Email link (passwordless login).
 
@@ -73,7 +16,7 @@ Set the environment variables SESSION_SECRET_CURRENT and SESSION_SECRET_PREVIOUS
 
 Duplicate the `.env` as `.env.build` and add the `FIREBASE_PRIVATE_KEY` var and set it to the value from the json credentials file you downloaded from Firebase (tt should start with `-----BEGIN PRIVATE KEY-----` and end with `\n-----END PRIVATE KEY-----\n`).
 
-### Install
+## Install
 
 Rename the `hello-next-app` project directory to your project name. At the top level of the project directory, open a terminal window and install the dependencies.
 
@@ -87,11 +30,19 @@ Run the app in a local environment.
 npm run dev
 ```
 
+## Config Files
+
+**package.json**
+
+This file contains the settings for npm, including various scripts for development (more on that later). For now, you can update name, description and other info in `package.json` for your project. For more information, refer to the [npm documentation about package.json](https://docs.npmjs.com/creating-a-package-json-file).
+
+**app.config.js**
+
+This file contains settings for your app that are used in various places in the app. Each property in the file is commented with how it is used.
+
 ## Project Structure
 
 Each page contains a `Layout` component with the `Header` and `Footer` components and a `Main` component for the page content itself. The `Layout` component accepts props for the url, title, description and more that are used to set meta tag data on each page - see `src/layout/Wrapper.js`.
-
-Update `package.json` with info for your own project’s name and other info.
 
 A global document head with `<title>`, `<description>`, `<meta>` tags and more can be updated by editing `src/layout/Head.js`.
 

@@ -4,7 +4,7 @@ export default (props) => {
   return (
     <Box
       sx={{
-        maxWidth: "1100px",
+        maxWidth: "960px",
         mx: "auto",
         px: [3, 4],
         py: 5,
