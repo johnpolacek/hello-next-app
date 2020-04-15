@@ -3,14 +3,18 @@ import { jsx } from "theme-ui"
 import { ThemeProvider } from "theme-ui"
 import Layout from "./Layout"
 import theme from "../theme"
+import appConfig from "../../app.config.js"
+import ReactGA from "react-ga"
 
 export default (props) => {
-  // Want Google Analytics? --> https://github.com/react-ga/react-ga --> add your UI code below
-  // ReactGA.initialize("UA-1234567-89")
-  // ReactGA.set({ anonymizeIp: true })
-  // if (typeof window !== "undefined") {
-  //   ReactGA.pageview(window.location.pathname + window.location.search)
-  // }
+  
+  if (typeof appConfig.analytics !== 'undefined' && appConfig.analytics.indexOf("UA") === 0)
+    ReactGA.initialize(appConfig.analytics)
+    ReactGA.set({ anonymizeIp: true })
+    if (typeof window !== "undefined") {
+      ReactGA.pageview(window.location.pathname)
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>

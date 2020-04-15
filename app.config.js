@@ -5,6 +5,8 @@ module.exports = {
     staging: "https://hello-next-app.now.sh",
     local: "http://localhost:3000",
   },
+  // if you wish to add google analytics, add your code here
+  analytics: "YOUR_GA_CODE_HERE",
   // name : appears in page titles, header nav
   name: "Your App",
   // shortDescription : appears in landing page title

@@ -58,9 +58,11 @@ This file contains the settings for npm, including various scripts for developme
 
 **app.config.js**
 
-This file contains settings for your app that are used in various places in the app. Each property in the file is commented with how it is used.
+This file contains settings for your app that are used in various places in the app. Each property in the file, such as your app’s name and description, is commented with how it is used.
 
-## Project Structure
+## Pages
+
+## Layout Components
 
 Each page contains a `Layout` component with the `Header` and `Footer` components and a `Main` component for the page content itself. The `Layout` component accepts props for the url, title, description and more that are used to set meta tag data on each page - see `src/layout/Wrapper.js`.
 
@@ -77,8 +79,6 @@ This project comes with some default routes - see the `/pages` folder. The `/app
 Refer to the [Next.js docs](https://nextjs.org/docs/routing/introduction) for more info about how routing works.
 
 ## Customization
-
-### App Config
 
 ### Favicon
 
