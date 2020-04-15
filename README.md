@@ -62,9 +62,17 @@ This file contains settings for your app that are used in various places in the 
 
 ## Pages
 
+For each page, define props for the url, title, description and more that are used to set meta tag data for that page. These are passed as props to the `Wrapper` component. It is recommended for SEO that you have a different title and description for each page. You may also define the background color for each page here.
+
 ## Layout Components
 
-Each page contains a `Layout` component with the `Header` and `Footer` components and a `Main` component for the page content itself. The `Layout` component accepts props for the url, title, description and more that are used to set meta tag data on each page - see `src/layout/Wrapper.js`.
+_/components/layout/Wrapper.js_
+
+The contents for each page is wrapped in a top-level `Wrapper` component. The main purpose of this component is to provide the design theme to all of its child components and wrap them in a `Layout` component. This is also where Google Analytics is initialized if you have enabled it within `app.config.js`.
+
+_/components/layout/Layout.js_
+
+The `Layout` component builds the page structure that is shared across your app, including `Header` and `Footer` components and a `Main` component for the page content itself.
 
 A global document head with `<title>`, `<description>`, `<meta>` tags and more can be updated by editing `src/layout/Head.js`.
 
