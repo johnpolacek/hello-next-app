@@ -1,21 +1,16 @@
 import React from "react"
 import Link from "next/link"
 import Wrapper from "../components/layout/Wrapper"
-import withAuthUser from "../utils/context/withAuthUser"
-import withAuthUserInfo from "../utils/context/withAuthUserInfo"
 import appConfig from "../app.config"
+import About from "../components/views/About"
 
-const About = (props) => (
+export default (props) => (
   <Wrapper
     url="/"
     title={appConfig.name + " | About"}
-    description="More information about the Hello Web App project"
+    description={"More information about " + appConfig.name}
+    bg="primary"
   >
-    <p>
-      This page is static because it does not fetch any data or include the
-      authed user info.
-    </p>
+    <About />
   </Wrapper>
 )
-
-export default withAuthUser(withAuthUserInfo(About))
