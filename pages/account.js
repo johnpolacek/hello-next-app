@@ -3,11 +3,9 @@ import PropTypes from "prop-types"
 import { get } from "lodash/object"
 import withAuthUser from "../utils/context/withAuthUser"
 import withAuthUserInfo from "../utils/context/withAuthUserInfo"
-import logout from "../utils/auth/logout"
 import appConfig from "../app.config"
-
 import Wrapper from "../components/layout/Wrapper"
-// Note: It is recommended for SEO that you have a different title and description for each page
+import Account from "../components/views/Account"
 
 const Index = (props) => {
   const { AuthUserInfo, data } = props
@@ -19,18 +17,9 @@ const Index = (props) => {
       url="/"
       title={appConfig.name + " | Account"}
       description="Your Hello Web App account information"
+      bg="primary"
     >
-      <p>Hi there!</p>
-      {AuthUser && (
-        <div>
-          <pre>
-            <code>{JSON.stringify(AuthUser, null, 2)}</code>
-          </pre>
-          <div>
-            <div>Your favorite food is {favoriteFood}.</div>
-          </div>
-        </div>
-      )}
+      {AuthUser && <Account email={AuthUser.email} data={data} />}
     </Wrapper>
   )
 }

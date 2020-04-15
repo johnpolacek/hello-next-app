@@ -5,7 +5,7 @@ import appConfig from "../../app.config"
 
 export default (props) => (
   <Box sx={{ textAlign: "center", width: "100%", color: "white" }}>
-    <Heading as="h1">{appConfig.name} Tour</Heading>
+    <Heading as="h1">{appConfig.name} Demo</Heading>
     <iframe
       src="https://player.vimeo.com/video/330041609"
       width="800"

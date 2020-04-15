@@ -113,6 +113,7 @@ export const base = {
       pb: 6,
       borderRadius: 8,
       boxShadow: "0 0 8px rgba(0, 0, 0, 0.125)",
+      color: "black",
     },
     compact: {
       padding: 1,

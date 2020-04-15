@@ -12,11 +12,11 @@ describe("Landing Page", function () {
     })
   })
 
-  describe("Take a Tour Button", function () {
-    it("links to the Tour Page", function () {
+  describe("View Demo Button", function () {
+    it("links to the Demo Page", function () {
       cy.visit("/")
-      cy.get("a").contains("Take a Tour").click()
-      cy.get("h1").contains("Tour").should("be.visible")
+      cy.get("a").contains("View Demo").click()
+      cy.get("h1").contains("Demo").should("be.visible")
     })
   })
 })
