@@ -1,6 +1,6 @@
 import appConfig from "../app.config"
 import Wrapper from "../components/layout/Wrapper"
-import Tour from "../components/views/Tour"
+import Demo from "../components/views/Demo"
 
 export default () => (
   <Wrapper
@@ -9,6 +9,6 @@ export default () => (
     description={"Product tour of " + appConfig.name}
     bg="primary"
   >
-    <Tour />
+    <Demo />
   </Wrapper>
 )

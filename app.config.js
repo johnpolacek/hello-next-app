@@ -21,4 +21,41 @@ module.exports = {
     "Subhead copy that explains the features and benefits of your app to your audience of potential users and captures their interest to get them to sign up or find out more.",
   // contact appears in the privacy policy page
   contact: "contact@yourappdomain.com",
+  // plans appears on pricing page and in account creation flow
+  // assumes $ / month
+  // customize
+  plans: [
+    {
+      name: "Starter",
+      price: 50,
+      description: "Get started at our lowest pricing tier",
+      includes: ["1 user", "1GB File Storage", "Email Support"],
+    },
+    {
+      name: "Pro",
+      price: 100,
+      description: "The right plan for most people",
+      includes: [
+        "10 users",
+        "10GB File Storage",
+        "Priority Email Support",
+        "White Label Branding",
+        "Custom Design Theme",
+      ],
+    },
+    {
+      name: "Premium",
+      price: 200,
+      description: "Serious power users and businesses",
+      includes: [
+        "25 users",
+        "25GB File Storage",
+        "Priority Email Support",
+        "White Label Branding",
+        "Custom Design Theme",
+        "Personalized Onboarding",
+        "Custom Domain",
+      ],
+    },
+  ],
 }

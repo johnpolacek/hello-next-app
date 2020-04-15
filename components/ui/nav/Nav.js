@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
 import Router from "next/router"
 import NavHome from "./NavHome"
 import NavLink from "./NavLink"

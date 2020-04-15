@@ -22,8 +22,8 @@ export default (props) => (
             </ButtonLink>
           </Box>
           <Box sx={{ display: "inline-block", mx: 3 }}>
-            <ButtonLink fontSize={4} bg="white" href="/tour">
-              Take a Tour
+            <ButtonLink fontSize={4} bg="white" href="/demo">
+              View Demo
             </ButtonLink>
           </Box>
         </Box>
