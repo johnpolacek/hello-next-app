@@ -30,6 +30,26 @@ Run the app in a local environment.
 npm run dev
 ```
 
+At this point you will see the app running, but authentication and our serverless backend functions will not work until we set up Firebase.
+
+## Setup Firebase
+
+First, you will need to create a new Firebase account at [firebase.google.com](https://firebase.google.com/) then create a project at the Firebase console. Under the General Settings, give your app a Public-facing name.
+
+Get your account credentials from the Firebase console at _Project settings > Service accounts_ where you can click on Generate new private key and download the credentials as a json file. It will contain keys such as `project_id`, `client_email` and `client_id`. Set them as environment variables in the `.env` file at the root of this project.
+
+We will also need to set up the Authentication settings for our app. In the Firebase console, go to the Authentication section for your app. Under Sign-in providers, enable 'Email/Password' and Email link (passwordless login).
+
+Next, add a new Web App to your project.
+
+Set the environment variables SESSION_SECRET_CURRENT and SESSION_SECRET_PREVIOUS in the .env file. These are used by cookie-session.
+
+Duplicate the `.env` as `.env.build` and add the `FIREBASE_PRIVATE_KEY` var and set it to the value from the json credentials file you downloaded from Firebase (tt should start with `-----BEGIN PRIVATE KEY-----` and end with `\n-----END PRIVATE KEY-----\n`).
+
+The `.env-build` file should never enter our source control as it has private keys that should only be used in our local environment.
+
+When it comes time for deployment, we will add these environment variables to the remote environment via the console (see the Deployment section).
+
 ## Config Files
 
 **package.json**
