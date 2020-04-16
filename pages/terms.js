@@ -1,10 +1,12 @@
+import withAuthUser from "../utils/context/withAuthUser"
+import withAuthUserInfo from "../utils/context/withAuthUserInfo"
 import appConfig from "../app.config"
 import Wrapper from "../components/layout/Wrapper"
 import { MDXProvider } from "@mdx-js/react"
-import Terms from "../components/markdown/terms.mdx"
+import TermsContent from "../components/markdown/terms.mdx"
 import Container from "../components/ui/containers/Container"
 
-export default () => (
+const Terms = (props) => (
   <Wrapper
     url="/terms"
     title={appConfig.name + " | Terms of Service"}
@@ -12,8 +14,10 @@ export default () => (
   >
     <MDXProvider>
       <Container id="terms">
-        <Terms />
+        <TermsContent />
       </Container>
     </MDXProvider>
   </Wrapper>
 )
+
+export default withAuthUser(withAuthUserInfo(Terms))

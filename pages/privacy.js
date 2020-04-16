@@ -1,10 +1,12 @@
+import withAuthUser from "../utils/context/withAuthUser"
+import withAuthUserInfo from "../utils/context/withAuthUserInfo"
 import appConfig from "../app.config"
 import Wrapper from "../components/layout/Wrapper"
 import { MDXProvider } from "@mdx-js/react"
-import Privacy from "../components/markdown/privacy.mdx"
+import PrivacyContent from "../components/markdown/privacy.mdx"
 import Container from "../components/ui/containers/Container"
 
-export default () => (
+const Privacy = (props) => (
   <Wrapper
     url="/privacy"
     title={appConfig.name + " | Privacy Policy"}
@@ -12,8 +14,10 @@ export default () => (
   >
     <MDXProvider>
       <Container id="privacy">
-        <Privacy />
+        <PrivacyContent />
       </Container>
     </MDXProvider>
   </Wrapper>
 )
+
+export default withAuthUser(withAuthUserInfo(Privacy))

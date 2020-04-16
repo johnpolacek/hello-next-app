@@ -40,9 +40,10 @@ export const base = {
     background: "#fff",
     primary: "#4169e1",
     secondary: "#ee5555",
-    muted: "#f6f6f6",
+    muted: "#ddd",
     blue: "#4169e1",
     cyan: "#41b9e1",
+    litegray: "#eee",
     gray: "#aeb3c0",
     green: "#0a9800",
     purple: "#6941e1",
@@ -78,6 +79,10 @@ export const base = {
       fontWeight: "semibold",
       color: "primary",
     },
+    huge: {
+      fontSize: 9,
+      fontWeight: 900,
+    },
   },
   buttons: {
     primary: {
@@ -92,6 +97,11 @@ export const base = {
       fontSize: 3,
       px: 3,
       py: 2,
+    },
+    huge: {
+      fontSize: 4,
+      px: 4,
+      py: 3,
     },
   },
   forms: {
