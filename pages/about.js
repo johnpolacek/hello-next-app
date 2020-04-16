@@ -1,16 +1,18 @@
-import React from "react"
-import Link from "next/link"
+import withAuthUser from "../utils/context/withAuthUser"
+import withAuthUserInfo from "../utils/context/withAuthUserInfo"
 import Wrapper from "../components/layout/Wrapper"
 import appConfig from "../app.config"
-import About from "../components/views/About"
+import AboutView from "../components/views/About"
 
-export default (props) => (
+const About = (props) => (
   <Wrapper
     url="/"
     title={appConfig.name + " | About"}
     description={"More information about " + appConfig.name}
     bg="primary"
   >
-    <About />
+    <AboutView />
   </Wrapper>
 )
+
+export default withAuthUser(withAuthUserInfo(About))

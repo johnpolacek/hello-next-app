@@ -30,6 +30,7 @@ module.exports = {
       price: 50,
       description: "Get started at our lowest pricing tier",
       includes: ["1 user", "1GB File Storage", "Email Support"],
+      isMonthly: true,
     },
     {
       name: "Pro",
@@ -42,6 +43,7 @@ module.exports = {
         "White Label Branding",
         "Custom Design Theme",
       ],
+      isMonthly: true,
     },
     {
       name: "Premium",
@@ -56,6 +58,7 @@ module.exports = {
         "Personalized Onboarding",
         "Custom Domain",
       ],
+      isMonthly: true,
     },
   ],
 }
