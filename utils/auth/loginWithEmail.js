@@ -3,7 +3,6 @@ import firebase from "firebase/app"
 import "firebase/auth"
 
 export default async () => {
-  console.log("loginWithEmail()")
   // Confirm the link is a sign-in with email link.
   if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
     // Additional state parameters can also be passed via URL.
@@ -17,8 +16,6 @@ export default async () => {
       // attacks, ask the user to provide the associated email again. For example:
       return { error: "Missing email" }
     }
-
-    console.log("email", email)
 
     // The client SDK will parse the code from the link for you.
     firebase

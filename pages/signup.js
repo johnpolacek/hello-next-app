@@ -8,7 +8,7 @@ export default () => {
     <Wrapper
       url="/"
       title={appConfig.name + " | Sign Up"}
-      description="Hello Web App Demo of creating a new account"
+      description={"Sign up for a new " + appConfig.name + " account"}
       bg="primary"
     >
       <SignUpForm />

@@ -9,9 +9,10 @@ const inputStyles = {
   px: 3,
   py: 2,
   mb: 3,
+  border: "1px solid",
   borderColor: "gray",
-  borderWidth: 1,
   bg: "white",
+  borderRadius: "4px",
 }
 
 export const base = {
