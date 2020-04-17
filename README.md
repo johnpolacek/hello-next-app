@@ -42,9 +42,9 @@ We will also need to set up the Authentication settings for our app. In the Fire
 
 Next, add a new Web App to your project.
 
-Set the environment variables SESSION_SECRET_CURRENT and SESSION_SECRET_PREVIOUS in the .env file. These are used by cookie-session.
+Uncomment then set the environment variables SESSION_SECRET_CURRENT and SESSION_SECRET_PREVIOUS in the .env file. These are used by cookie-session.
 
-Duplicate the `.env` as `.env.build` and add the `FIREBASE_PRIVATE_KEY` var and set it to the value from the json credentials file you downloaded from Firebase (tt should start with `-----BEGIN PRIVATE KEY-----` and end with `\n-----END PRIVATE KEY-----\n`).
+Duplicate the `.env` as `.env.build` then uncomment and set the `FIREBASE_PRIVATE_KEY` var and set it to the value from the json credentials file you downloaded from Firebase (it should start with `-----BEGIN PRIVATE KEY-----` and end with `\n-----END PRIVATE KEY-----\n`).
 
 The `.env-build` file should never enter our source control as it has private keys that should only be used in our local environment.
 

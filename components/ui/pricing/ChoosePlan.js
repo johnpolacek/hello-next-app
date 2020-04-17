@@ -15,7 +15,7 @@ export default (props) => {
         30-Day Free Trial is included with all plans
       </Heading>
       {plan !== null ? (
-        <Checkout />
+        <Checkout plan={plan} />
       ) : (
         <Pricing
           onSelect={(selectedPlan) => {
