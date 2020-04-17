@@ -36,6 +36,7 @@ export default (props) => (
     <Box as="ul" sx={{ p: 0, textAlign: "left" }}>
       {props.includes.map((includes, index) => (
         <Text
+          key={"includes"+index}
           as="li"
           sx={{
             fontSize: 3,

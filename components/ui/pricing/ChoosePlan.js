@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Box, Heading } from "theme-ui"
-import Pricing from "../../ui/pricing/Pricing"
+import Pricing from "./Pricing"
+import Checkout from "./Checkout"
 
 export default (props) => {
   const [plan, setPlan] = useState(null)
@@ -13,8 +14,8 @@ export default (props) => {
       <Heading variant="subhead">
         30-Day Free Trial is included with all plans
       </Heading>
-      {plan ? (
-        <Box>You selected: {plan}</Box>
+      {plan !== null ? (
+        <Checkout />
       ) : (
         <Pricing
           onSelect={(selectedPlan) => {
