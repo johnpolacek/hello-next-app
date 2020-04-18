@@ -8,7 +8,8 @@ export default (props) => (
   >
     <Heading variant="headline">Choose the plan that’s right for you</Heading>
     <Heading variant="subhead">
-      30-Day Free Trial is included with all plans
+      Plans for individuals, teams and businesses of every stage, shape and
+      size.
     </Heading>
     <Pricing />
   </Box>

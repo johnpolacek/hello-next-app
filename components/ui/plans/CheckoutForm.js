@@ -1,19 +1,16 @@
 import React, { useState } from "react"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
+import Router from "next/router"
 import { destroyCookie } from "nookies"
 import { Box, Card, Heading, Text, Button } from "theme-ui"
 import appConfig from "../../../app.config"
 import theme from "../../theme"
 
-const CheckoutForm = ({ paymentIntent, planId }) => {
+const CheckoutForm = ({ paymentIntent, plan }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [checkoutError, setCheckoutError] = useState()
   const [checkoutSuccess, setCheckoutSuccess] = useState()
-  const plan = appConfig.plans[planId]
-
-  console.log("CheckoutForm paymentIntent", paymentIntent)
-  console.log("CheckoutForm planId", planId)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -39,13 +36,19 @@ const CheckoutForm = ({ paymentIntent, planId }) => {
     }
   }
 
-  if (checkoutSuccess) return <p>Payment successfull!</p>
+  if (checkoutSuccess) {
+    Router.push("/plans/paid")
+  }
 
   return (
     <Card
       as="form"
       onSubmit={handleSubmit}
-      sx={{ maxWidth: "400px", mx: "auto", textAlign: "center" }}
+      sx={{
+        fontWeightidth: "400px",
+        mx: "auto",
+        textAlign: "center",
+      }}
     >
       <Box
         sx={{
@@ -77,7 +80,6 @@ const CheckoutForm = ({ paymentIntent, planId }) => {
             style: {
               base: {
                 fontSize: "16px",
-                border: "1px solid #ddd",
                 color: theme.colors.black || "black",
                 "::placeholder": {
                   color: theme.colors.gray || "gray",
@@ -97,7 +99,7 @@ const CheckoutForm = ({ paymentIntent, planId }) => {
         </Button>
       </Box>
 
-      {checkoutError && <span style={{ color: "red" }}>{checkoutError}</span>}
+      {checkoutError && <Text variant="error">{checkoutError}</Text>}
     </Card>
   )
 }

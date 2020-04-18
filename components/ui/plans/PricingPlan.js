@@ -1,7 +1,7 @@
 import { Flex, Box, Card, Heading, Text, Button } from "theme-ui"
 import appConfig from "../../../app.config"
 import ButtonLink from "../nav/ButtonLink"
-import { convertNameToSlug } from "../../../utils/functions"
+import { stringToSlug } from "../../../utils/functions"
 
 export default (props) => (
   <Card sx={{ width: "340px", m: 3, p: 4 }}>
@@ -25,9 +25,9 @@ export default (props) => (
     {props.isMonthly && (
       <Text sx={{ fontSize: 2, opacity: 0.75 }}>per month</Text>
     )}
-    <Box sx={{ py: 3 }}>
-      <ButtonLink href={"./plans/" + convertNameToSlug(props.name)}>
-        Sign Up
+    <Box sx={{ py: 4 }}>
+      <ButtonLink fontSize={4} href={"./plans/" + stringToSlug(props.name)}>
+        Select Plan
       </ButtonLink>
     </Box>
     <Box as="ul" sx={{ p: 0, textAlign: "left" }}>

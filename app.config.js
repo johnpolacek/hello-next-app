@@ -27,8 +27,8 @@ module.exports = {
   plans: [
     {
       name: "Starter",
-      price: 50,
-      description: "Get started at our lowest pricing tier",
+      price: 0,
+      description: "Get started for free",
       includes: ["1 user", "1GB File Storage", "Email Support"],
       isMonthly: true,
     },
@@ -39,7 +39,7 @@ module.exports = {
       includes: [
         "10 users",
         "10GB File Storage",
-        "Priority Email Support",
+        "Email Support",
         "White Label Branding",
         "Custom Design Theme",
       ],

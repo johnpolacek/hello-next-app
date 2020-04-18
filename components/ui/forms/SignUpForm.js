@@ -29,17 +29,10 @@ export default () => {
 
   const handleSubmit = async () => {
     if (checked) {
-      setError("")
-      setIsSubmitting(true)
-      try {
-        let result = await firebase
-          .auth()
-          .createUserWithEmailAndPassword(email, password)
-        Router.push("/")
-      } catch (err) {
-        setError(err.message)
-        setIsSubmitting(false)
-      }
+      let result = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+      Router.push("/plans")
     } else {
       setError("Please agree to the terms and conditions to create an account.")
     }
