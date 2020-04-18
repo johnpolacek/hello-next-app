@@ -59,6 +59,7 @@ export const base = {
       textTransform: "uppercase",
       letterSpacing: ".2em",
     },
+    error: { color: "red" },
     heading: { pb: 3, color: "white", fontSize: 5, fontWeight: "bold" },
     headline: {
       fontSize: 7,

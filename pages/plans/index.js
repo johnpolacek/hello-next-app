@@ -4,7 +4,7 @@ import Wrapper from "../../components/layout/Wrapper"
 import appConfig from "../../app.config"
 import ChoosePlan from "../../components/ui/plans/ChoosePlan"
 
-const Plans = (props) => (
+export default (props) => (
   <Wrapper
     url="/"
     title={appConfig.name + " | Plans"}
@@ -14,5 +14,3 @@ const Plans = (props) => (
     <ChoosePlan />
   </Wrapper>
 )
-
-export default withAuthUser(withAuthUserInfo(Plans))
