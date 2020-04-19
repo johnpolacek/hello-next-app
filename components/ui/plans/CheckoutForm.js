@@ -45,7 +45,7 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
       as="form"
       onSubmit={handleSubmit}
       sx={{
-        fontWeightidth: "400px",
+        minWidth: "360px",
         mx: "auto",
         textAlign: "center",
       }}
