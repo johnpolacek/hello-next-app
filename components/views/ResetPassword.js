@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { Box, Heading, Button } from "theme-ui"
 import Router from "next/router"
 import appConfig from "../../app.config"
-import loginWithEmail from "../../utils/auth/loginWithEmail"
+import loginWithEmail from "../../utils/firebase/loginWithEmail"
 import ResetPasswordForm from "../ui/forms/ResetPasswordForm"
 
 export default (props) => {

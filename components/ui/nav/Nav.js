@@ -1,7 +1,7 @@
 import Router from "next/router"
 import NavHome from "./NavHome"
 import NavLink from "./NavLink"
-import logout from "../../../utils/auth/logout"
+import logout from "../../../utils/firebase/logout"
 import withAuthUserInfo from "../../../utils/context/withAuthUserInfo"
 import { Flex, Box, Button } from "theme-ui"
 
