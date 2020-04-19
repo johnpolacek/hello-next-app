@@ -3,7 +3,7 @@ import Router from "next/router"
 import Link from "next/link"
 import firebase from "firebase/app"
 import "firebase/auth"
-import initFirebase from "../../../utils/auth/initFirebase"
+import initFirebase from "../../../utils/firebase/initFirebase"
 import { Box, Text, Label, Input, Checkbox } from "theme-ui"
 import Form from "./Form"
 

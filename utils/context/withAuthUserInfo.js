@@ -3,7 +3,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { get } from "lodash/object"
-import { AuthUserInfoContext } from "../auth/hooks"
+import { AuthUserInfoContext } from "../firebase/hooks"
 
 // Provides an AuthUserInfo prop to the composed component.
 export default (ComposedComponent) => {

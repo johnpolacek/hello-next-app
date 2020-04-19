@@ -3,8 +3,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { get, set } from "lodash/object"
-import { AuthUserInfoContext, useFirebaseAuth } from "../auth/hooks"
-import { createAuthUser, createAuthUserInfo } from "../auth/user"
+import { AuthUserInfoContext, useFirebaseAuth } from "../firebase/hooks"
+import { createAuthUser, createAuthUserInfo } from "../firebase/user"
 
 // Gets the authenticated user from the Firebase JS SDK, when client-side,
 // or from the request object, when server-side. Add the AuthUserInfo to
