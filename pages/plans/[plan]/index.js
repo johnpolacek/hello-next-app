@@ -16,7 +16,7 @@ const stripePromise = loadStripe("pk_test_Lgr71n8BQ91Fl6TPQKE4jPDv00BO4ts8Kr")
 
 export const getServerSideProps = async (ctx) => {
   const plan = findBySlug(appConfig.plans, "name", ctx.params.plan)
-  const stripe = new Stripe("sk_test_W86VDt8I7VWbh1GjZcEzoA9Q00e4NRT9d1")
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST)
   let paymentIntent
   const { paymentIntentId } = await parseCookies(ctx)
 
@@ -46,7 +46,10 @@ export const getServerSideProps = async (ctx) => {
 }
 
 const PlanPage = (props) => {
-  console.log("process.env", process.env)
+  console.log(
+    "process.env.STRIPE_SECRET_KEY_TEST",
+    process.env.STRIPE_SECRET_KEY_TEST
+  )
   return (
     <Wrapper
       url="/"
