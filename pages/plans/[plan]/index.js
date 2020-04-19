@@ -10,9 +10,7 @@ import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
 import CheckoutForm from "../../../components/ui/plans/CheckoutForm"
 
-console.log("process.env", process.env)
-
-const stripePromise = loadStripe("pk_test_Lgr71n8BQ91Fl6TPQKE4jPDv00BO4ts8Kr")
+const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY_TEST)
 
 export const getServerSideProps = async (ctx) => {
   const plan = findBySlug(appConfig.plans, "name", ctx.params.plan)
@@ -45,25 +43,17 @@ export const getServerSideProps = async (ctx) => {
   }
 }
 
-const PlanPage = (props) => {
-  console.log(
-    "process.env.STRIPE_SECRET_KEY_TEST",
-    process.env.STRIPE_SECRET_KEY_TEST
-  )
-  return (
-    <Wrapper
-      url="/"
-      title={appConfig.name + " | " + props.plan.name + " Plan"}
-      description={
-        "Purchase the " + appConfig.name + " " + props.plan.name + " Plan"
-      }
-      bg="primary"
-    >
-      <Elements stripe={stripePromise}>
-        <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />
-      </Elements>
-    </Wrapper>
-  )
-}
-
-export default PlanPage
+export default (props) => (
+  <Wrapper
+    url="/"
+    title={appConfig.name + " | " + props.plan.name + " Plan"}
+    description={
+      "Purchase the " + appConfig.name + " " + props.plan.name + " Plan"
+    }
+    bg="primary"
+  >
+    <Elements stripe={stripePromise}>
+      <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />
+    </Elements>
+  </Wrapper>
+)
