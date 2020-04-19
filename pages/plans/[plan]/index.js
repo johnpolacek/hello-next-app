@@ -8,8 +8,9 @@ import Stripe from "stripe"
 import { parseCookies, setCookie } from "nookies"
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
-
 import CheckoutForm from "../../../components/ui/plans/CheckoutForm"
+
+console.log("process.env", process.env)
 
 const stripePromise = loadStripe("pk_test_Lgr71n8BQ91Fl6TPQKE4jPDv00BO4ts8Kr")
 
@@ -44,19 +45,22 @@ export const getServerSideProps = async (ctx) => {
   }
 }
 
-const PlanPage = (props) => (
-  <Wrapper
-    url="/"
-    title={appConfig.name + " | " + props.plan.name + " Plan"}
-    description={
-      "Purchase the " + appConfig.name + " " + props.plan.name + " Plan"
-    }
-    bg="primary"
-  >
-    <Elements stripe={stripePromise}>
-      <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />
-    </Elements>
-  </Wrapper>
-)
+const PlanPage = (props) => {
+  console.log("process.env", process.env)
+  return (
+    <Wrapper
+      url="/"
+      title={appConfig.name + " | " + props.plan.name + " Plan"}
+      description={
+        "Purchase the " + appConfig.name + " " + props.plan.name + " Plan"
+      }
+      bg="primary"
+    >
+      <Elements stripe={stripePromise}>
+        <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />
+      </Elements>
+    </Wrapper>
+  )
+}
 
 export default PlanPage
