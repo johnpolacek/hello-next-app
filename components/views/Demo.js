@@ -10,9 +10,9 @@ export default (props) => (
       src="https://player.vimeo.com/video/330041609"
       width="800"
       height="420"
-      frameborder="0"
+      frameBorder="0"
       allow="autoplay; fullscreen"
-      allowfullscreen
+      allowFullScreen
     ></iframe>
     <Heading sx={{ py: 4, maxWidth: "600px", mx: "auto" }} variant="subhead">
       Put a video walkthrough or product tour content here, then include another
