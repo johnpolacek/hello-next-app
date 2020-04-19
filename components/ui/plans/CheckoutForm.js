@@ -3,6 +3,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import Router from "next/router"
 import { destroyCookie } from "nookies"
 import { Box, Card, Heading, Text, Button } from "theme-ui"
+import CircleCheckmark from "../graphics/CircleCheckmark"
 import appConfig from "../../../app.config"
 import theme from "../../theme"
 
@@ -50,25 +51,7 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
         textAlign: "center",
       }}
     >
-      <Box
-        sx={{
-          color: "secondary",
-          pr: 1,
-          fontWeight: 900,
-          fontSize: 4,
-          display: "inline-block",
-          transform: "rotate(-6deg)",
-          borderRadius: "50%",
-          borderColor: "secondary",
-          border: "4px solid",
-          width: "42px",
-          height: "42px",
-          mt: -3,
-          mb: 2,
-        }}
-      >
-        ✓
-      </Box>
+      <CircleCheckmark color="secondary" />
       <Heading as="h3" variant="cardheading">
         <Text sx={{ fontSize: 3, mb: -2 }}>You’ve selected </Text>
         <Text sx={{ fontSize: 8, fontWeight: 700 }}>{plan.name}</Text>
