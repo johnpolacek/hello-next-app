@@ -2,16 +2,18 @@ import React, { useState } from "react"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import Router from "next/router"
 import { destroyCookie } from "nookies"
+import theme from "../../theme"
 import { Box, Card, Heading, Text, Button } from "theme-ui"
 import CircleCheckmark from "../graphics/CircleCheckmark"
-import appConfig from "../../../app.config"
-import theme from "../../theme"
+import { stringToSlug } from "../../../utils/functions"
+import setPlan from "../../../utils/firebase/setPlan"
 
 const CheckoutForm = ({ paymentIntent, plan }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [checkoutError, setCheckoutError] = useState()
   const [checkoutSuccess, setCheckoutSuccess] = useState()
+  const selectedPlan = stringToSlug(plan.name)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -38,7 +40,13 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
   }
 
   if (checkoutSuccess) {
-    Router.push("/plans/paid")
+    try {
+      await setPlan(selectedPlan)
+      Router.push("/plans/" + selectedPlan + "/paid")
+    } catch (err) {
+      console.log(err)
+      setCheckoutError(err.message)
+    }
   }
 
   return (
