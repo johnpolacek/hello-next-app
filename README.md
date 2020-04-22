@@ -86,6 +86,22 @@ This project comes with some default routes - see the `/pages` folder. The `/app
 
 Refer to the [Next.js docs](https://nextjs.org/docs/routing/introduction) for more info about how routing works.
 
+
+## Stripe Integration
+
+To set up payment plans, sign up for a Stripe account if you do not already have one. 
+
+API Keys...
+
+The default settings in *app.config.js* are for one free and two paid monthly plans that begin with a 30-day free trial. Edit the config file to reflect the payment plans you would like to attach to your app.
+
+In Stripe, you will need to add a product for each paid plan that you offer. To change the length of the free trial, adjust the `trial` string in *app.config.js* to correspond to your settings in Stripe.
+
+Additionally, for every product you add to Stripe, you should add a duplicate test product.
+
+A the plan id for each product (and the test product plan id) should be added to *app.config.js*.
+
+
 ## Customization
 
 ### Favicon

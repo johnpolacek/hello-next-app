@@ -15,33 +15,69 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
 
   const handleSubmit = async () => {
     try {
-      const {
-        error,
-        paymentIntent: { status },
-      } = await stripe.confirmCardPayment(paymentIntent.client_secret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
+      const result = await stripe.createPaymentMethod({
+        type: "card",
+        card: elements.getElement(CardElement),
+        billing_details: {
+          address: {
+            city: "Chicago",
+            line1: "4913 Ashland",
+            postal_code: 60565,
+            state: "IL",
+          },
+          email: "john.po.lacek@gmail.com",
+          name: "Johnny Tryhard",
+          phone: "773-758-5666",
         },
       })
-
-      if (error) throw new Error(error.message)
-
-      if (status === "succeeded") {
-        destroyCookie(null, "paymentIntentId")
-        setCheckoutSuccess(true)
-      }
+      await handleStripePaymentMethod(result)
     } catch (err) {
       setCheckoutError(err.message)
     }
   }
 
-  if (checkoutSuccess) {
-    try {
-      setPlan(plan)
-    } catch (err) {
-      console.log(err)
-      setCheckoutError(err.message)
+  const handleStripePaymentMethod = async (result) => {
+    if (result.error) {
+      setCheckoutError(result.error.message)
+    } else {
+      const response = await fetch("/api/createCustomer", {
+        method: "POST",
+        mode: "same-origin",
+        body: JSON.stringify({
+          paymentMethodId: result.paymentMethod.id,
+        }),
+      })
+
+      const subscription = await response.json()
+      handleSubscription(subscription)
     }
+  }
+
+  const handleSubscription = (subscription) => {
+    const { latest_invoice } = subscription
+    const { payment_intent } = latest_invoice
+
+    if (payment_intent) {
+      const { client_secret, status } = payment_intent
+
+      if (status === "requires_action") {
+        stripe.confirmCardPayment(client_secret).then(function (result) {
+          if (result.error) {
+            setCheckoutError(result.error.message)
+          } else {
+            setCheckoutSuccess(true)
+          }
+        })
+      } else {
+        setCheckoutSuccess(true)
+      }
+    } else {
+      setCheckoutError(`handleSubscription:: No payment information received!`)
+    }
+  }
+
+  if (checkoutSuccess) {
+    setPlan(plan)
   }
 
   return (
