@@ -41,7 +41,7 @@ const Form = (props) => {
       <Card
         id={props.id}
         as="form"
-        sx={{ bg: "white" }}
+        sx={{ bg: "white", minWidth: props.minWidth || "auto" }}
         onSubmit={handleSubmit}
       >
         {props.heading && (
