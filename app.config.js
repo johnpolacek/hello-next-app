@@ -31,6 +31,7 @@ module.exports = {
       description: "Get started for free",
       includes: ["1 user", "1GB File Storage", "Email Support"],
       isMonthly: true,
+      // free plans do not need a plan id
     },
     {
       name: "Pro",
@@ -44,6 +45,8 @@ module.exports = {
         "Custom Design Theme",
       ],
       isMonthly: true,
+      planId: "plan_H98v4Soymn4QE3", // Stripe Product Id
+      planIdTest: "plan_H98v4Soymn4QE3", // Stripe Product Id Test
     },
     {
       name: "Premium",
@@ -59,6 +62,9 @@ module.exports = {
         "Custom Domain",
       ],
       isMonthly: true,
+      planId: "plan_H98v1kie0YIbxG", // Stripe Product Id
+      planIdTest: "plan_H98v1kie0YIbxG", // Stripe Product Id Test
     },
   ],
+  trial: "30 day",
 }
