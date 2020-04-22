@@ -1,23 +1,19 @@
 import React, { useState } from "react"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
-import Router from "next/router"
 import { destroyCookie } from "nookies"
+import setPlan from "../../../utils/firebase/setPlan"
 import theme from "../../theme"
 import { Box, Card, Heading, Text, Button } from "theme-ui"
+import Form from "./Form"
 import CircleCheckmark from "../graphics/CircleCheckmark"
-import { stringToSlug } from "../../../utils/functions"
-import setPlan from "../../../utils/firebase/setPlan"
 
 const CheckoutForm = ({ paymentIntent, plan }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [checkoutError, setCheckoutError] = useState()
   const [checkoutSuccess, setCheckoutSuccess] = useState()
-  const selectedPlan = stringToSlug(plan.name)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
+  const handleSubmit = async () => {
     try {
       const {
         error,
@@ -41,8 +37,7 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
 
   if (checkoutSuccess) {
     try {
-      await setPlan(selectedPlan)
-      Router.push("/plans/" + selectedPlan + "/paid")
+      setPlan(plan)
     } catch (err) {
       console.log(err)
       setCheckoutError(err.message)
@@ -50,20 +45,20 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
   }
 
   return (
-    <Card
-      as="form"
+    <Form
       onSubmit={handleSubmit}
-      sx={{
-        minWidth: "360px",
-        mx: "auto",
-        textAlign: "center",
-      }}
+      buttonText={"Pay $" + plan.price}
+      error={checkoutError}
+      id="LoginForm"
+      minWidth="400px"
     >
-      <CircleCheckmark color="secondary" />
-      <Heading as="h3" variant="cardheading">
-        <Text sx={{ fontSize: 3, mb: -2 }}>You’ve selected </Text>
-        <Text sx={{ fontSize: 8, fontWeight: 700 }}>{plan.name}</Text>
-      </Heading>
+      <Box sx={{ textAlign: "center" }}>
+        <CircleCheckmark color="secondary" />
+        <Heading as="h3" variant="cardheading">
+          <Text sx={{ fontSize: 3, mb: -2 }}>You’ve selected </Text>
+          <Text sx={{ fontSize: 8, fontWeight: 700 }}>{plan.name}</Text>
+        </Heading>
+      </Box>
 
       <Box sx={theme.forms.input}>
         <CardElement
@@ -83,15 +78,7 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
           }}
         />
       </Box>
-
-      <Box sx={{ pt: 4 }}>
-        <Button variant="huge" type="submit" disabled={!stripe}>
-          Pay ${plan.price}
-        </Button>
-      </Box>
-
-      {checkoutError && <Text variant="error">{checkoutError}</Text>}
-    </Card>
+    </Form>
   )
 }
 
