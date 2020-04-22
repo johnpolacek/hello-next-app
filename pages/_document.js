@@ -13,7 +13,7 @@ class CustomDocument extends Document {
     // Alternatively, you could use a store, like Redux.
     const { AuthUserInfo } = this.props
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <script
             id="__MY_AUTH_USER_INFO"
