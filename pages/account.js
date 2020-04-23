@@ -6,11 +6,10 @@ import withAuthUserInfo from "../utils/context/withAuthUserInfo"
 import appConfig from "../app.config"
 import Wrapper from "../components/layout/Wrapper"
 import Account from "../components/views/Account"
+import getPlan from "../utils/firebase/getPlan"
 
 const Index = (props) => {
-  const { AuthUserInfo, data } = props
-  const AuthUser = get(AuthUserInfo, "AuthUser", null)
-  const { favoriteFood } = data
+  const AuthUser = get(props.AuthUserInfo, "AuthUser", null)
 
   return (
     <Wrapper
@@ -19,20 +18,10 @@ const Index = (props) => {
       description="Your Hello Web App account information"
       bg="primary"
     >
-      {AuthUser && <Account email={AuthUser.email} data={data} />}
+      {AuthUser && <Account email={AuthUser.email} data={props} />}
     </Wrapper>
   )
 }
-
-// Just an example.
-const mockFetchData = async (userId) => ({
-  user: {
-    ...(userId && {
-      id: userId,
-    }),
-  },
-  favoriteFood: "pizza",
-})
 
 Index.getInitialProps = async (ctx) => {
   // Get the AuthUserInfo object. This is set in `withAuthUser.js`.
@@ -40,34 +29,10 @@ Index.getInitialProps = async (ctx) => {
   const AuthUserInfo = get(ctx, "myCustomData.AuthUserInfo", null)
   const AuthUser = get(AuthUserInfo, "AuthUser", null)
 
-  // You can also get the token (e.g., to authorize a request when fetching data)
-  // const AuthUserToken = get(AuthUserInfo, 'token', null)
-
   // You can fetch data here.
-  const data = await mockFetchData(get(AuthUser, "id"))
-
-  return {
-    data,
-  }
-}
-
-Index.displayName = "Index"
-
-Index.propTypes = {
-  AuthUserInfo: PropTypes.shape({
-    AuthUser: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      emailVerified: PropTypes.bool.isRequired,
-    }),
-    token: PropTypes.string,
-  }),
-  data: PropTypes.shape({
-    user: PropTypes.shape({
-      id: PropTypes.string,
-    }).isRequired,
-    favoriteFood: PropTypes.string.isRequired,
-  }).isRequired,
+  return await getPlan(AuthUser.id).then((planId) => {
+    return { AuthUserInfo, plan: planId }
+  })
 }
 
 Index.defaultProps = {
