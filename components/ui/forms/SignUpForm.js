@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Router from "next/router"
 import Link from "next/link"
+import { setCookie } from "nookies"
 import firebase from "firebase/app"
 import "firebase/auth"
 import initFirebase from "../../../utils/firebase/initFirebase"
@@ -32,6 +33,7 @@ export default () => {
       let result = await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
+      setCookie(null, "accountEmail", email)
       Router.push("/plans")
     } else {
       setError("Please agree to the terms and conditions to create an account.")

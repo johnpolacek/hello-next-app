@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
-import { destroyCookie } from "nookies"
+import { parseCookies, destroyCookie } from "nookies"
 import setPlan from "../../../utils/firebase/setPlan"
 import theme from "../../theme"
 import { Box, Card, Heading, Text, Button } from "theme-ui"
@@ -13,21 +13,18 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
   const [checkoutError, setCheckoutError] = useState()
   const [checkoutSuccess, setCheckoutSuccess] = useState()
 
+  const { accountEmail } = parseCookies()
+  console.log("accountEmail", accountEmail)
+
+  console.log("plan", plan)
+
   const handleSubmit = async () => {
     try {
       const result = await stripe.createPaymentMethod({
         type: "card",
         card: elements.getElement(CardElement),
         billing_details: {
-          address: {
-            city: "Chicago",
-            line1: "4913 Ashland",
-            postal_code: 60565,
-            state: "IL",
-          },
-          email: "john.po.lacek@gmail.com",
-          name: "Johnny Tryhard",
-          phone: "773-758-5666",
+          email: accountEmail,
         },
       })
       await handleStripePaymentMethod(result)
@@ -45,6 +42,8 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
         mode: "same-origin",
         body: JSON.stringify({
           paymentMethodId: result.paymentMethod.id,
+          planId: plan.id,
+          email: accountEmail,
         }),
       })
 

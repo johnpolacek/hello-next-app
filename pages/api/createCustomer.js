@@ -3,17 +3,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST)
 
 export default async (req, res) => {
   if (req.method === "POST") {
-    const { paymentMethodId } = JSON.parse(req.body)
+    const { paymentMethodId, planId, email } = JSON.parse(req.body)
 
     //const { paymentMethodId, planId } = JSON.parse(req.body)
-    console.log("update createCustomer to get planId param")
-    const planId = "plan_H98v1kie0YIbxG"
 
     try {
       const customer = await stripe.customers.create({
         payment_method: paymentMethodId,
-        phone: "555-555-5555",
-        email: "janedoe@example.com",
+        email: email,
         invoice_settings: {
           default_payment_method: paymentMethodId,
         },

@@ -13,10 +13,13 @@ import CheckoutForm from "../../../components/ui/forms/CheckoutForm"
 const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY_TEST)
 
 export const getServerSideProps = async (ctx) => {
-  const plan = findBySlug(appConfig.plans, "name", ctx.params.plan)
+  let plan = findBySlug(appConfig.plans, "name", ctx.params.plan)
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST)
   let paymentIntent
   const { paymentIntentId } = await parseCookies(ctx)
+
+  plan.id =
+    process.env.NODE_ENV === "development" ? plan.planIdTest : plan.planId
 
   if (paymentIntentId) {
     paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId)
