@@ -30,8 +30,8 @@ Index.getInitialProps = async (ctx) => {
   const AuthUser = get(AuthUserInfo, "AuthUser", null)
 
   // You can fetch data here.
-  return await getPlan(AuthUser.id).then((planId) => {
-    return { AuthUserInfo, plan: planId }
+  return await getPlan(AuthUser.id).then((plan) => {
+    return { AuthUserInfo, plan: plan }
   })
 }
 

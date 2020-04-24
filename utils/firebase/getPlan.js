@@ -7,23 +7,35 @@ import { stringToSlug } from "../functions"
 export default async (userId) => {
   console.log("getPlan userId", userId)
 
-  var docRef = firebase.firestore().collection("users").doc(userId)
+  var usersRef = firebase.firestore().collection("users").doc(userId)
 
-  return docRef
+  return usersRef
     .get()
-    .then(function (doc) {
+    .then((doc) => {
       if (doc.exists) {
         const planId = doc.data().plan
-        console.log("getPlan planId", planId)
-        return planId
+        var plansRef = firebase.firestore().collection("plans").doc(planId)
+        return plansRef
+          .get()
+          .then((planDoc) => {
+            if (planDoc.exists) {
+              return { ...{ id: planId }, ...planDoc.data() }
+            } else {
+              console.log("No such plan!")
+              return false
+            }
+          })
+          .catch(function (error) {
+            console.log("Error getting plan document:", error)
+            return false
+          })
       } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!")
+        console.log("No such user!")
         return false
       }
     })
     .catch(function (error) {
-      console.log("Error getting document:", error)
+      console.log("Error getting user document:", error)
       return false
     })
 
