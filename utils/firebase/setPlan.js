@@ -5,22 +5,24 @@ import Router from "next/router"
 import { stringToSlug } from "../functions"
 
 export default async (plan) => {
+  console.log("setPlan plan", plan)
   return firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // first create the plan
       // planId is user id + timestamp (users may change their plan or get a new one when they renew)
-      const planId = user.uid + new Date().getTime()
+      const userPlanId = user.uid + "-" + new Date().getTime()
       const expiration = new Date()
       expiration.setFullYear(expiration.getFullYear() + 1)
 
       firebase
         .firestore()
         .collection("plans")
-        .doc(planId)
+        .doc(userPlanId)
         .set({
           price: plan.price,
           type: plan.name,
-          expiration: firebase.firestore.Timestamp.fromDate(expiration),
+          plan: plan.id,
+          subscription: plan.items.data[0].subscription,
         })
         .then(() => {
           // then attach it to the user in the database
@@ -29,7 +31,7 @@ export default async (plan) => {
             .collection("users")
             .doc(user.uid)
             .set({
-              plan: planId,
+              plan: userPlanId,
             })
             .then(() => {
               Router.push("/plans/" + stringToSlug(plan.name) + "/paid")

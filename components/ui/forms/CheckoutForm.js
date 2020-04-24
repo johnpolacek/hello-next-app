@@ -10,8 +10,9 @@ import CircleCheckmark from "../graphics/CircleCheckmark"
 const CheckoutForm = ({ paymentIntent, plan }) => {
   const stripe = useStripe()
   const elements = useElements()
-  const [checkoutError, setCheckoutError] = useState()
-  const [checkoutSuccess, setCheckoutSuccess] = useState()
+  const [checkoutError, setCheckoutError] = useState(null)
+  const [checkoutSuccess, setCheckoutSuccess] = useState(null)
+  const [subscription, setSubscription] = useState(null)
 
   const { accountEmail } = parseCookies()
   console.log("accountEmail", accountEmail)
@@ -55,6 +56,7 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
   const handleSubscription = (subscription) => {
     const { latest_invoice } = subscription
     const { payment_intent } = latest_invoice
+    setSubscription(subscription)
 
     if (payment_intent) {
       const { client_secret, status } = payment_intent
@@ -76,7 +78,7 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
   }
 
   if (checkoutSuccess) {
-    setPlan(plan)
+    setPlan({ ...subscription, ...plan })
   }
 
   return (
