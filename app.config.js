@@ -21,6 +21,8 @@ module.exports = {
     "Subhead copy that explains the features and benefits of your app to your audience of potential users and captures their interest to get them to sign up or find out more.",
   // contact appears in the privacy policy page
   contact: "contact@yourappdomain.com",
+  // support appears when errors happen
+  support: "support@yourappdomain.com",
   // plans appears on pricing page and in account creation flow
   // assumes $ / month
   // customize
