@@ -38,20 +38,4 @@ export default async (userId) => {
       console.log("Error getting user document:", error)
       return false
     })
-
-  // return firebase.auth().onAuthStateChanged((user) => {
-  //   console.log("onAuthStateChanged user", user)
-  //   firebase
-  //     .firestore()
-  //     .ref("/users/" + userId)
-  //     .once("value")
-  //     .then(function (snapshot) {
-  //       const planId = snapshot.val() && snapshot.val().plan
-  //       console.log("getPlan planId", planId)
-  //       return planId
-  //     })
-  //     .catch(function (error) {
-  //       return false
-  //     })
-  // })
 }

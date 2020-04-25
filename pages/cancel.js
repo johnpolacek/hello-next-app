@@ -5,7 +5,7 @@ import withAuthUser from "../utils/context/withAuthUser"
 import withAuthUserInfo from "../utils/context/withAuthUserInfo"
 import appConfig from "../app.config"
 import Wrapper from "../components/layout/Wrapper"
-import Account from "../components/views/Account"
+import Cancel from "../components/views/Cancel"
 import getPlan from "../utils/firebase/getPlan"
 
 const Page = (props) => {
@@ -14,11 +14,11 @@ const Page = (props) => {
   return (
     <Wrapper
       url="/"
-      title={appConfig.name + " | Account"}
+      title={appConfig.name + " | Cancel"}
       description={"Your " + appConfig.name + " account information"}
       bg="primary"
     >
-      {AuthUser && <Account {...props} />}
+      {AuthUser && <Cancel {...props} />}
     </Wrapper>
   )
 }
@@ -33,10 +33,6 @@ Page.getInitialProps = async (ctx) => {
   return await getPlan(AuthUser.id).then((plan) => {
     return { plan: plan }
   })
-}
-
-Page.defaultProps = {
-  AuthUserInfo: null,
 }
 
 // Use `withAuthUser` to get the authed user server-side, which

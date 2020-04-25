@@ -95,6 +95,10 @@ export const base = {
       color: "background",
       bg: "secondary",
     },
+    reverse: {
+      color: "primary",
+      bg: "white",
+    },
     large: {
       fontSize: 3,
       px: 3,
