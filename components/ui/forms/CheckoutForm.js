@@ -35,6 +35,8 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
   }
 
   const handleStripePaymentMethod = async (result) => {
+    console.log("handleStripePaymentMethod")
+    console.dir(result)
     if (result.error) {
       setCheckoutError(result.error.message)
     } else {

@@ -14,6 +14,13 @@ export default async (plan) => {
       const expiration = new Date()
       expiration.setFullYear(expiration.getFullYear() + 1)
 
+      console.log("plan.latest_invoice", plan.latest_invoice)
+
+      console.log(
+        plan.latest_invoice.payment_intent.charges.data[0]
+          .payment_method_details
+      )
+
       firebase
         .firestore()
         .collection("plans")
@@ -23,6 +30,20 @@ export default async (plan) => {
           type: plan.name,
           plan: plan.id,
           subscription: plan.items.data[0].subscription,
+          last4:
+            plan.latest_invoice.payment_intent.charges.data[0]
+              .payment_method_details.card.last4,
+          network:
+            plan.latest_invoice.payment_intent.charges.data[0]
+              .payment_method_details.card.network,
+          expires:
+            plan.latest_invoice.payment_intent.charges.data[0].payment_method_details.card.exp_month
+              .toString()
+              .padStart(2, "0") +
+            "/" +
+            plan.latest_invoice.payment_intent.charges.data[0].payment_method_details.card.exp_year
+              .toString()
+              .substr(2),
         })
         .then(() => {
           // then attach it to the user in the database
