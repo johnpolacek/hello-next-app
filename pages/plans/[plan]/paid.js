@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react"
 import withAuthUser from "../../../utils/context/withAuthUser"
 import withAuthUserInfo from "../../../utils/context/withAuthUserInfo"
 import Wrapper from "../../../components/layout/Wrapper"
