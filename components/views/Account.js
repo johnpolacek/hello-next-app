@@ -19,7 +19,11 @@ export default (props) => {
       <Heading variant="headline">Your Account</Heading>
       {props.plan ? (
         <>
-          <DataRow label="Email">{props.AuthUserInfo.AuthUser.email}</DataRow>
+          <DataRow
+            name="email"
+            value={props.AuthUserInfo.AuthUser.email}
+            label="Email"
+          />
           <DataRow label="Plan">
             {props.plan.type}{" "}
             {plan.isMonthly && (
