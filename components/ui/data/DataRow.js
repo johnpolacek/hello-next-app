@@ -39,6 +39,7 @@ export default (props) => {
           <Input
             name={props.name}
             value={dataValue}
+            type={props.type || "text"}
             onChange={(e) => {
               setDataValue(e.target.value)
             }}
@@ -49,7 +50,6 @@ export default (props) => {
               px: 2,
               m: 0,
             }}
-            type="text"
           />
         ) : (
           <Box sx={{ p: 1 }}>{props.children || dataValue}</Box>

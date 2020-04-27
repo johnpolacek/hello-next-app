@@ -6,6 +6,7 @@ import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
 import { stringToSlug, findBySlug } from "../../utils/functions"
 import updateEmail from "../../utils/firebase/updateEmail"
+import updatePassword from "../../utils/firebase/updatePassword"
 
 export default (props) => {
   const [error, setError] = useState("")
@@ -25,12 +26,26 @@ export default (props) => {
             name="email"
             value={props.AuthUserInfo.AuthUser.email}
             label="Email"
-            onSave={(email, onComplete) => {
-              updateEmail(email).then((response) => {
+            onSave={(newEmail, onComplete) => {
+              updateEmail(newEmail).then((response) => {
                 if (!response.success) {
                   setError(response.message)
                 }
                 onComplete()
+              })
+            }}
+          />
+          <DataRow
+            name="password"
+            value="••••••••••••"
+            label="Password"
+            type="password"
+            onSave={(newPassword, onComplete) => {
+              updatePassword(newPassword).then((response) => {
+                if (!response.success) {
+                  setError(response.message)
+                }
+                window.location.reload()
               })
             }}
           />
