@@ -1,30 +1,40 @@
+import React, { useState } from "react"
 import { Flex, Box, Heading, Text, Link } from "theme-ui"
 import NextLink from "next/link"
 import DataRow from "../ui/data/DataRow"
 import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
 import { stringToSlug, findBySlug } from "../../utils/functions"
+import updateEmail from "../../utils/firebase/updateEmail"
 
 export default (props) => {
+  const [error, setError] = useState("")
   const plan = findBySlug(
     appConfig.plans,
     "name",
     stringToSlug(props.plan.type)
   )
 
-  console.log("Account props", props)
-
   return (
     <Box sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
       <Heading variant="headline">Your Account</Heading>
+      <Text sx={{ pb: 4, fontStyle: "italic" }}>{error}&nbsp;</Text>
       {props.plan ? (
         <>
           <DataRow
             name="email"
             value={props.AuthUserInfo.AuthUser.email}
             label="Email"
+            onSave={(email, onComplete) => {
+              updateEmail(email).then((response) => {
+                if (!response.success) {
+                  setError(response.message)
+                }
+                onComplete()
+              })
+            }}
           />
-          <DataRow label="Plan">
+          <DataRow link="/account/plan" label="Plan">
             {props.plan.type}{" "}
             {plan.isMonthly && (
               <Text as="span" sx={{ fontSize: 0, pl: 1 }}>
@@ -33,7 +43,7 @@ export default (props) => {
               </Text>
             )}
           </DataRow>
-          <DataRow label="Billing">
+          <DataRow link="/account/billing" label="Billing">
             <Text
               as="span"
               sx={{
@@ -57,9 +67,11 @@ export default (props) => {
               exp. {props.plan.expires}
             </Text>
           </DataRow>
-          <NextLink href="./cancel" passHref>
-            <Link variant="reverse">Cancel Account</Link>
-          </NextLink>
+          <Box sx={{ pt: 4, fontSize: 1 }}>
+            <NextLink href="./cancel" passHref>
+              <Link variant="reverse">Cancel Account</Link>
+            </NextLink>
+          </Box>
         </>
       ) : (
         <Box sx={{ pb: 6, mb: 6 }}>

@@ -12,8 +12,6 @@ const actionCodeSettings = {
   handleCodeInApp: true,
 }
 
-firebase.auth()
-
 export default async (email) => {
   return firebase
     .auth()

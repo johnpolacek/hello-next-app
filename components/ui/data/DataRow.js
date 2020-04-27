@@ -1,8 +1,16 @@
 import React, { useState } from "react"
 import { Flex, Box, Text, Button, Label, Input } from "theme-ui"
+import Router from "next/router"
 
 export default (props) => {
   const [isEditing, setIsEditing] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const [dataValue, setDataValue] = useState(props.value)
+
+  const onSaveComplete = () => {
+    setIsEditing(false)
+    setIsSaving(false)
+  }
 
   return (
     <Flex
@@ -30,7 +38,10 @@ export default (props) => {
         {isEditing ? (
           <Input
             name={props.name}
-            value={props.value}
+            value={dataValue}
+            onChange={(e) => {
+              setDataValue(e.target.value)
+            }}
             sx={{
               fontSize: 1,
               color: "black",
@@ -41,7 +52,7 @@ export default (props) => {
             type="text"
           />
         ) : (
-          <Box sx={{ p: 1 }}>{props.children || props.value}</Box>
+          <Box sx={{ p: 1 }}>{props.children || dataValue}</Box>
         )}
       </Box>
       <Box
@@ -55,11 +66,20 @@ export default (props) => {
       >
         <Button
           onClick={() => {
-            setIsEditing(true)
+            if (props.link) {
+              Router.push(props.link)
+            } else {
+              if (isEditing && !isSaving) {
+                setIsSaving(true)
+                props.onSave(dataValue, onSaveComplete)
+              } else {
+                setIsEditing(true)
+              }
+            }
           }}
           sx={{
             py: 2,
-            bg: isEditing ? "secondary" : "transparent",
+            bg: isEditing ? (isSaving ? "gray" : "secondary") : "transparent",
             fontSize: 0,
           }}
         >

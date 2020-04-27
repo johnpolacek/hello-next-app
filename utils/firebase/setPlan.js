@@ -5,7 +5,6 @@ import Router from "next/router"
 import { stringToSlug } from "../functions"
 
 export default async (plan) => {
-  console.log("setPlan plan", plan)
   return firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // first create the plan
@@ -13,13 +12,6 @@ export default async (plan) => {
       const userPlanId = user.uid + "-" + new Date().getTime()
       const expiration = new Date()
       expiration.setFullYear(expiration.getFullYear() + 1)
-
-      console.log("plan.latest_invoice", plan.latest_invoice)
-
-      console.log(
-        plan.latest_invoice.payment_intent.charges.data[0]
-          .payment_method_details
-      )
 
       firebase
         .firestore()
