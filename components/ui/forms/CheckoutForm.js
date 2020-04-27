@@ -13,11 +13,7 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
   const [checkoutError, setCheckoutError] = useState(null)
   const [checkoutSuccess, setCheckoutSuccess] = useState(null)
   const [subscription, setSubscription] = useState(null)
-
   const { accountEmail } = parseCookies()
-  console.log("accountEmail", accountEmail)
-
-  console.log("plan", plan)
 
   const handleSubmit = async () => {
     try {
@@ -35,8 +31,6 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
   }
 
   const handleStripePaymentMethod = async (result) => {
-    console.log("handleStripePaymentMethod")
-    console.dir(result)
     if (result.error) {
       setCheckoutError(result.error.message)
     } else {

@@ -9,7 +9,6 @@ export default (props) => {
       ? "All plans come with a free " + appConfig.trial + " trial."
       : "Plans for individuals, teams and businesses of every stage, shape and size."
 
-  console.log("appConfig.trial", appConfig.trial)
   return (
     <Box
       sx={{ textAlign: "center", width: "100%", color: "white", pt: 3, pb: 5 }}
