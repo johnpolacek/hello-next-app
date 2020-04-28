@@ -5,7 +5,12 @@ import PricingPlan from "./PricingPlan"
 export default (props) => (
   <Flex sx={{ flexWrap: "wrap", width: "100%", justifyContent: "center" }}>
     {appConfig.plans.map((plan, index) => (
-      <PricingPlan key={"plan" + index} index={index} {...plan} />
+      <PricingPlan
+        isCurrent={props.current === plan.name}
+        key={"plan" + index}
+        index={index}
+        {...plan}
+      />
     ))}
   </Flex>
 )

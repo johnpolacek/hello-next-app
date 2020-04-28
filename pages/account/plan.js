@@ -15,7 +15,7 @@ const Page = (props) => {
     <Wrapper
       url="/"
       title={appConfig.name + " | Manage Plan"}
-      description={"Your " + appConfig.name + " account information"}
+      description={"Update your " + appConfig.name + " plan"}
       bg="primary"
     >
       {AuthUser && <Plan {...props} />}
