@@ -5,6 +5,23 @@ import { stringToSlug } from "../../../utils/functions"
 
 export default (props) => (
   <Card sx={{ width: "340px", m: 3, p: 4 }}>
+    {props.isCurrent && (
+      <Box sx={{ mt: -5, mb: 3 }}>
+        <Text
+          sx={{
+            py: 1,
+            px: 3,
+            bg: "secondary",
+            color: "white",
+            display: "inline-block",
+            fontWeight: "bold",
+            borderRadius: "4px",
+          }}
+        >
+          Your current plan
+        </Text>
+      </Box>
+    )}
     <Heading variant="cardheading">{props.name}</Heading>
     <Box
       sx={{
@@ -26,9 +43,24 @@ export default (props) => (
       <Text sx={{ fontSize: 2, opacity: 0.75 }}>per month</Text>
     )}
     <Box sx={{ py: 4 }}>
-      <ButtonLink fontSize={4} href={"./plans/" + stringToSlug(props.name)}>
-        Select Plan
-      </ButtonLink>
+      {props.isCurrent ? (
+        <Box
+          sx={{
+            fontSize: 4,
+            color: "white",
+            bg: "secondary",
+            display: "inline-block",
+            py: 3,
+            px: 4,
+          }}
+        >
+          Selected
+        </Box>
+      ) : (
+        <ButtonLink fontSize={4} href={"./plans/" + stringToSlug(props.name)}>
+          Select Plan
+        </ButtonLink>
+      )}
     </Box>
     <Box as="ul" sx={{ p: 0, textAlign: "left" }}>
       {props.includes.map((includes, index) => (
