@@ -1,4 +1,3 @@
-import React, { useState } from "react"
 import { Flex, Box, Heading, Text, Link } from "theme-ui"
 import NextLink from "next/link"
 import ButtonLink from "../ui/nav/ButtonLink"
@@ -7,7 +6,6 @@ import { stringToSlug, findBySlug } from "../../utils/functions"
 import Pricing from "../ui/plans/Pricing"
 
 export default (props) => {
-  const [error, setError] = useState("")
   const plan = findBySlug(
     appConfig.plans,
     "name",
@@ -23,7 +21,6 @@ export default (props) => {
           {props.plan.type}
         </Box>
       </Heading>
-      <Text sx={{ pb: 4, fontStyle: "italic" }}>{error}&nbsp;</Text>
       <Pricing current={props.plan.type} />
       {props.plan ? (
         <>
