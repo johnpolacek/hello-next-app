@@ -18,6 +18,7 @@
     "@next/mdx": "^9.3.4",
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.4.0",
+    "@theme-ui/color": "^0.3.1",
     "cookie-session": "1.4.0",
     "dotenv": "8.2.0",
     "firebase": "^7.13.2",
