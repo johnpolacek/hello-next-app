@@ -1,14 +1,17 @@
 import { Box, Text, Link } from "theme-ui"
+import { shade } from "@theme-ui/color"
 
 export default (props) => (
   <Box
     as="header"
     sx={{
-      p: 4,
+      pt: 4,
+      pb: 5,
+      px: 3,
       color: "white",
       textAlign: "center",
       fontSize: 3,
-      bg: "primary",
+      bg: shade("primary", 0.2),
     }}
   >
     <Box>
