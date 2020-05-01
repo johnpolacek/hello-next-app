@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import reset from "../../../utils/firebase/reset"
 import { Flex, Box, Card, Heading, Text, Button } from "theme-ui"
+import Spinner from "../graphics/Spinner"
 
 const Form = (props) => {
   const [error, setError] = useState("")
@@ -58,7 +59,7 @@ const Form = (props) => {
           disabled={disabled}
           type="submit"
         >
-          {props.buttonText}
+          {isSubmitting ? <Spinner /> : props.buttonText}
         </Button>
         {props.after}
       </Card>
