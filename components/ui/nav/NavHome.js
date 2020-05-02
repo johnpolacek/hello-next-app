@@ -21,7 +21,12 @@ export default (props) => (
           color: "primary",
         }}
       >
-        <img width="24" height="24" src="/hello.svg" alt="Hand Wave Logo" />
+        <img
+          width="24"
+          height="24"
+          src="/logo-app.svg"
+          alt={appConfig.name + " Logo"}
+        />
       </span>
       <span>{appConfig.name}</span>
     </h1>
