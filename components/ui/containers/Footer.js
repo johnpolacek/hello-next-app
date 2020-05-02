@@ -1,48 +1,51 @@
-import { Box, Text, Link } from "theme-ui"
+import { Flex, Box, Text, Link, Image } from "theme-ui"
 import { shade } from "@theme-ui/color"
+import appConfig from "../../../app.config.js"
 
 export default (props) => (
   <Box
-    as="header"
+    as="footer"
     sx={{
-      pt: 4,
-      pb: 5,
-      px: 3,
       color: "white",
-      textAlign: "center",
+      textAlign: "left",
       fontSize: 3,
       bg: shade("primary", 0.2),
     }}
   >
-    <Box>
-      <Text sx={{ mx: 3, display: "inline-block" }}>
-        Created by{" "}
-        <Link variant="reverse" href="https://johnpolacek">
-          John Polacek
-        </Link>
-      </Text>
-      <Text sx={{ mx: 3, display: "inline-block" }}>
-        Open sourced on{" "}
-        <Link
-          variant="reverse"
-          href="https://github.com/johnpolacek/project-starter"
-        >
-          Github
-        </Link>
-      </Text>
-    </Box>
-    <Box sx={{ fontSize: 0, pt: 3, mb: -3 }}>
-      Hello Icon by{" "}
-      <Link
-        variant="reverse"
-        href="https://www.flaticon.com/authors/vitaly-gorbachev"
-      >
-        Vitaly Gorbachev
-      </Link>{" "}
-      from{" "}
-      <Link variant="reverse" href="https://www.flaticon.com/">
-        flaticon.com
-      </Link>
-    </Box>
+    <Flex
+      sx={{
+        pt: 4,
+        pb: 5,
+        px: 4,
+        flexWrap: "wrap",
+        maxWidth: "1280px",
+        mx: "auto",
+      }}
+    >
+      <Box sx={{ width: "33.33%", px: 3 }}>
+        <Text sx={{ fontWeight: 600, fontSize: 3, pb: 2 }}>
+          <span
+            sx={{
+              pr: "12px",
+              position: "relative",
+              top: "6px",
+              color: "primary",
+            }}
+          >
+            <Image
+              width="20"
+              height="20"
+              src="/logo-app.svg"
+              alt={appConfig.name + " Logo"}
+              sx={{ position: "relative", top: "3px" }}
+            />
+          </span>
+          <Text as="span" sx={{ pl: 2 }}>
+            {appConfig.company.name}
+          </Text>
+        </Text>
+        <Text sx={{ fontSize: 0 }}>{appConfig.company.description}</Text>
+      </Box>
+    </Flex>
   </Box>
 )

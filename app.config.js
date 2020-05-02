@@ -9,6 +9,12 @@ module.exports = {
   analytics: "YOUR_GA_CODE_HERE",
   // name : appears in page titles, header nav
   name: "Your App",
+  // company : appears in footer
+  company: {
+    name: "Your Company",
+    description:
+      "Short description to explain the purpose of your company and what you stand for.",
+  },
   // shortDescription : appears in landing page title
   shortDescription: "Very Short App Description",
   // longDescription : appears in landing page meta description
