@@ -25,9 +25,10 @@ export default () => {
     try {
       firebase
         .auth()
-        .signInWithEmailAndPassword(email, password).then((result) => {
+        .signInWithEmailAndPassword(email, password)
+        .then((result) => {
           console.log("LoginFormIron result", result)
-          var user = firebase.auth().currentUser;
+          var user = firebase.auth().currentUser
           if (user) {
             fetch("/api/login-iron", {
               method: "POST",
