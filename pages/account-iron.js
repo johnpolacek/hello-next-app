@@ -1,10 +1,15 @@
 import React from 'react'
 import withSession from '../lib/session'
 import PropTypes from 'prop-types'
+import getPlan from "../utils/firebase/getPlan"
 
-const Account = ({ user }) => {
+const Account = ({ user, plan }) => {
+  console.log(user)
   return (
-    <div>{user.email}</div>
+    <><div>email: {user.email}</div>
+    <div>id: {user.uid}</div>
+    <div>plan: {JSON.stringify(plan)}</div>
+    </>
   )
 }
 
@@ -16,11 +21,13 @@ export const getServerSideProps = withSession(async function({ req, res }) {
     res.statusCode = 302
     res.end()
     return
+  } else {
+    const user = req.session.get('user')
+    return await getPlan(user.uid).then((plan) => {
+      return { props: {user, plan} }
+    })
   }
 
-  return {
-    props: { user: req.session.get('user') },
-  }
 })
 
 export default Account
