@@ -148,6 +148,8 @@ npm install -g now
 
 Next, we will use the Now CLI to add the secret vars for Firebase that correspond our local `.env`. _Note that for the multiline private key, you will need the `--` modifier and to enclose the value in quotes._
 
+For the `session-secret-previous` and `session-secret-current` variables, generate your own random 32-character key unique to your app.
+
 ```
 now secrets add session-secret-previous <secret-value>
 now secrets add session-secret-current <secret-value>
