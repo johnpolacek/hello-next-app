@@ -1,16 +1,21 @@
 import React from "react"
 import withSession from "../lib/session"
-import PropTypes from "prop-types"
-import getPlan from "../utils/firebase/getPlan"
+import getPlan from "../lib/firebase/getPlan"
+import appConfig from "../app.config"
+import Wrapper from "../components/layout/Wrapper"
+import AccountIron from "../components/views/AccountIron"
 
-const Account = ({ user, plan }) => {
-  console.log(user)
+const AccountPage = (props) => {
+  console.log(props.user)
   return (
-    <>
-      <div>email: {user.email}</div>
-      <div>id: {user.uid}</div>
-      <div>plan: {JSON.stringify(plan)}</div>
-    </>
+    <Wrapper
+      url="/"
+      title={appConfig.name + " | Account"}
+      description={"Your " + appConfig.name + " account information"}
+      bg="primary"
+    >
+      {props.user && <AccountIron {...props} />}
+    </Wrapper>
   )
 }
 
@@ -30,4 +35,4 @@ export const getServerSideProps = withSession(async function ({ req, res }) {
   }
 })
 
-export default Account
+export default AccountPage
