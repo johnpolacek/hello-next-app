@@ -1,5 +1,5 @@
-import withAuthUser from "../utils/context/withAuthUser"
-import withAuthUserInfo from "../utils/context/withAuthUserInfo"
+import React from "react"
+import withSession from "../../lib/session"
 import appConfig from "../app.config"
 import Wrapper from "../components/layout/Wrapper"
 import { MDXProvider } from "@mdx-js/react"
@@ -20,4 +20,18 @@ const Privacy = (props) => (
   </Wrapper>
 )
 
-export default withAuthUser(withAuthUserInfo(Privacy))
+export const getServerSideProps = withSession(async function ({ req, res }) {
+  const user = req.session.get("user")
+
+  if (user === undefined) {
+    res.setHeader("location", "/login")
+    res.statusCode = 302
+    res.end()
+    return
+  } else {
+    const user = req.session.get("user")
+    return { props: { user }}
+  }
+})
+
+export default Privacy

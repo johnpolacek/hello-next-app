@@ -1,16 +1,11 @@
 import React from "react"
-import PropTypes from "prop-types"
-import { get } from "lodash/object"
-import withAuthUser from "../utils/context/withAuthUser"
-import withAuthUserInfo from "../utils/context/withAuthUserInfo"
+import withSession from "../lib/session"
+import getPlan from "../lib/firebase/getPlan"
 import appConfig from "../app.config"
 import Wrapper from "../components/layout/Wrapper"
 import Account from "../components/views/Account"
-import getPlan from "../utils/firebase/getPlan"
 
-const Page = (props) => {
-  const AuthUser = get(props.AuthUserInfo, "AuthUser", null)
-
+const AccountPage = (props) => {
   return (
     <Wrapper
       url="/"
@@ -18,29 +13,25 @@ const Page = (props) => {
       description={"Your " + appConfig.name + " account information"}
       bg="primary"
     >
-      {AuthUser && <Account {...props} />}
+      {props.user && <Account {...props} />}
     </Wrapper>
   )
 }
 
-Page.getInitialProps = async (ctx) => {
-  // Get the AuthUserInfo object. This is set in `withAuthUser.js`.
-  // The AuthUserInfo object is available on both the server and client.
-  const AuthUserInfo = get(ctx, "myCustomData.AuthUserInfo", null)
-  const AuthUser = get(AuthUserInfo, "AuthUser", null)
+export const getServerSideProps = withSession(async function ({ req, res }) {
+  const user = req.session.get("user")
 
-  // You can fetch data here.
-  return await getPlan(AuthUser.id).then((plan) => {
-    return { plan: plan }
-  })
-}
+  if (user === undefined) {
+    res.setHeader("location", "/login")
+    res.statusCode = 302
+    res.end()
+    return
+  } else {
+    const user = req.session.get("user")
+    return await getPlan(user.uid).then((plan) => {
+      return { props: { user, plan } }
+    })
+  }
+})
 
-Page.defaultProps = {
-  AuthUserInfo: null,
-}
-
-// Use `withAuthUser` to get the authed user server-side, which
-// disables static rendering.
-// Use `withAuthUserInfo` to include the authed user as a prop
-// to your component.
-export default withAuthUser(withAuthUserInfo(Page))
+export default AccountPage

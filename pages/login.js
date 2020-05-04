@@ -1,6 +1,6 @@
 import React from "react"
 import Wrapper from "../components/layout/Wrapper"
-import LoginForm from "../components/ui/forms/LoginForm"
+import LoginFormIron from "../components/ui/forms/LoginForm"
 import appConfig from "../app.config"
 
 export default () => {
@@ -11,7 +11,7 @@ export default () => {
       description="The account login page for Hello Next App"
       bg="primary"
     >
-      <LoginForm />
+      <LoginFormIron />
     </Wrapper>
   )
 }

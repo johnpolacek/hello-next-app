@@ -23,10 +23,26 @@ export default () => {
 
   const handleSubmit = async () => {
     try {
-      let result = await firebase
+      firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-      Router.push("/")
+        .then((result) => {
+          console.log("LoginFormIron result", result)
+          var user = firebase.auth().currentUser
+          if (user) {
+            fetch("/api/login", {
+              method: "POST",
+              // eslint-disable-next-line no-undef
+              headers: new Headers({ "Content-Type": "application/json" }),
+              credentials: "same-origin",
+              body: JSON.stringify({ user }),
+            }).then(() => {
+              Router.push("/")
+            })
+          } else {
+            setError("Not able to sign in")
+          }
+        })
     } catch (err) {
       if (
         err.code === "auth/user-not-found" ||
