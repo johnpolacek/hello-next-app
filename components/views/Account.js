@@ -24,7 +24,7 @@ export default (props) => {
         <>
           <DataRow
             name="email"
-            value={props.AuthUserInfo.AuthUser.email}
+            value={props.user.email}
             label="Email"
             onSave={(newEmail, onComplete) => {
               updateEmail(newEmail).then((response) => {

@@ -2,10 +2,12 @@ import Router from "next/router"
 import NavHome from "./NavHome"
 import NavLink from "./NavLink"
 import logout from "../../../utils/firebase/logout"
-import withAuthUserInfo from "../../../utils/context/withAuthUserInfo"
+import useUser from "../../../lib/hooks/useUser"
 import { Flex, Box, Button } from "theme-ui"
 
 const Nav = (props) => {
+  // const { user, mutateUser } = useUser()
+  const user = false
   return (
     <Flex as="nav" sx={{ flexWrap: "wrap", py: [2, 0], bg: "primary" }}>
       <Box
@@ -29,7 +31,7 @@ const Nav = (props) => {
           pr: [0, 3],
         }}
       >
-        {props.AuthUserInfo.AuthUser ? (
+        {user ? (
           <>
             <Button
               sx={{
@@ -73,4 +75,4 @@ const Nav = (props) => {
   )
 }
 
-export default withAuthUserInfo(Nav)
+export default Nav
