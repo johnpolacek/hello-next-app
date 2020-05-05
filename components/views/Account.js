@@ -4,9 +4,9 @@ import NextLink from "next/link"
 import DataRow from "../ui/data/DataRow"
 import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
-import { stringToSlug, findBySlug } from "../../utils/functions"
-import updateEmail from "../../utils/firebase/updateEmail"
-import updatePassword from "../../utils/firebase/updatePassword"
+import { stringToSlug, findBySlug } from "../../lib/util"
+import updateEmail from "../../lib/firebase/updateEmail"
+import updatePassword from "../../lib/firebase/updatePassword"
 
 export default (props) => {
   const [error, setError] = useState("")

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import { parseCookies, destroyCookie } from "nookies"
-import setPlan from "../../../utils/firebase/setPlan"
+import setPlan from "../../../lib/firebase/setPlan"
 import theme from "../../theme"
 import { Box, Card, Heading, Text, Button } from "theme-ui"
 import Form from "./Form"

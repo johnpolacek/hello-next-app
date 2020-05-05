@@ -2,7 +2,7 @@ import { Flex, Box, Heading, Text, Link } from "theme-ui"
 import NextLink from "next/link"
 import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
-import { stringToSlug, findBySlug } from "../../utils/functions"
+import { stringToSlug, findBySlug } from "../../lib/util"
 import Pricing from "../ui/plans/Pricing"
 
 export default (props) => {

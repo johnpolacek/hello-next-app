@@ -1,11 +1,11 @@
 import { SWRConfig } from "swr"
-import fetch from "../lib/fetchJson"
+import fetchJson from "../lib/fetchJson"
 
 function MyApp({ Component, pageProps }) {
   return (
     <SWRConfig
       value={{
-        fetcher: fetch,
+        fetcher: fetchJson,
         onError: (err) => {
           console.error(err)
         },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import reset from "../../../utils/firebase/reset"
+import reset from "../../../lib/firebase/reset"
 import { Flex, Box, Card, Heading, Text, Button } from "theme-ui"
 import Spinner from "../graphics/Spinner"
 

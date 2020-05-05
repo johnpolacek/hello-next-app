@@ -3,7 +3,7 @@ import withSession from "../../lib/session"
 import appConfig from "../../app.config"
 import Wrapper from "../../components/layout/Wrapper"
 import Plan from "../../components/views/Plan"
-import getPlan from "../../utils/firebase/getPlan"
+import getPlan from "../../lib/firebase/getPlan"
 
 const PlanPage = (props) => {
   return (
