@@ -30,7 +30,7 @@ export const getServerSideProps = withSession(async function ({ req, res }) {
     return
   } else {
     const user = req.session.get("user")
-    return { props: { user }}
+    return { props: { user } }
   }
 })
 
