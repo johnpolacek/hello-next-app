@@ -1,13 +1,13 @@
+import useUser from "../../../lib/hooks/useUser"
+import { mutate } from "swr"
 import Router from "next/router"
 import NavHome from "./NavHome"
 import NavLink from "./NavLink"
-import logout from "../../../utils/firebase/logout"
-import useUser from "../../../lib/hooks/useUser"
 import { Flex, Box, Button } from "theme-ui"
 
 const Nav = (props) => {
   // const { user, mutateUser } = useUser()
-  const user = false
+  const user = true
   return (
     <Flex as="nav" sx={{ flexWrap: "wrap", py: [2, 0], bg: "primary" }}>
       <Box
@@ -40,12 +40,10 @@ const Nav = (props) => {
                 fontSize: 3,
               }}
               onClick={async () => {
-                try {
-                  await logout()
-                  Router.push("/login")
-                } catch (e) {
-                  console.error(e)
-                }
+                await fetch("/api/logout")
+                // tell all SWRs with this key to revalidate
+                mutate("/api/user", { isLoggedIn: false })
+                Router.push("/login")
               }}
             >
               Logout
