@@ -1,12 +1,12 @@
-import withAuthUser from "../../../utils/context/withAuthUser"
-import withAuthUserInfo from "../../../utils/context/withAuthUserInfo"
+import React from "react"
+import withSession from "../../lib/session"
 import Wrapper from "../../../components/layout/Wrapper"
 import appConfig from "../../../app.config"
 import { Box, Heading } from "theme-ui"
 import ButtonLink from "../../../components/ui/nav/ButtonLink"
-import { findBySlug } from "../../../utils/functions"
+import { findBySlug } from "../../../lib/util"
 
-const Page = (props) => {
+const PaidPage = (props) => {
   const selectedPlan = props.url.asPath.split("/")[2]
   const plan = findBySlug(appConfig.plans, "name", selectedPlan)
 
@@ -48,4 +48,20 @@ const Page = (props) => {
   )
 }
 
-export default withAuthUser(withAuthUserInfo(Page))
+export const getServerSideProps = withSession(async function ({ req, res }) {
+  const user = req.session.get("user")
+
+  if (user === undefined) {
+    res.setHeader("location", "/login")
+    res.statusCode = 302
+    res.end()
+    return
+  } else {
+    const user = req.session.get("user")
+    return await getPlan(user.uid).then((plan) => {
+      return { props: { user, plan } }
+    })
+  }
+})
+
+export default PaidPage

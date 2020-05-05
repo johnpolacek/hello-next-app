@@ -1,13 +1,13 @@
-import useUser from "../../../lib/hooks/useUser"
-import { mutate } from "swr"
+import useUser from "../../../lib/useUser"
 import Router from "next/router"
 import NavHome from "./NavHome"
 import NavLink from "./NavLink"
 import { Flex, Box, Button } from "theme-ui"
 
-const Nav = (props) => {
-  // const { user, mutateUser } = useUser()
-  const user = true
+const Nav = () => {
+  let { user, mutateUser } = useUser()
+  user = false
+  // console.log("Nav user", user)
   return (
     <Flex as="nav" sx={{ flexWrap: "wrap", py: [2, 0], bg: "primary" }}>
       <Box

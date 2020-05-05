@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Box, Heading, Text, Button } from "theme-ui"
 import Link from "next/link"
 import ButtonLink from "../ui/nav/ButtonLink"
-import cancelPlan from "../../utils/firebase/cancelPlan"
+import cancelPlan from "../../lib/firebase/cancelPlan"
 import appConfig from "../../app.config"
 
 export default (props) => {

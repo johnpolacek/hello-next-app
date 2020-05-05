@@ -1,7 +1,7 @@
 import { Flex, Box, Card, Heading, Text, Button } from "theme-ui"
 import appConfig from "../../../app.config"
 import ButtonLink from "../nav/ButtonLink"
-import { stringToSlug } from "../../../utils/functions"
+import { stringToSlug } from "../../../lib/util"
 
 export default (props) => (
   <Card sx={{ width: "340px", m: 3, p: 4 }}>
