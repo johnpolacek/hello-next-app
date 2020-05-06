@@ -126,8 +126,8 @@ export const base = {
       fontSize: 1,
       fontWeight: 500,
       display: "block",
-      mb:1,
-      opacity: ".8"
+      mb: 1,
+      opacity: ".8",
     },
   },
   cards: {

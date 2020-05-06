@@ -6,7 +6,6 @@ import appConfig from "../../app.config.js"
 import ReactGA from "react-ga"
 
 export default (props) => {
-
   if (
     typeof appConfig.analytics !== "undefined" &&
     appConfig.analytics.indexOf("UA") === 0

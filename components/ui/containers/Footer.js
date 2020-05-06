@@ -2,7 +2,7 @@ import NextLink from "next/link"
 import { Flex, Box, Text, Link, Image } from "theme-ui"
 import { shade } from "@theme-ui/color"
 import appConfig from "../../../app.config.js"
-import { SocialIcon } from 'react-social-icons'
+import { SocialIcon } from "react-social-icons"
 
 export default (props) => (
   <Box
@@ -25,7 +25,7 @@ export default (props) => (
       }}
     >
       <Box sx={{ width: "40%", px: 4 }}>
-        <Text sx={{ fontWeight: 600, fontSize: 3, pb: 2, pr:3 }}>
+        <Text sx={{ fontWeight: 600, fontSize: 3, pb: 2, pr: 3 }}>
           <span
             sx={{
               pr: "12px",
@@ -66,7 +66,16 @@ export default (props) => (
         </NextLink>
       </Box>
       <Box sx={{ width: "40%", px: 4 }}>
-      {appConfig.social.map((url) => <Box sx={{display:"inline-block", pr: 2}}><SocialIcon fgColor="#fff" bgColor="rgba(0,0,0,.1)" style={{ height: 36, width: 36 }} url={url} /></Box>)}
+        {appConfig.social.map((url) => (
+          <Box sx={{ display: "inline-block", pr: 2 }}>
+            <SocialIcon
+              fgColor="#fff"
+              bgColor="rgba(0,0,0,.1)"
+              style={{ height: 36, width: 36 }}
+              url={url}
+            />
+          </Box>
+        ))}
       </Box>
     </Flex>
   </Box>
