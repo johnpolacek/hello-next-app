@@ -1,13 +1,14 @@
-import useUser from "../../../lib/useUser"
-import Router from "next/router"
+import React, { useContext } from "react"
+import { UserContext } from "../../context/UserContext"
 import NavHome from "./NavHome"
 import NavLink from "./NavLink"
 import { Flex, Box, Button } from "theme-ui"
 
 const Nav = () => {
-  let { user, mutateUser } = useUser()
-  user = false
-  // console.log("Nav user", user)
+  const { user } = useContext(UserContext)
+
+  console.log("Nav user", user)
+
   return (
     <Flex as="nav" sx={{ flexWrap: "wrap", py: [2, 0], bg: "primary" }}>
       <Box

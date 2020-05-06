@@ -11,6 +11,7 @@ const Privacy = (props) => (
     url="/privacy"
     title={appConfig.name + " | Privacy Policy"}
     description={"Privacy policy information for " + appConfig.name + " users"}
+    user={props.user}
   >
     <MDXProvider>
       <Container id="privacy">

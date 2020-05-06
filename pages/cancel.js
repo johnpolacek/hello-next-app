@@ -12,6 +12,7 @@ const CancelPage = (props) => {
       title={appConfig.name + " | Cancel"}
       description={"Your " + appConfig.name + " account information"}
       bg="primary"
+      user={props.user}
     >
       <Cancel {...props} />
     </Wrapper>

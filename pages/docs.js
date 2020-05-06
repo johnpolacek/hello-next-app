@@ -11,6 +11,7 @@ const Docs = (props) => (
     url="/docs"
     title={appConfig.name + " | Docs"}
     description={"Technical documentation for " + appConfig.name}
+    user={props.user}
   >
     <MDXProvider>
       <Container id="docs">

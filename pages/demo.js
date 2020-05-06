@@ -10,6 +10,7 @@ const Demo = (props) => (
     title={appConfig.name + " | Tour"}
     description={"Product tour of " + appConfig.name}
     bg="primary"
+    user={props.user}
   >
     <DemoView />
   </Wrapper>
