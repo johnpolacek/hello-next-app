@@ -11,7 +11,6 @@ const PlanPage = (props) => {
       url="/"
       title={appConfig.name + " | Manage Plan"}
       description={"Update your " + appConfig.name + " plan"}
-      bg="primary"
     >
       {props.user && <Plan {...props} />}
     </Wrapper>

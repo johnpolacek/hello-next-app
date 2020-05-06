@@ -14,7 +14,6 @@ const Index = (props) => {
       url="/"
       title={appConfig.name + " | " + appConfig.shortDescription}
       description={appConfig.longDescription}
-      bg={isSignedIn ? "white" : "primary"}
       user={props.user}
     >
       <IndexView isSignedIn={isSignedIn} />

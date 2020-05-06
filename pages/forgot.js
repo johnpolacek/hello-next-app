@@ -13,7 +13,6 @@ export default () => {
         appConfig.name +
         " then this is the place to be"
       }
-      bg="primary"
     >
       <ForgotPassword />
     </Wrapper>

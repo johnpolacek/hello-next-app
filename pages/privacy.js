@@ -1,5 +1,5 @@
 import React from "react"
-import withSession from "../../lib/session"
+import withSession from "../lib/session.js"
 import appConfig from "../app.config"
 import Wrapper from "../components/layout/Wrapper"
 import { MDXProvider } from "@mdx-js/react"

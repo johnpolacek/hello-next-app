@@ -37,8 +37,8 @@ export const base = {
     heading: 1.125,
   },
   colors: {
-    text: "#1b1e21",
-    background: "#fff",
+    text: "#fff",
+    background: "#4169e1",
     primary: "#4169e1",
     secondary: "#ee5555",
     muted: "#ddd",
