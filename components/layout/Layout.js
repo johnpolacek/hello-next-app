@@ -3,13 +3,12 @@ import PropTypes from "prop-types"
 import Head from "./Head"
 import Style from "./Style"
 import { Flex } from "theme-ui"
-import {UserContext} from "../context/UserContext"
+import { UserContext } from "../context/UserContext"
 import Header from "../ui/containers/Header"
 import Main from "../ui/containers/Main"
 import Footer from "../ui/containers/Footer"
 
 const Layout = (props) => {
-
   const { setUser } = useContext(UserContext)
 
   useEffect(() => {
@@ -17,23 +16,24 @@ const Layout = (props) => {
   }, [props.user])
 
   return (
-  <>
-    <Head {...props} />
+    <>
+      <Head {...props} />
 
-    <Flex
-      sx={{
-        minHeight: "100vh",
-        flexDirection: "column",
-      }}
-    >
-      <Header />
-      <Main>{props.children}</Main>
-      <Footer />
-    </Flex>
+      <Flex
+        sx={{
+          minHeight: "100vh",
+          flexDirection: "column",
+        }}
+      >
+        <Header />
+        <Main>{props.children}</Main>
+        <Footer />
+      </Flex>
 
-    <Style />
-  </>
-)}
+      <Style />
+    </>
+  )
+}
 
 Layout.propTypes = {
   title: PropTypes.string.isRequired,
