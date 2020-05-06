@@ -120,6 +120,15 @@ export const base = {
     reverse: {
       color: "white",
     },
+    footer: {
+      color: "white",
+      textDecoration: "none",
+      fontSize: 1,
+      fontWeight: 500,
+      display: "block",
+      mb:1,
+      opacity: ".8"
+    },
   },
   cards: {
     primary: {

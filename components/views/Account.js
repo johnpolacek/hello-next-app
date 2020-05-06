@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Flex, Box, Heading, Text, Link } from "theme-ui"
-import NextLink from "next/link"
 import DataRow from "../ui/data/DataRow"
 import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"

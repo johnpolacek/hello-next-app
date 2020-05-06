@@ -13,7 +13,7 @@ module.exports = {
   company: {
     name: "Your Company",
     description:
-      "Short description to explain the purpose of your company and what you stand for.",
+      "Short description to explain the purpose of your company and the things you stand for.",
   },
   // shortDescription : appears in landing page title
   shortDescription: "Very Short App Description",
@@ -29,6 +29,13 @@ module.exports = {
   contact: "contact@yourappdomain.com",
   // support appears when errors happen
   support: "support@yourappdomain.com",
+  // add all your social links, will get added automatically as long as they are supported by react-social-icons https://jaketrent.github.io/react-social-icons/
+  social: [
+    "https://twitter.com/vercel",
+    "https://www.linkedin.com/company/vercel-llc/",
+    "https://www.facebook.com/zeitcompany/",
+    "https://github.com/zeit",
+  ],
   // plans appears on pricing page and in account creation flow
   // assumes $ / month
   // customize
