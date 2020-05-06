@@ -12,7 +12,6 @@ const AccountPage = (props) => {
       url="/"
       title={appConfig.name + " | Account"}
       description={"Your " + appConfig.name + " account information"}
-      bg="primary"
       user={props.user}
     >
       <Account {...props} />

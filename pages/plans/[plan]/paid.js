@@ -15,7 +15,6 @@ const PaidPage = (props) => {
       url="/"
       title={appConfig.name + " | " + plan.name + " Plan Purchased"}
       description={"Choose the right " + appConfig.name + " plan for you"}
-      bg="primary"
     >
       <Box
         sx={{

@@ -19,7 +19,6 @@ const UserPlanPage = (props) => (
     description={
       "Purchase the " + appConfig.name + " " + props.plan.name + " Plan"
     }
-    bg="primary"
   >
     <Elements stripe={stripePromise}>
       <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />

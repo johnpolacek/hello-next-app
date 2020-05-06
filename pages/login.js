@@ -9,7 +9,6 @@ export default () => {
       url="/"
       title={appConfig.name + " | Login"}
       description="The account login page for Hello Next App"
-      bg="primary"
       user={props.user}
     >
       <LoginForm />

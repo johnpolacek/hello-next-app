@@ -9,7 +9,6 @@ export default () => {
       url="/"
       title={appConfig.name + " | Sign Up"}
       description={"Sign up for a new " + appConfig.name + " account"}
-      bg="primary"
     >
       <SignUpForm />
     </Wrapper>

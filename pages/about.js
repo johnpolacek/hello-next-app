@@ -9,7 +9,6 @@ const About = (props) => (
     url="/"
     title={appConfig.name + " | About"}
     description={"More information about " + appConfig.name}
-    bg="primary"
     user={props.user}
   >
     <AboutView />
