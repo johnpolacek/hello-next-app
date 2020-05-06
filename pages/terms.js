@@ -11,6 +11,7 @@ const Terms = (props) => (
     url="/terms"
     title={appConfig.name + " | Terms of Service"}
     description={"Terms of service for the usage of " + appConfig.name}
+    user={props.user}
   >
     <MDXProvider>
       <Container id="terms">
