@@ -33,7 +33,7 @@ export const base = {
     heavy: 900,
   },
   lineHeights: {
-    body: 1.5,
+    body: 1.6,
     heading: 1.125,
   },
   colors: {
@@ -182,20 +182,29 @@ export const base = {
       fontFamily: "body",
       fontWeight: "body",
       lineHeight: "body",
+      code: {
+        fontFamily: "monospace",
+        fontSize: "80%",
+        bg: "rgba(0,0,0,.2)",
+        px: 2,
+        py:1,
+      },
     },
     a: {
-      color: "primary",
+      color: "text",
     },
+    
     pre: {
       fontFamily: "monospace",
       overflowX: "auto",
+      background: "rgba(0,0,0,.2)",
+      px: 3,
+      py: 2,
+      width: "max-content",
       code: {
         color: "inherit",
+        background: "transparent"
       },
-    },
-    code: {
-      fontFamily: "monospace",
-      fontSize: "inherit",
     },
     table: {
       width: "100%",
