@@ -187,13 +187,13 @@ export const base = {
         fontSize: "80%",
         bg: "rgba(0,0,0,.2)",
         px: 2,
-        py:1,
+        py: 1,
       },
     },
     a: {
       color: "text",
     },
-    
+
     pre: {
       fontFamily: "monospace",
       overflowX: "auto",
@@ -203,7 +203,7 @@ export const base = {
       width: "max-content",
       code: {
         color: "inherit",
-        background: "transparent"
+        background: "transparent",
       },
     },
     table: {
