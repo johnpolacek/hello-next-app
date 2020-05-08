@@ -12,7 +12,6 @@ const Reset = (props) => {
       url="/"
       title={appConfig.name + " | " + appConfig.shortDescription}
       description={appConfig.longDescription}
-      user={props.user}
     >
       <ResetPassword isSignedIn={isSignedIn} />
     </Wrapper>

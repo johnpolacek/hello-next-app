@@ -59,6 +59,7 @@ const Nav = () => {
                 sx={{
                   bg: "rgba(0,0,0,.25)",
                   fontWeight: "lite",
+                  color: "white",
                   px: 3,
                   py: 1,
                   my: -2,
