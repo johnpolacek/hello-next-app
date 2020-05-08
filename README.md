@@ -1,4 +1,4 @@
-# Hello Next App
+# Hello Next App Docs
 
 ---
 
