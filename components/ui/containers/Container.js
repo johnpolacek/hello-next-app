@@ -4,13 +4,14 @@ export default (props) => {
   return (
     <Box
       sx={{
-        maxWidth: "960px",
+        maxWidth: props.width + "px",
         mx: "auto",
-        px: [3, 4],
-        py: 5,
+        p: 5,
+        mb: 5,
         alignItems: "center",
-        bg: props.bg || "transparent",
+        borderRadius: "4px",
       }}
+      variant={props.variant}
       {...props}
     />
   )

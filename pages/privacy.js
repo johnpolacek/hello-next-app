@@ -14,7 +14,7 @@ const Privacy = (props) => (
     user={props.user}
   >
     <MDXProvider>
-      <Container id="privacy">
+      <Container id="privacy" width={960}>
         <PrivacyContent />
       </Container>
     </MDXProvider>

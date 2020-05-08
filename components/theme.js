@@ -147,6 +147,38 @@ export const base = {
       borderColor: "muted",
     },
   },
+  container: {
+    lite: {
+      bg: "white",
+      h1: {
+        color: "black",
+      },
+      h2: {
+        color: "black",
+      },
+      h3: {
+        color: "black",
+      },
+      h4: {
+        color: "black",
+      },
+      h5: {
+        color: "black",
+      },
+      h6: {
+        color: "black",
+      },
+      p: {
+        color: "black",
+      },
+      code: {
+        color: "black",
+      },
+      a: {
+        color: "primary",
+      },
+    },
+  },
   styles: {
     root: {
       fontFamily: "body",
@@ -185,7 +217,7 @@ export const base = {
       code: {
         fontFamily: "monospace",
         fontSize: "80%",
-        bg: "rgba(0,0,0,.2)",
+        bg: "rgba(0,0,0,.1)",
         px: 2,
         py: 1,
       },
@@ -193,16 +225,14 @@ export const base = {
     a: {
       color: "text",
     },
-
     pre: {
       fontFamily: "monospace",
       overflowX: "auto",
-      background: "rgba(0,0,0,.2)",
+      background: "rgba(0,0,0,.1)",
       px: 3,
       py: 2,
       width: "max-content",
       code: {
-        color: "inherit",
         background: "transparent",
       },
     },

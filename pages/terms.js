@@ -14,7 +14,7 @@ const Terms = (props) => (
     user={props.user}
   >
     <MDXProvider>
-      <Container id="terms">
+      <Container id="terms" width={960}>
         <TermsContent />
       </Container>
     </MDXProvider>

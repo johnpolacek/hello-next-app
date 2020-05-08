@@ -1,6 +1,7 @@
 import React from "react"
 import withSession from "../lib/session"
 import { MDXProvider } from "@mdx-js/react"
+import { Box } from "theme-ui"
 import appConfig from "../app.config"
 import Wrapper from "../components/layout/Wrapper"
 import Container from "../components/ui/containers/Container"
@@ -14,7 +15,7 @@ const Docs = (props) => (
     user={props.user}
   >
     <MDXProvider>
-      <Container id="docs">
+      <Container id="docs" width="960" variant="container.lite">
         <DocsContent />
       </Container>
     </MDXProvider>
