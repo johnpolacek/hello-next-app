@@ -4,7 +4,7 @@ import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
 
 export default (props) => (
-  <Box sx={{ textAlign: "center", width: "100%", color: "white" }}>
+  <Box sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
     <Heading as="h1">{appConfig.name} Demo</Heading>
     <iframe
       src="https://player.vimeo.com/video/330041609"
