@@ -41,7 +41,7 @@ Layout.propTypes = {
   url: PropTypes.string.isRequired,
   imageUrl: PropTypes.string,
   imageAlt: PropTypes.string,
-  user: PropTypes.user,
+  user: PropTypes.object,
 }
 
 export default Layout
