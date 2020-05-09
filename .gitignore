@@ -27,5 +27,6 @@ _WIP.md
 
 # Local dotenv files.
 .env.*build
+*firebase-adminsdk*
 
 .now
