@@ -7,8 +7,6 @@ import { Flex, Box, Button } from "theme-ui"
 const Nav = () => {
   const { user } = useContext(UserContext)
 
-  console.log("Nav user", user)
-
   return (
     <Flex as="nav" sx={{ flexWrap: "wrap", py: [2, 0], bg: "primary" }}>
       <Box
