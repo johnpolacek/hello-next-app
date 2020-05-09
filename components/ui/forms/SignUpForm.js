@@ -8,6 +8,8 @@ import initFirebase from "../../../lib/firebase/initFirebase"
 import { Box, Text, Label, Input, Checkbox } from "theme-ui"
 import Form from "./Form"
 
+initFirebase()
+
 const LoginLink = () => (
   <Text sx={{ pt: 4, width: "100%", textAlign: "center" }}>
     Already have an account?{" "}
