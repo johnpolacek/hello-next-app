@@ -66,8 +66,8 @@ export default (props) => (
         </NextLink>
       </Box>
       <Box sx={{ width: "40%", px: 4 }}>
-        {appConfig.social.map((url) => (
-          <Box sx={{ display: "inline-block", pr: 2 }}>
+        {appConfig.social.map((url, i) => (
+          <Box key={"socialLink" + i} sx={{ display: "inline-block", pr: 2 }}>
             <SocialIcon
               fgColor="#fff"
               bgColor="rgba(0,0,0,.1)"
