@@ -7,17 +7,22 @@ import { parseCookies, setCookie } from "nookies"
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
 import CheckoutForm from "../../../components/ui/forms/CheckoutForm"
+import PlanSignupSuccess from "../../../components/ui/plans/PlanSignupSuccess"
 
 const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY_TEST)
 
 export const getServerSideProps = async (ctx) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST)
   let plan = findBySlug(appConfig.plans, "name", ctx.params.plan)
+
   let paymentIntent
   const { paymentIntentId } = await parseCookies(ctx)
 
-  plan.id =
-    process.env.NODE_ENV === "development" ? plan.planIdTest : plan.planId
+  // free plans do not have an id and the user does not have a subscription
+  if (plan.price > 0) {
+    plan.id =
+      process.env.NODE_ENV === "development" ? plan.planIdTest : plan.planId
+  }
 
   if (paymentIntentId) {
     paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId)
@@ -53,7 +58,11 @@ export default (props) => (
     }
   >
     <Elements stripe={stripePromise}>
-      <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />
+      {props.plan.price > 0 ? (
+        <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />
+      ) : (
+        <PlanSignupSuccess plan={props.plan} />
+      )}
     </Elements>
   </Wrapper>
 )
