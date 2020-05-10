@@ -46,7 +46,8 @@ module.exports = {
       description: "Get started for free",
       includes: ["1 user", "1GB File Storage", "Email Support"],
       isMonthly: true,
-      // free plans do not need a plan id
+      planId: null, // free plans do not have a Stripe Product Id so do not get an ad
+      planIdTest: null,
     },
     {
       name: "Pro",
