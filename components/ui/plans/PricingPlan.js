@@ -57,7 +57,14 @@ export default (props) => (
           Selected
         </Box>
       ) : (
-        <ButtonLink fontSize={4} href={"./plans/" + stringToSlug(props.name)}>
+        <ButtonLink
+          fontSize={4}
+          href={
+            "./plans/" +
+            stringToSlug(props.name) +
+            (props.price === 0 ? "/ready" : "/checkout")
+          }
+        >
           Select Plan
         </ButtonLink>
       )}

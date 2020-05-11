@@ -1,21 +1,22 @@
 import React from "react"
-import withSession from "../../lib/session"
+import withSession from "../../../lib/session"
 import Wrapper from "../../../components/layout/Wrapper"
 import appConfig from "../../../app.config"
 import PlanSignupSuccess from "../../../components/ui/plans/PlanSignupSuccess"
 import { findBySlug } from "../../../lib/util"
+import getPlan from "../../../lib/firebase/getPlan"
 
-const PaidPage = (props) => {
-  const selectedPlan = props.url.asPath.split("/")[2]
-  const plan = findBySlug(appConfig.plans, "name", selectedPlan)
-
+const PlanReadyPage = (props) => {
   return (
     <Wrapper
       url="/"
-      title={appConfig.name + " | " + plan.name + " Plan Purchased"}
-      description={"Choose the right " + appConfig.name + " plan for you"}
+      title={appConfig.name + " | " + props.plan.name + " Plan"}
+      description={
+        "Your " + appConfig.name + " " + props.plan.name + " plan is ready."
+      }
+      user={props.user}
     >
-      <PlanSignupSuccess plan={plan} />
+      <PlanSignupSuccess plan={props.plan} />
     </Wrapper>
   )
 }
@@ -30,10 +31,11 @@ export const getServerSideProps = withSession(async function ({ req, res }) {
     return
   } else {
     const user = req.session.get("user")
+    console.log(user.uid)
     return await getPlan(user.uid).then((plan) => {
       return { props: { user, plan } }
     })
   }
 })
 
-export default PaidPage
+export default PlanReadyPage
