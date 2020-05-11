@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import Router from "next/router"
 import Link from "next/link"
-import { setCookie } from "nookies"
 import firebase from "firebase/app"
 import "firebase/auth"
+import "firebase/firestore"
 import initFirebase from "../../../lib/firebase/initFirebase"
 import { Box, Text, Label, Input, Checkbox } from "theme-ui"
 import Form from "./Form"
@@ -32,11 +32,35 @@ export default () => {
 
   const handleSubmit = async () => {
     if (checked) {
-      let result = await firebase
+      firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-      setCookie(null, "accountEmail", email)
-      Router.push("/plans")
+        .then((result) => {
+          console.log("SignUpFormIron result", result)
+          var user = firebase.auth().currentUser
+          if (user) {
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(user.uid)
+              .set({
+                plan: 0,
+              })
+              .then(() => {
+                fetch("/api/login", {
+                  method: "POST",
+                  // eslint-disable-next-line no-undef
+                  headers: new Headers({ "Content-Type": "application/json" }),
+                  credentials: "same-origin",
+                  body: JSON.stringify({ user }),
+                }).then(() => {
+                  Router.push("/plans")
+                })
+              })
+          } else {
+            setError("Not able to sign in")
+          }
+        })
     } else {
       setError("Please agree to the terms and conditions to create an account.")
     }

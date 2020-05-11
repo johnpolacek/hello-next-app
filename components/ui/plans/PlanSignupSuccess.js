@@ -15,8 +15,8 @@ export default (props) => (
   >
     <Heading variant="headline">All Set!</Heading>
     <Heading variant="subhead">
-      Thanks for purchasing the {props.plan.name} Plan. Your account is ready to
-      go.
+      Thanks for {props.plan.price === 0 ? "choosing" : "purchasing"} the{" "}
+      {props.plan.name} Plan. Your account is ready to go.
     </Heading>
     <Box sx={{ pb: 5 }}>
       <Box sx={{ display: "inline-block", mx: 3 }}>

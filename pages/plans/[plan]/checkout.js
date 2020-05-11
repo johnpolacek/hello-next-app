@@ -49,7 +49,7 @@ export const getServerSideProps = async (ctx) => {
   }
 }
 
-export default (props) => (
+const PlanCheckoutPage = (props) => (
   <Wrapper
     url="/"
     title={appConfig.name + " | " + props.plan.name + " Plan"}
@@ -58,11 +58,9 @@ export default (props) => (
     }
   >
     <Elements stripe={stripePromise}>
-      {props.plan.price > 0 ? (
-        <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />
-      ) : (
-        <PlanSignupSuccess plan={props.plan} />
-      )}
+      <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />
     </Elements>
   </Wrapper>
 )
+
+export default PlanCheckoutPage
