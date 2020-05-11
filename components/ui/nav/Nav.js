@@ -3,6 +3,7 @@ import { UserContext } from "../../context/UserContext"
 import NavHome from "./NavHome"
 import NavLink from "./NavLink"
 import { Flex, Box, Button } from "theme-ui"
+import Router from "next/router"
 
 const Nav = () => {
   const { user } = useContext(UserContext)
