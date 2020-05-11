@@ -40,8 +40,6 @@ const Nav = () => {
               }}
               onClick={async () => {
                 await fetch("/api/logout")
-                // tell all SWRs with this key to revalidate
-                mutate("/api/user", { isLoggedIn: false })
                 Router.push("/login")
               }}
             >
