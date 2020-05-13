@@ -50,7 +50,7 @@ export default (props) => {
           <DataRow link="/account/plan" label="Plan">
             {plan.price > 0 ? (
               <Box>
-                <Text as="span">{plan.type} </Text>
+                <Text as="span">{plan.name} </Text>
               </Box>
             ) : (
               <Box>

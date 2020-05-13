@@ -22,7 +22,6 @@ const Form = (props) => {
     try {
       props.onSubmit()
     } catch (err) {
-      console.log("err", err)
       setError(err.message)
       setIsSubmitting(false)
     }
