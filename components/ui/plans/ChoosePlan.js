@@ -14,7 +14,9 @@ export default (props) => {
       sx={{ textAlign: "center", width: "100%", color: "white", pt: 3, pb: 5 }}
     >
       <Heading variant="headline">Choose the plan that’s right for you</Heading>
-      <Heading variant="subhead">{subhead}</Heading>
+      <Heading variant="subhead" as="h3">
+        {subhead}
+      </Heading>
       <Pricing />
     </Box>
   )

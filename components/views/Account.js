@@ -9,11 +9,11 @@ import updatePassword from "../../lib/firebase/updatePassword"
 
 export default (props) => {
   const [error, setError] = useState("")
+  console.log("Account props.plan", props.plan)
   const plan = props.plan
-    ? findBySlug(appConfig.plans, "name", stringToSlug(props.plan.type))
+    ? findBySlug(appConfig.plans, "name", stringToSlug(props.plan.name))
     : appConfig.plans[0]
 
-  console.log("Account plan", plan)
   return (
     <Box sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
       <Heading variant="headline">Your Account</Heading>

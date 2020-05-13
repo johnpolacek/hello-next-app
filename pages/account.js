@@ -6,7 +6,6 @@ import Wrapper from "../components/layout/Wrapper"
 import Account from "../components/views/Account"
 
 const AccountPage = (props) => {
-  console.log("AccountPage props.user", props.user)
   return (
     <Wrapper
       url="/"

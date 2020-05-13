@@ -22,7 +22,9 @@ export default (props) => (
         </Text>
       </Box>
     )}
-    <Heading variant="cardheading">{props.name}</Heading>
+    <Heading variant="cardheading" as="h4">
+      {props.name}
+    </Heading>
     <Box
       sx={{
         position: "relative",
