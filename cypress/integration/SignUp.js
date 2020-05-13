@@ -30,7 +30,7 @@ describe("Sign Up", function () {
     cy.get("input[name=password]").type("TestSignUp123!")
     cy.get("input[type=checkbox]").parent().click()
     cy.get("form").find("button").contains("Sign Up").click()
-    cy.wait(2000)
+    cy.wait(4000)
     cy.get("h2")
       .contains("Choose the plan that’s right for you")
       .should("be.visible")
