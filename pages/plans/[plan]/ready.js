@@ -4,7 +4,7 @@ import Wrapper from "../../../components/layout/Wrapper"
 import appConfig from "../../../app.config"
 import PlanSignupSuccess from "../../../components/ui/plans/PlanSignupSuccess"
 import { findBySlug } from "../../../lib/util"
-import getPlan from "../../../lib/firebase/getPlan"
+import getPlan from "../../../lib/firebase/admin/getPlan"
 
 const PlanReadyPage = (props) => {
   return (
@@ -31,7 +31,6 @@ export const getServerSideProps = withSession(async function ({ req, res }) {
     return
   } else {
     const user = req.session.get("user")
-    console.log(user.uid)
     return await getPlan(user.uid).then((plan) => {
       return { props: { user, plan } }
     })
