@@ -24,38 +24,35 @@ export default () => {
   const [error, setError] = useState("")
 
   const handleSubmit = async () => {
-    try {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then((result) => {
-          console.log("LoginFormIron result", result)
-          var user = firebase.auth().currentUser
-          if (user) {
-            fetch("/api/login", {
-              method: "POST",
-              // eslint-disable-next-line no-undef
-              headers: new Headers({ "Content-Type": "application/json" }),
-              credentials: "same-origin",
-              body: JSON.stringify({ user }),
-            }).then(() => {
-              Router.push("/")
-            })
-          } else {
-            setError("Not able to sign in")
-          }
-        })
-    } catch (err) {
-      if (
-        err.code === "auth/user-not-found" ||
-        err.code === "auth/wrong-password"
-      ) {
-        setError("This login was not valid. Please try again")
-      } else {
-        setError(err.message)
-      }
-      console.log(err)
-    }
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        var user = firebase.auth().currentUser
+        if (user) {
+          fetch("/api/login", {
+            method: "POST",
+            // eslint-disable-next-line no-undef
+            headers: new Headers({ "Content-Type": "application/json" }),
+            credentials: "same-origin",
+            body: JSON.stringify({ user }),
+          }).then(() => {
+            Router.push("/")
+          })
+        } else {
+          setError("Not able to sign in")
+        }
+      })
+      .catch((err) => {
+        if (
+          err.code === "auth/user-not-found" ||
+          err.code === "auth/wrong-password"
+        ) {
+          setError("This login was not valid. Please try again")
+        } else {
+          setError(err.message)
+        }
+      })
   }
 
   return (

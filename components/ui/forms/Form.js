@@ -10,9 +10,7 @@ const Form = (props) => {
 
   useEffect(() => {
     // if the controller had an error, allow submit after error is fixed
-    if (props.error === "") {
-      setIsSubmitting(false)
-    }
+    setIsSubmitting(false)
   }, [props.error])
 
   const handleSubmit = async (e) => {
@@ -31,7 +29,7 @@ const Form = (props) => {
     isSubmitting || (typeof props.enabled !== "undefined" && !props.enabled)
 
   const ErrorMessage = (props) => (
-    <Text sx={{ pb: 3, maxWidth: "300px" }} color="red">
+    <Text as="p" sx={{ pb: 3, maxWidth: "300px" }} color="red">
       {props.children}
     </Text>
   )

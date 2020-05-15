@@ -61,6 +61,9 @@ export default () => {
             setError("Not able to sign in")
           }
         })
+        .catch((err) => {
+          console.log("SignupForm error", err)
+        })
     } else {
       setError("Please agree to the terms and conditions to create an account.")
     }
