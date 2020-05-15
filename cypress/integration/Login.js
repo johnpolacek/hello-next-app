@@ -1,6 +1,6 @@
 describe("Login", () => {
   it("then logout", function () {
-    cy.fixture('users').then((users)  => {
+    cy.fixture("users").then((users) => {
       cy.visit("/")
       cy.get("a").contains("Login").click()
       cy.get("h2").contains("Login to your Account").should("be.visible")
