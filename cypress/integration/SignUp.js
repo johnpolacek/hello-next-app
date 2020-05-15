@@ -1,6 +1,6 @@
 describe("Sign Up", () => {
   describe("invalid form submit", () => {
-    it("requires fields", function () {
+    it("has missing fields", function () {
       cy.visit("/")
       cy.get("a").contains("Sign Up").click()
       cy.get("h2").contains("Create an account").should("be.visible")
@@ -57,7 +57,7 @@ describe("Sign Up", () => {
       cy.get("div").contains("test@hellonextapp.com").should("be.visible")
       cy.get("div").contains("Starter").should("be.visible")
       cy.get("label").contains("Plan").should("be.visible")
-      cy.get("label").contains("Billing").should("not.be.visible")
+      cy.get("label").contains("Billing").should("not.exist")
     })
 
     it("creates paid pro account", () => {

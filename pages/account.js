@@ -1,6 +1,6 @@
 import React from "react"
 import withSession from "../lib/session"
-import getPlan from "../lib/firebase/getPlan"
+import getPlan from "../lib/firebase/admin/getPlan"
 import appConfig from "../app.config"
 import Wrapper from "../components/layout/Wrapper"
 import Account from "../components/views/Account"
