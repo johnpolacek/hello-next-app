@@ -32,3 +32,14 @@ Cypress.Commands.add("fillOutCreditCardForm", () => {
   cy.wait(500)
   cy.getWithinIframe('[name="postal"]').type("12345")
 })
+
+Cypress.Commands.add("login", () => {
+  cy.fixture("users").then((users) => {
+    cy.visit("/login")
+    cy.get("input[name=email]").type(users.paid.email)
+    cy.get("input[name=password]").type(users.paid.password)
+    cy.get("form").find("button").contains("Login").click()
+    cy.wait(2000)
+    cy.get("p").contains("Signed In View of App").should("be.visible")
+  })
+})
