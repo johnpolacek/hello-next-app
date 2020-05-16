@@ -81,7 +81,7 @@ export default (props) => {
             py: 2,
             bg: isEditing ? (isSaving ? "gray" : "secondary") : "white",
             fontSize: 0,
-            color: "white",
+            color: isEditing ? "white" : "primary",
           }}
         >
           {isEditing ? "save" : "update"}
