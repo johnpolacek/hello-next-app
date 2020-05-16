@@ -151,6 +151,9 @@ To run tests:
 npm run test
 ```
 
+This package comes with pre-configured tests. To get them to pass, you will need to update them for your project. 
+
+
 ## Deployment
 
 For deployment to `now`, you will need to get a zeit.co account at [zeit.co/signup](https://zeit.co/signup). Once you have an account, you will need to install the Now CLI:
