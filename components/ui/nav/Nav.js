@@ -8,8 +8,10 @@ import Router from "next/router"
 const Nav = () => {
   const { user } = useContext(UserContext)
 
+  console.log("Nav user", user)
+
   return (
-    <Flex as="nav" sx={{ flexWrap: "wrap", py: [2, 0], bg: "primary", opacity: user === null ? 0 : 1, transition: 'opacity 0.5s' }}>
+    <Flex as="nav" sx={{ flexWrap: "wrap", py: [2, 0], bg: "primary" }}>
       <Box
         sx={{
           width: ["100%", "50%"],
@@ -29,6 +31,7 @@ const Nav = () => {
           width: ["100%", "50%"],
           textAlign: ["center", "right"],
           pr: [0, 3],
+          opacity: user === null ? 0 : 1
         }}
       >
         {user ? (

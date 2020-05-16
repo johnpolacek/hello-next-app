@@ -1,7 +1,9 @@
 describe("Login", () => {
-  it("loads signed in view of app then logout", function () {
+  it("loads signed in view", function () {
     cy.fixture("users").then((users) => {
       cy.visit("/")
+      cy.get("a").contains("Sign Up").should("be.visible")
+      cy.get("a").contains("Account").should("not.exist")
       cy.get("a").contains("Login").click()
       cy.wait(2000)
       cy.get("h2").contains("Login to your Account").should("be.visible")
@@ -10,11 +12,15 @@ describe("Login", () => {
       cy.get("form").find("button").contains("Login").click()
       cy.wait(2000)
       cy.get("p").contains("Signed In View of App").should("be.visible")
+      cy.get("a").contains("Sign Up").should("not.exist")
       cy.get("a").contains("Login").should("not.exist")
+      cy.get("a").contains("Account").should("be.visible")
       cy.get("button").contains("Logout").click()
       cy.wait(1000)
       cy.get("h2").contains("Login to your Account").should("be.visible")
+      cy.get("a").contains("Login").should("be.visible")
       cy.get("button").contains("Logout").should("not.exist")
+      cy.get("a").contains("Account").should("not.exist")
     })
   })
 

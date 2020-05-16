@@ -5,14 +5,6 @@ import PropTypes from "prop-types"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
-const A = React.forwardRef(({ onClick, href, styles, children }, ref) => {
-  return (
-    <a href={href} sx={styles} ref={ref}>
-      {children}
-    </a>
-  )
-})
-
 const NavLink = (props) => {
   const router = useRouter()
   const isCurrent = router.pathname === props.href && props.href !== "/"
@@ -31,7 +23,7 @@ const NavLink = (props) => {
   }
   return (
     <Link href={props.href} passHref>
-      <A styles={styles}>{props.children}</A>
+      <a sx={styles}>{props.children}</a>
     </Link>
   )
 }
