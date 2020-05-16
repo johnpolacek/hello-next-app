@@ -6,6 +6,7 @@ import appConfig from "../../app.config.js"
 import ReactGA from "react-ga"
 
 export default (props) => {
+  
   if (
     typeof appConfig.analytics !== "undefined" &&
     appConfig.analytics.indexOf("UA") === 0
@@ -19,7 +20,7 @@ export default (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <UserProvider>
+      <UserProvider user={props.user}>
         <Layout {...props} />
       </UserProvider>
     </ThemeProvider>

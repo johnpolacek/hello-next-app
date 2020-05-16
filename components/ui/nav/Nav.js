@@ -9,7 +9,7 @@ const Nav = () => {
   const { user } = useContext(UserContext)
 
   return (
-    <Flex as="nav" sx={{ flexWrap: "wrap", py: [2, 0], bg: "primary" }}>
+    <Flex as="nav" sx={{ flexWrap: "wrap", py: [2, 0], bg: "primary", opacity: user === null ? 0 : 1, transition: 'opacity 0.5s' }}>
       <Box
         sx={{
           width: ["100%", "50%"],

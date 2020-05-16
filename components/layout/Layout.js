@@ -9,10 +9,11 @@ import Main from "../ui/containers/Main"
 import Footer from "../ui/containers/Footer"
 
 const Layout = (props) => {
+  
   const { setUser } = useContext(UserContext)
 
   useEffect(() => {
-    setUser(props.user)
+    setUser(props.user ? props.user : false)
   }, [props.user])
 
   return (
