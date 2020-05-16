@@ -3,7 +3,7 @@ describe("Sign Up", () => {
     it("has missing fields", function () {
       cy.visit("/")
       cy.get("a").contains("Sign Up").click()
-      cy.get("h2").contains("Create an account").should("be.visible")
+      cy.get("form").contains("Create an account").should("be.visible")
       cy.get("button").contains("Sign Up").click()
       cy.get("h2")
         .contains("Choose the plan that’s right for you")
@@ -27,7 +27,7 @@ describe("Sign Up", () => {
       )
       cy.visit("/")
       cy.get("a").contains("Sign Up").click()
-      cy.get("h2").contains("Create an account").should("be.visible")
+      cy.get("form").contains("Create an account").should("be.visible")
       cy.get("input[name=email]").type("test@hellonextapp.com")
       cy.get("input[name=password]").type("TestSignUp123!")
       cy.get("input[type=checkbox]").parent().click()
