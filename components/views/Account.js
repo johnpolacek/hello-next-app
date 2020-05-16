@@ -15,7 +15,7 @@ export default (props) => {
     : appConfig.plans[0]
 
   return (
-    <Box sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
+    <Box id="accountInfo" sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
       <Heading variant="headline">Your Account</Heading>
       <Text sx={{ pb: 4, fontStyle: "italic" }}>{error}&nbsp;</Text>
       {plan ? (
@@ -24,6 +24,7 @@ export default (props) => {
             name="email"
             value={props.user.email}
             label="Email"
+            type="email"
             onSave={(newEmail, onComplete) => {
               updateEmail(newEmail).then((response) => {
                 if (!response.success) {
