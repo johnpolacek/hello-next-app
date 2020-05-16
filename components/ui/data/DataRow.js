@@ -79,9 +79,9 @@ export default (props) => {
           }}
           sx={{
             py: 2,
-            bg: isEditing ? (isSaving ? "gray" : "transparent") : "white",
+            bg: isEditing ? (isSaving ? "gray" : "secondary") : "white",
             fontSize: 0,
-            color: isEditing ? "transparent" : "primary",
+            color: "white",
           }}
         >
           {isEditing ? "save" : "update"}
