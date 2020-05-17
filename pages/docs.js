@@ -3,12 +3,12 @@ import withSession from "../lib/session"
 import { MDXProvider } from "@mdx-js/react"
 import { Box } from "theme-ui"
 import appConfig from "../app.config"
-import Wrapper from "../components/layout/Wrapper"
+import Layout from "../components/layout/Layout"
 import Container from "../components/ui/containers/Container"
 import DocsContent from "../README.md"
 
 const Docs = (props) => (
-  <Wrapper
+  <Layout
     url="/docs"
     title={appConfig.name + " | Docs"}
     description={"Technical documentation for " + appConfig.name}
@@ -19,7 +19,7 @@ const Docs = (props) => (
         <DocsContent />
       </Container>
     </MDXProvider>
-  </Wrapper>
+  </Layout>
 )
 
 export const getServerSideProps = withSession(async function ({ req, res }) {

@@ -3,21 +3,21 @@ import withSession from "../lib/session"
 import IndexView from "../components/views/Index"
 import appConfig from "../app.config"
 
-import Wrapper from "../components/layout/Wrapper"
+import Layout from "../components/layout/Layout"
 // Note: It is recommended for SEO that you have a different title and description for each page
 
 const Index = (props) => {
   const isSignedIn = props.user != null
 
   return (
-    <Wrapper
+    <Layout
       url="/"
       title={appConfig.name + " | " + appConfig.shortDescription}
       description={appConfig.longDescription}
       user={props.user}
     >
       <IndexView isSignedIn={isSignedIn} />
-    </Wrapper>
+    </Layout>
   )
 }
 

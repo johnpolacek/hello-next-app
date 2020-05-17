@@ -1,6 +1,6 @@
 import React from "react"
 import withSession from "../../../lib/session"
-import Wrapper from "../../../components/layout/Wrapper"
+import Layout from "../../../components/layout/Layout"
 import appConfig from "../../../app.config"
 import PlanSignupSuccess from "../../../components/ui/plans/PlanSignupSuccess"
 import { findBySlug } from "../../../lib/util"
@@ -8,7 +8,7 @@ import getPlan from "../../../lib/firebase/admin/getPlan"
 
 const PlanReadyPage = (props) => {
   return (
-    <Wrapper
+    <Layout
       url="/"
       title={appConfig.name + " | " + props.plan.name + " Plan"}
       description={
@@ -17,7 +17,7 @@ const PlanReadyPage = (props) => {
       user={props.user}
     >
       <PlanSignupSuccess plan={props.plan} />
-    </Wrapper>
+    </Layout>
   )
 }
 

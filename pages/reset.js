@@ -2,19 +2,19 @@ import React from "react"
 import withSession from "../../lib/session"
 import ResetPassword from "../components/views/ResetPassword"
 import appConfig from "../app.config"
-import Wrapper from "../components/layout/Wrapper"
+import Layout from "../components/layout/Layout"
 
 const Reset = (props) => {
   const isSignedIn = props.user != null
 
   return (
-    <Wrapper
+    <Layout
       url="/"
       title={appConfig.name + " | " + appConfig.shortDescription}
       description={appConfig.longDescription}
     >
       <ResetPassword isSignedIn={isSignedIn} />
-    </Wrapper>
+    </Layout>
   )
 }
 

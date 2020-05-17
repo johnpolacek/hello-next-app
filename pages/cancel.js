@@ -1,13 +1,13 @@
 import React from "react"
 import withSession from "../lib/session"
 import appConfig from "../app.config"
-import Wrapper from "../components/layout/Wrapper"
+import Layout from "../components/layout/Layout"
 import Cancel from "../components/views/Cancel"
 import getPlan from "../lib/firebase/getPlan"
 
 const CancelPage = (props) => {
   return (
-    <Wrapper
+    <Layout
       url="/"
       title={appConfig.name + " | Cancel"}
       description={"Your " + appConfig.name + " account information"}
@@ -15,7 +15,7 @@ const CancelPage = (props) => {
       user={props.user}
     >
       <Cancel {...props} />
-    </Wrapper>
+    </Layout>
   )
 }
 
