@@ -15,7 +15,10 @@ export default (props) => {
     : appConfig.plans[0]
 
   return (
-    <Box id="accountInfo" sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
+    <Box
+      id="accountInfo"
+      sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}
+    >
       <Heading variant="headline">Your Account</Heading>
       <Text sx={{ pb: 4, fontStyle: "italic" }}>{error}&nbsp;</Text>
       {plan ? (
