@@ -1,11 +1,11 @@
 import React from "react"
 import withSession from "../lib/session"
 import appConfig from "../app.config"
-import Wrapper from "../components/layout/Wrapper"
+import Layout from "../components/layout/Layout"
 import DemoView from "../components/views/Demo"
 
 const Demo = (props) => (
-  <Wrapper
+  <Layout
     url="/tour"
     title={appConfig.name + " | Tour"}
     description={"Product tour of " + appConfig.name}
@@ -13,7 +13,7 @@ const Demo = (props) => (
     user={props.user}
   >
     <DemoView />
-  </Wrapper>
+  </Layout>
 )
 
 export const getServerSideProps = withSession(async function ({ req, res }) {

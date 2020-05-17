@@ -1,13 +1,13 @@
 import React from "react"
 import withSession from "../lib/session.js"
 import appConfig from "../app.config"
-import Wrapper from "../components/layout/Wrapper"
+import Layout from "../components/layout/Layout"
 import { MDXProvider } from "@mdx-js/react"
 import PrivacyContent from "../components/markdown/privacy.mdx"
 import Container from "../components/ui/containers/Container"
 
 const Privacy = (props) => (
-  <Wrapper
+  <Layout
     url="/privacy"
     title={appConfig.name + " | Privacy Policy"}
     description={"Privacy policy information for " + appConfig.name + " users"}
@@ -18,7 +18,7 @@ const Privacy = (props) => (
         <PrivacyContent />
       </Container>
     </MDXProvider>
-  </Wrapper>
+  </Layout>
 )
 
 export const getServerSideProps = withSession(async function ({ req, res }) {

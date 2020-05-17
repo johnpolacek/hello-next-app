@@ -1,18 +1,18 @@
 import React from "react"
 import withSession from "../lib/session"
-import Wrapper from "../components/layout/Wrapper"
+import Layout from "../components/layout/Layout"
 import appConfig from "../app.config"
 import AboutView from "../components/views/About"
 
 const About = (props) => (
-  <Wrapper
+  <Layout
     url="/"
     title={appConfig.name + " | About"}
     description={"More information about " + appConfig.name}
     user={props.user}
   >
     <AboutView />
-  </Wrapper>
+  </Layout>
 )
 
 export const getServerSideProps = withSession(async function ({ req, res }) {

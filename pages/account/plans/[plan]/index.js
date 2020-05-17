@@ -1,6 +1,6 @@
 import React from "react"
 import withSession from "../../../../lib/session"
-import Wrapper from "../../../../components/layout/Wrapper"
+import Layout from "../../../../components/layout/Layout"
 import appConfig from "../../../../app.config"
 import ChoosePlan from "../../../../components/ui/plans/ChoosePlan"
 import { findBySlug } from "../../../../lib/util"
@@ -13,7 +13,7 @@ import CheckoutForm from "../../../../components/ui/forms/CheckoutForm"
 const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY_TEST)
 
 const UserPlanPage = (props) => (
-  <Wrapper
+  <Layout
     url="/"
     title={appConfig.name + " | " + props.plan.name + " Plan"}
     description={
@@ -23,7 +23,7 @@ const UserPlanPage = (props) => (
     <Elements stripe={stripePromise}>
       <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />
     </Elements>
-  </Wrapper>
+  </Layout>
 )
 
 export const getServerSideProps = withSession(async (ctx) => {

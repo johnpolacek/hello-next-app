@@ -1,16 +1,16 @@
 import React from "react"
-import Wrapper from "../components/layout/Wrapper"
+import Layout from "../components/layout/Layout"
 import LoginForm from "../components/ui/forms/LoginForm"
 import appConfig from "../app.config"
 
 export default () => {
   return (
-    <Wrapper
+    <Layout
       url="/"
       title={appConfig.name + " | Login"}
       description="The account login page for Hello Next App"
     >
       <LoginForm />
-    </Wrapper>
+    </Layout>
   )
 }

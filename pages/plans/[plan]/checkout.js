@@ -1,4 +1,4 @@
-import Wrapper from "../../../components/layout/Wrapper"
+import Layout from "../../../components/layout/Layout"
 import appConfig from "../../../app.config"
 import ChoosePlan from "../../../components/ui/plans/ChoosePlan"
 import { findBySlug } from "../../../lib/util"
@@ -50,7 +50,7 @@ export const getServerSideProps = async (ctx) => {
 }
 
 const PlanCheckoutPage = (props) => (
-  <Wrapper
+  <Layout
     url="/"
     title={appConfig.name + " | " + props.plan.name + " Plan"}
     description={
@@ -60,7 +60,7 @@ const PlanCheckoutPage = (props) => (
     <Elements stripe={stripePromise}>
       <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />
     </Elements>
-  </Wrapper>
+  </Layout>
 )
 
 export default PlanCheckoutPage

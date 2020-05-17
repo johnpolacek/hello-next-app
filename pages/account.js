@@ -2,19 +2,19 @@ import React from "react"
 import withSession from "../lib/session"
 import getPlan from "../lib/firebase/admin/getPlan"
 import appConfig from "../app.config"
-import Wrapper from "../components/layout/Wrapper"
+import Layout from "../components/layout/Layout"
 import Account from "../components/views/Account"
 
 const AccountPage = (props) => {
   return (
-    <Wrapper
+    <Layout
       url="/"
       title={appConfig.name + " | Account"}
       description={"Your " + appConfig.name + " account information"}
       user={props.user}
     >
       <Account {...props} />
-    </Wrapper>
+    </Layout>
   )
 }
 

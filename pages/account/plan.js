@@ -1,19 +1,19 @@
 import React from "react"
 import withSession from "../../lib/session"
 import appConfig from "../../app.config"
-import Wrapper from "../../components/layout/Wrapper"
+import Layout from "../../components/layout/Layout"
 import Plan from "../../components/views/Plan"
 import getPlan from "../../lib/firebase/getPlan"
 
 const PlanPage = (props) => {
   return (
-    <Wrapper
+    <Layout
       url="/"
       title={appConfig.name + " | Manage Plan"}
       description={"Update your " + appConfig.name + " plan"}
     >
       {props.user && <Plan {...props} />}
-    </Wrapper>
+    </Layout>
   )
 }
 
