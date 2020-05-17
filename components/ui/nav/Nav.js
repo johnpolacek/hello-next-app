@@ -31,7 +31,7 @@ const Nav = () => {
           width: ["100%", "50%"],
           textAlign: ["center", "right"],
           pr: [0, 3],
-          opacity: user === null ? 0 : 1
+          opacity: user === null ? 0 : 1,
         }}
       >
         {user ? (

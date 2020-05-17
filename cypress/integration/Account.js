@@ -18,9 +18,9 @@ describe("Account Page", function () {
     cy.fixture("users").then((users) => {
       cy.login()
       cy.visit("/account")
-      cy.get('#accountInfo button').eq(0).click()
-      cy.get('input[type=email]').clear()
-      cy.get('input[type=email]').type("temp@hellonextapp.com")
+      cy.get("#accountInfo button").eq(0).click()
+      cy.get("input[type=email]").clear()
+      cy.get("input[type=email]").type("temp@hellonextapp.com")
     })
   })
 })
