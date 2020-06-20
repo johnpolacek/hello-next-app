@@ -1,4 +1,3 @@
-import fetchJson from "../../lib/fetchJson"
 import withSession from "../../lib/session"
 
 export default withSession(async (req, res) => {

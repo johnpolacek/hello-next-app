@@ -4,12 +4,11 @@ import DataRow from "../ui/data/DataRow"
 import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
 import { stringToSlug, findBySlug } from "../../lib/util"
-import updateEmail from "../../lib/firebase/updateEmail"
+import getToken from "../../lib/firebase/getToken"
 import updatePassword from "../../lib/firebase/updatePassword"
 
 export default (props) => {
   const [error, setError] = useState("")
-  console.log("Account props.plan", props.plan)
   const plan = props.plan
     ? findBySlug(appConfig.plans, "name", stringToSlug(props.plan.name))
     : appConfig.plans[0]
@@ -29,11 +28,24 @@ export default (props) => {
             label="Email"
             type="email"
             onSave={(newEmail, onComplete) => {
-              updateEmail(newEmail).then((response) => {
-                if (!response.success) {
-                  setError(response.message)
+              getToken().then((res) => {
+                if (res.success) {
+                  fetch("/api/updateEmail", {
+                    method: "POST",
+                    // eslint-disable-next-line no-undef
+                    headers: new Headers({
+                      "Content-Type": "application/json",
+                    }),
+                    credentials: "same-origin",
+                    body: JSON.stringify({ token: res.token, email: newEmail }),
+                  }).then((res) => {
+                    res.json().then((data) => {
+                      window.location.reload()
+                    })
+                  })
+                } else {
+                  setError(res.error)
                 }
-                onComplete()
               })
             }}
           />
@@ -43,11 +55,27 @@ export default (props) => {
             label="Password"
             type="password"
             onSave={(newPassword, onComplete) => {
-              updatePassword(newPassword).then((response) => {
-                if (!response.success) {
-                  setError(response.message)
+              getToken().then((res) => {
+                if (res.success) {
+                  fetch("/api/updatePassword", {
+                    method: "POST",
+                    // eslint-disable-next-line no-undef
+                    headers: new Headers({
+                      "Content-Type": "application/json",
+                    }),
+                    credentials: "same-origin",
+                    body: JSON.stringify({
+                      token: res.token,
+                      password: newPassword,
+                    }),
+                  }).then((res) => {
+                    res.json().then((data) => {
+                      console.log("success data", data)
+                    })
+                  })
+                } else {
+                  setError(res.error)
                 }
-                window.location.reload()
               })
             }}
           />
