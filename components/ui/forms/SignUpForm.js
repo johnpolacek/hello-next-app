@@ -36,7 +36,6 @@ export default () => {
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((result) => {
-          console.log("SignUpFormIron result", result)
           var user = firebase.auth().currentUser
           if (user) {
             firebase

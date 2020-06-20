@@ -16,20 +16,20 @@ export default (props) => {
     <Flex
       sx={{
         bg: "rgba(255, 255, 255, 0.1)",
-        maxWidth: "540px",
+        maxWidth: "720px",
         width: "96%",
         mx: "auto",
         mb: "2px",
       }}
     >
-      <Box sx={{ width: "30%", p: 3, textAlign: "right" }}>
+      <Box sx={{ width: "20%", p: 3, textAlign: "right" }}>
         <Label sx={{ p: 1 }} htmlFor={props.name}>
           {props.label}
         </Label>
       </Box>
       <Box
         sx={{
-          width: "50%",
+          width: "60%",
           p: 3,
           textAlign: "left",
           bg: "rgba(255, 255, 255, 0.1)",
