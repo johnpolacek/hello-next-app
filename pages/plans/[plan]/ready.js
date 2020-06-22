@@ -7,6 +7,7 @@ import { findBySlug } from "../../../lib/util"
 import getPlan from "../../../lib/firebase/admin/getPlan"
 
 const PlanReadyPage = (props) => {
+  console.log("props", props)
   return (
     <Layout
       url="/"

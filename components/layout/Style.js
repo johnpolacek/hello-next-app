@@ -34,6 +34,7 @@ export default (props) => (
     }
     a {
       background-color: transparent;
+      color: ${theme.colors.primary};
     }
     abbr[title] {
       border-bottom: none;

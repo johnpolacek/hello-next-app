@@ -5,13 +5,14 @@ import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
 import { stringToSlug, findBySlug } from "../../lib/util"
 import getToken from "../../lib/firebase/getToken"
-import updatePassword from "../../lib/firebase/updatePassword"
 
 export default (props) => {
   const [error, setError] = useState("")
   const plan = props.plan
     ? findBySlug(appConfig.plans, "name", stringToSlug(props.plan.name))
     : appConfig.plans[0]
+
+  console.log("Account plan", plan)
 
   return (
     <Box

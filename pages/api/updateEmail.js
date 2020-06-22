@@ -1,12 +1,12 @@
 import withSession from "../../lib/session"
-import updateUserProperty from "../../lib/firebase/admin/updateUserProperty"
+import updateAuthUserProperty from "../../lib/firebase/admin/updateAuthUserProperty"
 
 const updateEmail = withSession(async (req, res) => {
   const { token, email } = req.body
   let user = req.session.get("user")
 
   try {
-    const data = await updateUserProperty(token, "email", email)
+    const data = await updateAuthUserProperty(token, "email", email)
     user.email = email
     req.session.set("user", user)
     await req.session.save()
