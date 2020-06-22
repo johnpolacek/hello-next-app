@@ -12,8 +12,6 @@ export default (props) => {
     ? findBySlug(appConfig.plans, "name", stringToSlug(props.plan.name))
     : appConfig.plans[0]
 
-  console.log("Account plan", plan)
-
   return (
     <Box
       id="accountInfo"

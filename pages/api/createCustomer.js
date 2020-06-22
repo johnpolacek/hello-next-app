@@ -4,6 +4,8 @@ import Stripe from "stripe"
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST)
 
 export default async (req, res) => {
+  const debug = false
+
   if (req.method === "POST") {
     const {
       uid,
@@ -22,22 +24,24 @@ export default async (req, res) => {
           default_payment_method: paymentMethodId,
         },
       })
-      console.log(
-        `createCustomer: Successfully created customer: ${JSON.stringify(
-          customer
-        )}`
-      )
+      debug &&
+        console.log(
+          `createCustomer: Successfully created customer: ${JSON.stringify(
+            customer
+          )}`
+        )
       const subscription = await stripe.subscriptions.create({
         customer: customer.id,
         items: [{ plan: planId }],
         expand: ["latest_invoice.payment_intent"],
       })
 
-      console.log(
-        `createCustomer: Successfully created subscription: ${JSON.stringify(
-          subscription
-        )}`
-      )
+      debug &&
+        console.log(
+          `createCustomer: Successfully created subscription: ${JSON.stringify(
+            subscription
+          )}`
+        )
 
       const userPlanId = uid + "-" + new Date().getTime()
       const userData = {
@@ -47,11 +51,12 @@ export default async (req, res) => {
 
       const setUserResult = await updateUserProperties(uid, userData)
 
-      console.log(
-        `createCustomer: Successfully set user data: ${JSON.stringify(
-          userData
-        )}`
-      )
+      debug &&
+        console.log(
+          `createCustomer: Successfully set user data: ${JSON.stringify(
+            userData
+          )}`
+        )
 
       const planData = {
         price: planPrice,
@@ -75,11 +80,12 @@ export default async (req, res) => {
       }
 
       const setPlanResult = await setPlan(userPlanId, planData)
-      console.log(
-        `createCustomer: Successfully set plan data: ${JSON.stringify(
-          userData
-        )}`
-      )
+      debug &&
+        console.log(
+          `createCustomer: Successfully set plan data: ${JSON.stringify(
+            userData
+          )}`
+        )
 
       res.status(200).json(subscription)
     } catch (e) {
