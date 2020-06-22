@@ -1,8 +1,9 @@
 import React, { useState } from "react"
+import Router from "next/router"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
-import { parseCookies, destroyCookie } from "nookies"
-import setPlan from "../../../lib/firebase/setPlan"
+import { parseCookies } from "nookies"
 import theme from "../../theme"
+import { stringToSlug } from "../../../lib/util"
 import { Box, Card, Heading, Text, Button } from "theme-ui"
 import Form from "./Form"
 import CircleCheckmark from "../graphics/CircleCheckmark"
@@ -13,7 +14,9 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
   const [checkoutError, setCheckoutError] = useState(null)
   const [checkoutSuccess, setCheckoutSuccess] = useState(null)
   const [subscription, setSubscription] = useState(null)
-  const { accountEmail } = parseCookies()
+  const { accountEmail, uid } = parseCookies()
+
+  console.log("CheckoutForm plan", plan)
 
   const handleSubmit = async () => {
     try {
@@ -38,8 +41,11 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
         method: "POST",
         mode: "same-origin",
         body: JSON.stringify({
+          uid,
           paymentMethodId: result.paymentMethod.id,
-          planId: plan.id,
+          planId: plan.planId,
+          planPrice: plan.price,
+          planName: plan.name,
           email: accountEmail,
         }),
       })
@@ -74,7 +80,8 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
   }
 
   if (checkoutSuccess) {
-    setPlan({ ...subscription, ...plan })
+    console.log("Checkout success for plan: " + plan.name, plan)
+    Router.push("/plans/" + stringToSlug(plan.name) + "/ready")
   }
 
   return (

@@ -223,7 +223,7 @@ export const base = {
       },
     },
     a: {
-      color: "text",
+      color: "primary",
     },
     pre: {
       fontFamily: "monospace",

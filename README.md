@@ -8,6 +8,8 @@ First, you will need to create a new Firebase account at [firebase.google.com](h
 
 Get your account credentials from the Firebase console at _Project settings > Service accounts_ where you can click on Generate new private key and download the credentials as a json file. It will contain keys such as `project_id`, `client_email` and `client_id`. Set them as environment variables in the `.env` file at the root of this project.
 
+Additionally, the Firebase Admin SDK requires access to this json file, so move it into the `lib/firebase/admin` directory. This file contains private keys for access to your Firebase project, so it should not get committed to source control. It is already excluded via the `.gitignore` file in the top level of the Hello Next App project.
+
 We will also need to set up the Authentication settings for our app. In the Firebase console, go to the Authentication section for your app. Under Sign-in providers, enable 'Email/Password' and Email link (passwordless login).
 
 Next, add a new Web App to your project.
@@ -112,7 +114,22 @@ In Stripe, you will need to add a product for each paid plan that you offer. To 
 
 Additionally, for every product you add to Stripe, you should add a duplicate test product.
 
-A the plan id for each product (and the test product plan id) should be added to *app.config.js*.
+The plan id for each product (and the test product plan id) should be added to *app.config.js*.
+
+
+## User Management
+
+Provide information here about creating a user in Firebase, then linking that user with a paid account and subscription plan in Stripe...
+
+When a new user signs up, they first get a user account under the Firebase project so they can authenticate into your app with an email and password. 
+
+For our Firebase database, we will have two separate areas for managing users. There is the Authentication data associated with a user that contains any data necessary for handling the authentication flow for that user. Next, there is a users collection that we can use to store other user metadata, such as what plan they have signed up for or their Stripe Customer ID.
+
+Next up, they sign up for a plan. If the plan is free, then...
+
+For paid accounts, the user will provide their credit card details and make a Stripe payment to create their subscription.
+
+
 
 
 ## Customization

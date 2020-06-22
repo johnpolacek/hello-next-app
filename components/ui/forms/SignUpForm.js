@@ -1,3 +1,4 @@
+import { setCookie } from "nookies"
 import React, { useState } from "react"
 import Router from "next/router"
 import Link from "next/link"
@@ -53,6 +54,14 @@ export default () => {
                   credentials: "same-origin",
                   body: JSON.stringify({ user }),
                 }).then(() => {
+                  setCookie(null, "accountEmail", email, {
+                    maxAge: 30 * 24 * 60 * 60,
+                    path: "/",
+                  })
+                  setCookie(null, "uid", user.uid, {
+                    maxAge: 30 * 24 * 60 * 60,
+                    path: "/",
+                  })
                   Router.push("/plans")
                 })
               })
