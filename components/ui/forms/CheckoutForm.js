@@ -16,8 +16,6 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
   const [subscription, setSubscription] = useState(null)
   const { accountEmail, uid } = parseCookies()
 
-  console.log("CheckoutForm plan", plan)
-
   const handleSubmit = async () => {
     try {
       const result = await stripe.createPaymentMethod({
@@ -80,7 +78,6 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
   }
 
   if (checkoutSuccess) {
-    console.log("Checkout success for plan: " + plan.name, plan)
     Router.push("/plans/" + stringToSlug(plan.name) + "/ready")
   }
 
