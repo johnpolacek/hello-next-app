@@ -7,6 +7,7 @@ import { stringToSlug, findBySlug } from "../../lib/util"
 import getToken from "../../lib/firebase/getToken"
 
 export default (props) => {
+  
   const [error, setError] = useState("")
   const plan = props.plan
     ? findBySlug(appConfig.plans, "name", stringToSlug(props.plan.name))
@@ -36,7 +37,7 @@ export default (props) => {
                       "Content-Type": "application/json",
                     }),
                     credentials: "same-origin",
-                    body: JSON.stringify({ token: res.token, email: newEmail }),
+                    body: JSON.stringify({ token: res.token, email: newEmail, stripeId: props.plan.stripeId }),
                   }).then((res) => {
                     res.json().then((data) => {
                       window.location.reload()
