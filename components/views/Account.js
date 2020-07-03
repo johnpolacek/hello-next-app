@@ -13,6 +13,8 @@ export default (props) => {
     ? findBySlug(appConfig.plans, "name", stringToSlug(props.plan.name))
     : appConfig.plans[0]
 
+  console.log("props.plan", props.plan)
+
   return (
     <Box
       id="accountInfo"
@@ -37,7 +39,7 @@ export default (props) => {
                       "Content-Type": "application/json",
                     }),
                     credentials: "same-origin",
-                    body: JSON.stringify({ token: res.token, email: newEmail, stripeId: props.plan.stripeId }),
+                    body: JSON.stringify({ token: res.token, email: newEmail, stripeId: typeof props.plan.stripeId === 'undefined' ? -1 : props.plan.stripeId}),
                   }).then((res) => {
                     res.json().then((data) => {
                       window.location.reload()
