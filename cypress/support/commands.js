@@ -52,7 +52,8 @@ Cypress.Commands.add("canViewAccountInfo", (userData) => {
   cy.get("div").contains(userData.email).should("be.visible")
   cy.get("div").contains(userData.plan).should("be.visible")
 
-  const billingVisible = userData.plan === "Starter" ? "not.be.visible" : "be.visible"
+  const billingVisible =
+    userData.plan === "Starter" ? "not.be.visible" : "be.visible"
 
   cy.get("label").contains("Billing").should(billingVisible)
   cy.get("div").contains("visa").should(billingVisible)
@@ -62,7 +63,7 @@ Cypress.Commands.add("canViewAccountInfo", (userData) => {
 Cypress.Commands.add("canChangeEmail", (userData) => {
   cy.login(userData.email, userData.password)
   cy.visit("/account")
-  
+
   const newEmail = "temp@hellonextapp.com"
   cy.get("#accountInfo button").contains("update").eq(0).click()
   cy.get("input[type=email]").clear()
@@ -79,7 +80,7 @@ Cypress.Commands.add("canChangeEmail", (userData) => {
   cy.get("form").find("button").contains("Login").click()
   cy.wait(2000)
   cy.get("p").contains("Signed In View of App").should("be.visible")
-  
+
   // change back
   cy.visit("/account")
   cy.get("div").contains(newEmail).should("be.visible")
@@ -91,11 +92,10 @@ Cypress.Commands.add("canChangeEmail", (userData) => {
   cy.get("div").contains(userData.email).should("be.visible")
 })
 
-
 Cypress.Commands.add("canChangePassword", (userData) => {
   cy.login(userData.email, userData.password)
   cy.visit("/account")
-  
+
   const newPassword = "asdfasdf1!"
   cy.get("#accountInfo button").eq(1).click()
   cy.get("input[type=password]").clear()
@@ -111,7 +111,7 @@ Cypress.Commands.add("canChangePassword", (userData) => {
   cy.get("form").find("button").contains("Login").click()
   cy.wait(2000)
   cy.get("p").contains("Signed In View of App").should("be.visible")
-  
+
   // change back
   cy.visit("/account")
   cy.get("#accountInfo button").eq(1).click()
