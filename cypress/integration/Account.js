@@ -11,6 +11,12 @@ describe("Account Page", () => {
         cy.canChangeEmail(users.paid)
       })
     })
+
+    it("can change password", () => {
+      cy.fixture("users").then((users) => {
+        cy.canChangePassword(users.paid)
+      })
+    })
   })
 
   describe("for free accounts", () => {
@@ -23,6 +29,12 @@ describe("Account Page", () => {
     it("can change email", () => {
       cy.fixture("users").then((users) => {
         cy.canChangeEmail(users.free)
+      })
+    })
+
+    it("can change password", () => {
+      cy.fixture("users").then((users) => {
+        cy.canChangePassword(users.free)
       })
     })
   })
