@@ -1,11 +1,12 @@
 import React from "react"
 import withSession from "../lib/session"
-import getPlan from "../lib/firebase/admin/getPlan"
 import appConfig from "../app.config"
+import getPlan from "../lib/firebase/admin/getPlan"
 import Layout from "../components/layout/Layout"
 import Account from "../components/views/Account"
 
 const AccountPage = (props) => {
+  console.log("AccountPage props.plan", props.plan)
   return (
     <Layout
       url="/"
