@@ -33,7 +33,7 @@ Cypress.Commands.add("fillOutCreditCardForm", () => {
   cy.getWithinIframe('[name="postal"]').type("12345")
 })
 
-Cypress.Commands.add("login", () => {
+Cypress.Commands.add("loginPaid", () => {
   cy.fixture("users").then((users) => {
     cy.visit("/login")
     cy.get("input[name=email]").type(users.paid.email)
