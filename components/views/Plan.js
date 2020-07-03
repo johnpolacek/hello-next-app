@@ -6,10 +6,12 @@ import { stringToSlug, findBySlug } from "../../lib/util"
 import Pricing from "../ui/plans/Pricing"
 
 export default (props) => {
+  console.log("Plan props.plan.name", props.plan.name)
+
   const plan = findBySlug(
     appConfig.plans,
     "name",
-    stringToSlug(props.plan.type)
+    stringToSlug(props.plan.name)
   )
 
   return (
@@ -18,10 +20,10 @@ export default (props) => {
       <Heading variant="subhead">
         Your current plan is <br />
         <Box as="span" sx={{ fontWeight: 700, fontSize: 5 }}>
-          {props.plan.type}
+          {props.plan.name}
         </Box>
       </Heading>
-      <Pricing current={props.plan.type} />
+      <Pricing current={props.plan.name} />
       {props.plan ? (
         <>
           <Box sx={{ pt: 4, fontSize: 1 }}>
