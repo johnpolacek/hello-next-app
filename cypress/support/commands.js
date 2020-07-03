@@ -90,3 +90,33 @@ Cypress.Commands.add("canChangeEmail", (userData) => {
   cy.wait(4000)
   cy.get("div").contains(userData.email).should("be.visible")
 })
+
+
+Cypress.Commands.add("canChangePassword", (userData) => {
+  cy.login(userData.email, userData.password)
+  cy.visit("/account")
+  
+  const newPassword = "asdfasdf1!"
+  cy.get("#accountInfo button").eq(1).click()
+  cy.get("input[type=password]").clear()
+  cy.get("input[type=password]").type(newPassword)
+  cy.get("button").contains("save").click()
+  cy.wait(4000)
+
+  // logout then sign in with new password
+  cy.get("button").contains("Logout").click()
+  cy.wait(1000)
+  cy.get("input[name=email]").type(userData.email)
+  cy.get("input[name=password]").type(newPassword)
+  cy.get("form").find("button").contains("Login").click()
+  cy.wait(2000)
+  cy.get("p").contains("Signed In View of App").should("be.visible")
+  
+  // change back
+  cy.visit("/account")
+  cy.get("#accountInfo button").eq(1).click()
+  cy.get("input[type=password]").clear()
+  cy.get("input[type=password]").type(userData.password)
+  cy.get("button").contains("save").click()
+  cy.wait(4000)
+})
