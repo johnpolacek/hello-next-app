@@ -120,3 +120,20 @@ Cypress.Commands.add("canChangePassword", (userData) => {
   cy.get("button").contains("save").click()
   cy.wait(4000)
 })
+
+Cypress.Commands.add("canChangePlan", (userData, newPlanId) => {
+  cy.login(userData.email, userData.password)
+  cy.visit("/account")
+
+  const newPassword = "asdfasdf1!"
+  cy.get("button[class='update-plan'").click()
+
+  cy.get("h2").contains("Manage Plan").should("be.visible")
+  cy.get("#currentPlanName").contains(userData.plan).should("be.visible")
+  cy.get("#currentPlanLabel[data-plan='" + userData.plan + "']").should(
+    "be.visible"
+  )
+  cy.get("a[href*=/plans/" + newPlanId + "]")
+    .contains("Select Plan")
+    .click()
+})

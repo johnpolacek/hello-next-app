@@ -1,20 +1,21 @@
 import React, { useState } from "react"
 import Router from "next/router"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
-import { parseCookies } from "nookies"
 import theme from "../../theme"
 import { stringToSlug } from "../../../lib/util"
 import { Box, Card, Heading, Text, Button } from "theme-ui"
 import Form from "./Form"
 import CircleCheckmark from "../graphics/CircleCheckmark"
 
-const CheckoutForm = ({ paymentIntent, plan }) => {
+const CheckoutForm = ({ paymentIntent, plan, user, subscriptionId }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [checkoutError, setCheckoutError] = useState(null)
   const [checkoutSuccess, setCheckoutSuccess] = useState(null)
   const [subscription, setSubscription] = useState(null)
-  const { accountEmail, uid } = parseCookies()
+
+  console.log("CheckoutForm subscriptionId", subscriptionId)
+  console.log("CheckoutForm user", user)
 
   const handleSubmit = async () => {
     try {
@@ -22,7 +23,7 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
         type: "card",
         card: elements.getElement(CardElement),
         billing_details: {
-          email: accountEmail,
+          email: user.email,
         },
       })
       await handleStripePaymentMethod(result)
@@ -35,20 +36,25 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
     if (result.error) {
       setCheckoutError(result.error.message)
     } else {
-      const response = await fetch("/api/createCustomer", {
-        method: "POST",
-        mode: "same-origin",
-        body: JSON.stringify({
-          uid,
-          paymentMethodId: result.paymentMethod.id,
-          planId: plan.planId,
-          planPrice: plan.price,
-          planName: plan.name,
-          email: accountEmail,
-        }),
-      })
+      const response = await fetch(
+        subscriptionId ? "/api/updateSubscription" : "/api/createCustomer",
+        {
+          method: "POST",
+          mode: "same-origin",
+          body: JSON.stringify({
+            uid: user.uid,
+            paymentMethodId: result.paymentMethod.id,
+            planId: plan.planId,
+            planPrice: plan.price,
+            planName: plan.name,
+            email: user.email,
+            subscriptionId,
+          }),
+        }
+      )
 
       const subscription = await response.json()
+      console.log("updateSubscription response", subscription)
       handleSubscription(subscription)
     }
   }
@@ -93,7 +99,9 @@ const CheckoutForm = ({ paymentIntent, plan }) => {
         <CircleCheckmark color="secondary" />
         <Heading as="h3" variant="cardheading">
           <Text sx={{ fontSize: 3, mb: -2 }}>You’ve selected </Text>
-          <Text sx={{ fontSize: 8, fontWeight: 700 }}>{plan.name}</Text>
+          <Text id="checkoutPlanName" sx={{ fontSize: 8, fontWeight: 700 }}>
+            {plan.name}
+          </Text>
         </Heading>
       </Box>
 

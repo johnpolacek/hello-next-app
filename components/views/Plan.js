@@ -19,7 +19,11 @@ export default (props) => {
       <Heading variant="headline">Manage Plan</Heading>
       <Heading variant="subhead">
         Your current plan is <br />
-        <Box as="span" sx={{ fontWeight: 700, fontSize: 5 }}>
+        <Box
+          id="currentPlanName"
+          as="span"
+          sx={{ fontWeight: 700, fontSize: 5 }}
+        >
           {props.plan.name}
         </Box>
       </Heading>

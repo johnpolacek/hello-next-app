@@ -65,6 +65,7 @@ export default (props) => {
         }}
       >
         <Button
+          className={"update-" + props.name}
           onClick={() => {
             if (props.link) {
               Router.push(props.link)

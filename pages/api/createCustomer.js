@@ -14,6 +14,7 @@ export default async (req, res) => {
       planName,
       planPrice,
       email,
+      stripeId,
     } = JSON.parse(req.body)
 
     try {
