@@ -18,7 +18,7 @@ describe("Account Page", () => {
       })
     })
 
-    it("can change plan", () => {
+    it("can change between paid plans", () => {
       cy.fixture("users").then((users) => {
         cy.login(users.paid.email, users.paid.password)
         cy.visit("/account")
