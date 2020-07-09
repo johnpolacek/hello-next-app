@@ -8,6 +8,8 @@ export default (props) => (
     {props.isCurrent && (
       <Box sx={{ mt: -5, mb: 3 }}>
         <Text
+          id="currentPlanLabel"
+          data-plan={props.name}
           sx={{
             py: 1,
             px: 3,

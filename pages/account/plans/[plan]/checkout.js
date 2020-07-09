@@ -4,6 +4,7 @@ import Layout from "../../../../components/layout/Layout"
 import appConfig from "../../../../app.config"
 import ChoosePlan from "../../../../components/ui/plans/ChoosePlan"
 import { findBySlug } from "../../../../lib/util"
+import getPlan from "../../../../lib/firebase/admin/getPlan"
 import Stripe from "stripe"
 import { parseCookies, setCookie } from "nookies"
 import { loadStripe } from "@stripe/stripe-js"
@@ -15,13 +16,21 @@ const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY_TEST)
 const UserPlanPage = (props) => (
   <Layout
     url="/"
-    title={appConfig.name + " | " + props.plan.name + " Plan"}
+    title={appConfig.name + " | " + props.newPlan.name + " Plan"}
     description={
-      "Purchase the " + appConfig.name + " " + props.plan.name + " Plan"
+      "Purchase the " + appConfig.name + " " + props.newPlan.name + " Plan"
     }
+    user={props.user}
   >
     <Elements stripe={stripePromise}>
-      <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />
+      {props.currPlan && props.currPlan.subscription && (
+        <CheckoutForm
+          user={props.user}
+          plan={props.newPlan}
+          subscriptionId={props.currPlan.subscription}
+          paymentIntent={props.paymentIntent}
+        />
+      )}
     </Elements>
   </Layout>
 )
@@ -38,22 +47,14 @@ export const getServerSideProps = withSession(async (ctx) => {
     return
   } else {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST)
-    let plan = findBySlug(appConfig.plans, "name", ctx.params.plan)
+    let newPlan = findBySlug(appConfig.plans, "name", ctx.params.plan)
     let paymentIntent
     const { paymentIntentId } = await parseCookies(ctx)
 
-    plan.id =
-      process.env.NODE_ENV === "development" ? plan.planIdTest : plan.planId
-
-    if (paymentIntentId) {
-      paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId)
-      return {
-        props: {
-          paymentIntent,
-          plan,
-        },
-      }
-    }
+    newPlan.id =
+      process.env.NODE_ENV === "development"
+        ? newPlan.planIdTest
+        : newPlan.planId
 
     paymentIntent = await stripe.paymentIntents.create({
       amount: 1000,
@@ -62,12 +63,16 @@ export const getServerSideProps = withSession(async (ctx) => {
 
     setCookie(ctx, "paymentIntentId", paymentIntent.id)
 
-    return {
-      props: {
-        paymentIntent,
-        plan,
-      },
-    }
+    return await getPlan(user.uid).then((currPlan) => {
+      return {
+        props: {
+          paymentIntent,
+          currPlan,
+          user,
+          newPlan,
+        },
+      }
+    })
   }
 })
 

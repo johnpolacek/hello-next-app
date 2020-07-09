@@ -87,7 +87,7 @@ export default (props) => {
               })
             }}
           />
-          <DataRow link="/account/plan" label="Plan">
+          <DataRow link="/account/plan" name="plan" label="Plan">
             {plan.price > 0 ? (
               <Box>
                 <Text as="span">{plan.name} </Text>
@@ -102,7 +102,7 @@ export default (props) => {
             )}
           </DataRow>
           {plan.price > 0 && plan.isMonthly && (
-            <DataRow link="/account/billing" label="Billing">
+            <DataRow link="/account/billing" name="billing" label="Billing">
               <Text
                 as="span"
                 sx={{
