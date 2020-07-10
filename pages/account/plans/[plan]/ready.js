@@ -4,15 +4,8 @@ import Layout from "../../../../components/layout/Layout"
 import appConfig from "../../../../app.config"
 import { findBySlug } from "../../../../lib/util"
 import getPlan from "../../../../lib/firebase/admin/getPlan"
-import Stripe from "stripe"
-import { parseCookies, setCookie } from "nookies"
-import { loadStripe } from "@stripe/stripe-js"
-import { Elements } from "@stripe/react-stripe-js"
-import CheckoutForm from "../../../../components/ui/forms/CheckoutForm"
 
-const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY_TEST)
-
-const CheckoutPlanPage = (props) => {
+const ChangeToFreePlanPage = (props) => {
   const subscriptionId =
     props.currPlan && props.currPlan.subscription
       ? props.currPlan.subscription
@@ -26,14 +19,9 @@ const CheckoutPlanPage = (props) => {
       }
       user={props.user}
     >
-      <Elements stripe={stripePromise}>
-        <CheckoutForm
-          user={props.user}
-          plan={props.newPlan}
-          subscriptionId={subscriptionId}
-          paymentIntent={props.paymentIntent}
-        />
-      </Elements>
+      <div>
+        Downgrade to free plan stuff here... subscription id: {subscriptionId}
+      </div>
     </Layout>
   )
 }
@@ -49,28 +37,11 @@ export const getServerSideProps = withSession(async (ctx) => {
     res.end()
     return
   } else {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST)
-    let newPlan = findBySlug(appConfig.plans, "name", ctx.params.plan)
-    let paymentIntent
-    const { paymentIntentId } = await parseCookies(ctx)
-
-    newPlan.id =
-      process.env.NODE_ENV === "development"
-        ? newPlan.planIdTest
-        : newPlan.planId
-
-    paymentIntent = await stripe.paymentIntents.create({
-      amount: 1000,
-      currency: "usd",
-    })
-
-    setCookie(ctx, "paymentIntentId", paymentIntent.id)
-
     return await getPlan(user.uid).then((currPlan) => {
       console.log("currPlan", currPlan)
+      let newPlan = findBySlug(appConfig.plans, "name", ctx.params.plan)
       return {
         props: {
-          paymentIntent,
           currPlan,
           user,
           newPlan,
@@ -80,4 +51,4 @@ export const getServerSideProps = withSession(async (ctx) => {
   }
 })
 
-export default CheckoutPlanPage
+export default ChangeToFreePlanPage
