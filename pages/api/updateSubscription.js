@@ -23,9 +23,10 @@ export default async (req, res) => {
           `updateSubscription getPlan: ${JSON.stringify({ currPlanData })}`
         )
 
-      const currSubscription = await stripe.subscriptions.retrieve(
-        subscriptionId
-      )
+      const currSubscription =
+        subscriptionId === 0
+          ? false
+          : await stripe.subscriptions.retrieve(subscriptionId)
 
       debug &&
         console.log(
@@ -34,10 +35,15 @@ export default async (req, res) => {
           })}`
         )
 
-      const itemIdToDelete = currSubscription.items.data[0].id
+      let subscriptionItems = [{ plan: planId }]
+
+      if (currSubscription) {
+        const itemIdToDelete = currSubscription.items.data[0].id
+        subscriptionItems.push({ id: itemIdToDelete, deleted: true })
+      }
 
       const subscription = await stripe.subscriptions.update(subscriptionId, {
-        items: [{ plan: planId }, { id: itemIdToDelete, deleted: true }],
+        items: subscriptionItems,
         expand: ["latest_invoice.payment_intent"],
       })
 
