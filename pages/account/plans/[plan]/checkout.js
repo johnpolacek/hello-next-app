@@ -13,27 +13,31 @@ import CheckoutForm from "../../../../components/ui/forms/CheckoutForm"
 
 const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY_TEST)
 
-const UserPlanPage = (props) => (
-  <Layout
-    url="/"
-    title={appConfig.name + " | " + props.newPlan.name + " Plan"}
-    description={
-      "Purchase the " + appConfig.name + " " + props.newPlan.name + " Plan"
-    }
-    user={props.user}
-  >
-    <Elements stripe={stripePromise}>
-      {props.currPlan && props.currPlan.subscription && (
+const UserPlanPage = (props) => {
+  const subscriptionId =
+    props.currPlan && props.currPlan.subscription
+      ? props.currPlan.subscription
+      : 0
+  return (
+    <Layout
+      url="/"
+      title={appConfig.name + " | " + props.newPlan.name + " Plan"}
+      description={
+        "Purchase the " + appConfig.name + " " + props.newPlan.name + " Plan"
+      }
+      user={props.user}
+    >
+      <Elements stripe={stripePromise}>
         <CheckoutForm
           user={props.user}
           plan={props.newPlan}
-          subscriptionId={props.currPlan.subscription}
+          subscriptionId={subscriptionId}
           paymentIntent={props.paymentIntent}
         />
-      )}
-    </Elements>
-  </Layout>
-)
+      </Elements>
+    </Layout>
+  )
+}
 
 export const getServerSideProps = withSession(async (ctx) => {
   const req = ctx.req
@@ -64,6 +68,7 @@ export const getServerSideProps = withSession(async (ctx) => {
     setCookie(ctx, "paymentIntentId", paymentIntent.id)
 
     return await getPlan(user.uid).then((currPlan) => {
+      console.log("currPlan", currPlan)
       return {
         props: {
           paymentIntent,
