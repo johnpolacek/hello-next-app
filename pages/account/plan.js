@@ -3,9 +3,9 @@ import withSession from "../../lib/session"
 import appConfig from "../../app.config"
 import getPlan from "../../lib/firebase/admin/getPlan"
 import Layout from "../../components/layout/Layout"
-import Plan from "../../components/views/Plan"
+import ManagePlan from "../../components/views/ManagePlan"
 
-const PlanPage = (props) => {
+const ManagePlanPage = (props) => {
   console.log("PlanPage props.plan", props.plan)
   return (
     <Layout
@@ -14,7 +14,7 @@ const PlanPage = (props) => {
       description={"Update your " + appConfig.name + " plan"}
       user={props.user}
     >
-      {props.user && props.plan && <Plan {...props} />}
+      {props.user && props.plan && <ManagePlan {...props} />}
     </Layout>
   )
 }
@@ -35,4 +35,4 @@ export const getServerSideProps = withSession(async function ({ req, res }) {
   }
 })
 
-export default PlanPage
+export default ManagePlanPage

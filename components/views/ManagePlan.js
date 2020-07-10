@@ -5,7 +5,7 @@ import appConfig from "../../app.config"
 import { stringToSlug, findBySlug } from "../../lib/util"
 import Pricing from "../ui/plans/Pricing"
 
-export default (props) => {
+const ManagePlan = (props) => {
   console.log("Plan props.plan.name", props.plan.name)
 
   const plan = findBySlug(
@@ -47,3 +47,5 @@ export default (props) => {
     </Box>
   )
 }
+
+export default ManagePlan
