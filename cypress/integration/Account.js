@@ -29,7 +29,7 @@ describe("Account Page", () => {
         cy.get("#currentPlanName").contains("Pro").should("be.visible")
 
         cy.get("a[href='./plans/premium/checkout']").click()
-        cy.get("#checkoutPlanName").contains("Premium").should("be.visible")
+        cy.get("#planSelectedName").contains("Premium").should("be.visible")
 
         cy.fillOutCreditCardForm()
         cy.get("button").contains("Pay $200").click()
@@ -52,7 +52,7 @@ describe("Account Page", () => {
         cy.get("#currentPlanName").contains("Premium").should("be.visible")
 
         cy.get("a[href='./plans/pro/checkout']").click()
-        cy.get("#checkoutPlanName").contains("Pro").should("be.visible")
+        cy.get("#planSelectedName").contains("Pro").should("be.visible")
 
         cy.fillOutCreditCardForm()
         cy.get("button").contains("Pay $100").click()
