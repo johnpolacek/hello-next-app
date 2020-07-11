@@ -90,5 +90,54 @@ describe("Account Page", () => {
         cy.canChangePassword(users.free)
       })
     })
+
+    it("can upgrade to paid account and back", () => {
+      cy.fixture("users").then((users) => {
+        cy.login(users.free.email, users.free.password)
+        cy.visit("/account")
+
+        cy.get(".update-plan").click()
+        cy.wait(2000)
+        cy.get("h2").contains("Manage Plan").should("be.visible")
+        cy.get("#currentPlanName").contains("Starter").should("be.visible")
+
+        cy.get("a[href='./plans/pro/checkout']").click()
+        cy.get("#planSelectedName").contains("Pro").should("be.visible")
+
+        cy.fillOutCreditCardForm()
+        cy.get("button").contains("Pay $100").click()
+
+        cy.wait(8000)
+        cy.get("h2").contains("All Set!").should("be.visible")
+
+        // then view account page
+        cy.get("a").contains("View Account Page").click()
+        cy.get("h2").contains("Your Account").should("be.visible")
+
+        // Verify account details
+        cy.get("label").contains("Plan").should("be.visible")
+        cy.get("div").contains("Pro").should("be.visible")
+        cy.get("label").contains("Billing").should("be.visible")
+
+        cy.get(".update-plan").click()
+        cy.wait(2000)
+        cy.get("h2").contains("Manage Plan").should("be.visible")
+        cy.get("#currentPlanName").contains("Pro").should("be.visible")
+
+        cy.get("a[href='./plans/starter/ready']").click()
+        cy.wait(2000)
+
+        cy.get("button").contains("Yes, downgrade").click()
+        cy.wait(8000)
+
+        cy.get("h2").contains("All Set!").should("be.visible")
+        cy.get("a").contains("View Account Page").click()
+        cy.get("h2").contains("Your Account").should("be.visible")
+
+        // Verify account details
+        cy.get("label").contains("Plan").should("be.visible")
+        cy.get("div").contains("Starter").should("be.visible")
+      })
+    })
   })
 })
