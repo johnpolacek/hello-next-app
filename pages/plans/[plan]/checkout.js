@@ -49,18 +49,27 @@ export const getServerSideProps = async (ctx) => {
   }
 }
 
-const PlanCheckoutPage = (props) => (
-  <Layout
-    url="/"
-    title={appConfig.name + " | " + props.plan.name + " Plan"}
-    description={
-      "Purchase the " + appConfig.name + " " + props.plan.name + " Plan"
-    }
-  >
-    <Elements stripe={stripePromise}>
-      <CheckoutForm plan={props.plan} paymentIntent={props.paymentIntent} />
-    </Elements>
-  </Layout>
-)
+const PlanCheckoutPage = (props) => {
+  const { accountEmail, uid } = parseCookies()
+  const user = { uid, email: accountEmail }
+
+  return (
+    <Layout
+      url="/"
+      title={appConfig.name + " | " + props.plan.name + " Plan"}
+      description={
+        "Purchase the " + appConfig.name + " " + props.plan.name + " Plan"
+      }
+    >
+      <Elements stripe={stripePromise}>
+        <CheckoutForm
+          user={user}
+          plan={props.plan}
+          paymentIntent={props.paymentIntent}
+        />
+      </Elements>
+    </Layout>
+  )
+}
 
 export default PlanCheckoutPage
