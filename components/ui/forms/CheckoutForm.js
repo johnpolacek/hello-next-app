@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Router from "next/router"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
+import { parseCookies } from "nookies"
 import theme from "../../theme"
 import { stringToSlug } from "../../../lib/util"
 import { Box } from "theme-ui"
@@ -13,6 +14,10 @@ const CheckoutForm = ({ paymentIntent, plan, user, subscriptionId }) => {
   const [checkoutError, setCheckoutError] = useState(null)
   const [checkoutSuccess, setCheckoutSuccess] = useState(null)
   const [subscription, setSubscription] = useState(null)
+
+  console.log("CheckoutForm user", user)
+
+  // const { accountEmail, uid } = parseCookies()
 
   const handleSubmit = async () => {
     try {

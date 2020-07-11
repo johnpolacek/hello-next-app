@@ -4,7 +4,7 @@ import Stripe from "stripe"
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST)
 
 export default async (req, res) => {
-  const debug = false
+  const debug = true
 
   if (req.method === "POST") {
     const {
@@ -14,7 +14,6 @@ export default async (req, res) => {
       planName,
       planPrice,
       email,
-      stripeId,
     } = JSON.parse(req.body)
 
     try {
@@ -80,7 +79,7 @@ export default async (req, res) => {
             .substr(2),
       }
 
-      const setPlanResult = await setPlan(userPlanId, planData)
+      const setPlanResult = await setPlan(userPlanId, uid, planData)
       debug &&
         console.log(
           `createCustomer: Successfully set plan data: ${JSON.stringify(
