@@ -50,25 +50,22 @@ export default async (req, res) => {
       debug &&
         console.log(`updateSubscription: Successfully updated subscription`)
 
-      const newPlanData =
-        planId === 0
-          ? { id: 0 }
-          : {
-              price: planPrice,
-              name: planName,
-              id: planId,
-              subscription: subscription.id,
-              last4: currPlanData.last4,
-              network: currPlanData.network,
-              expires: currPlanData.expires,
-            }
+      const newPlanData = {
+        price: planPrice,
+        name: planName,
+        id: planId,
+        subscription: subscription.id,
+        last4: currPlanData.last4,
+        network: currPlanData.network,
+        expires: currPlanData.expires,
+      }
 
       debug &&
         console.log(
           `updateSubscription new planData:: ${JSON.stringify(newPlanData)}`
         )
 
-      const setPlanResult = await setPlan(currPlanData.id, uid, newPlanData)
+      const setPlanResult = await setPlan(currPlanData.id, newPlanData)
       debug &&
         console.log(
           `updateSubscription: Successfully set plan data: ${JSON.stringify(
