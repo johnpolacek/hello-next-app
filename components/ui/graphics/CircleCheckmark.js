@@ -16,6 +16,7 @@ export default (props) => (
       height: "42px",
       mt: -3,
       mb: 2,
+      lineHeight: 1.48,
     }}
   >
     ✓
