@@ -4,6 +4,7 @@ import Layout from "../../../../components/layout/Layout"
 import appConfig from "../../../../app.config"
 import { findBySlug } from "../../../../lib/util"
 import getPlan from "../../../../lib/firebase/admin/getPlan"
+import ConfirmDowngradePlan from "../../../../components/ui/plans/ConfirmDowngradePlan"
 
 const ChangeToFreePlanPage = (props) => {
   const subscriptionId =
@@ -13,15 +14,21 @@ const ChangeToFreePlanPage = (props) => {
   return (
     <Layout
       url="/"
-      title={appConfig.name + " | " + props.newPlan.name + " Plan"}
+      title={appConfig.name + " | Downgrade Plan"}
       description={
-        "Purchase the " + appConfig.name + " " + props.newPlan.name + " Plan"
+        "Downgrade to the " +
+        appConfig.name +
+        " " +
+        props.newPlan.name +
+        " Plan"
       }
       user={props.user}
     >
-      <div>
-        Downgrade to free plan stuff here... subscription id: {subscriptionId}
-      </div>
+      <ConfirmDowngradePlan
+        planId={props.currPlan.id}
+        subscriptionId={subscriptionId}
+        user={props.user}
+      />
     </Layout>
   )
 }
