@@ -1,5 +1,5 @@
 import React from "react"
-import withSession from "../../lib/session"
+import withSession from "../lib/session"
 import ResetPassword from "../components/views/ResetPassword"
 import appConfig from "../app.config"
 import Layout from "../components/layout/Layout"
