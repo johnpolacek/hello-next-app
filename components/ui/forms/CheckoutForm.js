@@ -3,9 +3,9 @@ import Router from "next/router"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import theme from "../../theme"
 import { stringToSlug } from "../../../lib/util"
-import { Box, Card, Heading, Text, Button } from "theme-ui"
+import { Box } from "theme-ui"
 import Form from "./Form"
-import CircleCheckmark from "../graphics/CircleCheckmark"
+import PlanSelected from "../plans/PlanSelected"
 
 const CheckoutForm = ({ paymentIntent, plan, user, subscriptionId }) => {
   const stripe = useStripe()
@@ -13,9 +13,6 @@ const CheckoutForm = ({ paymentIntent, plan, user, subscriptionId }) => {
   const [checkoutError, setCheckoutError] = useState(null)
   const [checkoutSuccess, setCheckoutSuccess] = useState(null)
   const [subscription, setSubscription] = useState(null)
-
-  console.log("CheckoutForm subscriptionId", subscriptionId)
-  console.log("CheckoutForm user", user)
 
   const handleSubmit = async () => {
     try {
@@ -92,19 +89,10 @@ const CheckoutForm = ({ paymentIntent, plan, user, subscriptionId }) => {
       onSubmit={handleSubmit}
       buttonText={"Pay $" + plan.price}
       error={checkoutError}
-      id="LoginForm"
+      id="CheckoutForm"
       minWidth="400px"
     >
-      <Box sx={{ textAlign: "center" }}>
-        <CircleCheckmark color="secondary" />
-        <Heading as="h3" variant="cardheading">
-          <Text sx={{ fontSize: 3, mb: -2 }}>You’ve selected </Text>
-          <Text id="checkoutPlanName" sx={{ fontSize: 8, fontWeight: 700 }}>
-            {plan.name}
-          </Text>
-        </Heading>
-      </Box>
-
+      <PlanSelected plan={plan.name} />
       <Box sx={theme.forms.input}>
         <CardElement
           options={{
