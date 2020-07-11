@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Box, Heading, Text, Button } from "theme-ui"
 import Link from "next/link"
 import ButtonLink from "../ui/nav/ButtonLink"
+import getToken from "../../lib/firebase/getToken"
 import cancelPlan from "../../lib/firebase/cancelPlan"
 import appConfig from "../../app.config"
 
@@ -10,16 +11,21 @@ export default (props) => {
   const [success, setSuccess] = useState(null)
 
   const onCancel = async () => {
-    const response = await cancelPlan(
-      props.plan.id,
-      props.plan.subscription,
-      props.AuthUserInfo.AuthUser.id
-    )
-    if (response.error) {
-      setError(response.error)
-    } else {
-      setSuccess(true)
-    }
+    getToken().then((res) => {
+      if (res.success) {
+        cancelPlan(props.planId, props.subscriptionId, props.user.uid).then(
+          (response) => {
+            if (response.error) {
+              setError(response.error)
+            } else {
+              setSuccess(true)
+            }
+          }
+        )
+      } else {
+        setError(res.error)
+      }
+    })
   }
 
   return (

@@ -1,17 +1,29 @@
 import Stripe from "stripe"
+import updateUserProperties from "../../lib/firebase/admin/updateUserProperties"
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST)
 
 export default async (req, res) => {
   if (req.method === "POST") {
-    const { planId, subscriptionId, userId } = JSON.parse(req.body)
-    const isValid = planId.split("-")[0] === userId
+    const { planId, subscriptionId, uid } = JSON.parse(req.body)
+    const isValid = planId.split("-")[0] === uid
 
     if (isValid) {
       try {
         stripe.subscriptions.del(subscriptionId, (err, confirmation) => {
           console.log("err", err)
           console.log("confirmation", confirmation)
-          res.status(200).json({ err, confirmation })
+
+          const userData = { plan: 0 }
+          const setUserResult = updateUserProperties(uid, userData).then(() => {
+            console.log(
+              `cancelSubscription: Successfully set user data: ${JSON.stringify(
+                userData
+              )}`
+            )
+
+            res.status(200).json({ err, confirmation })
+          })
         })
       } catch (e) {
         console.log(`create-customer:: Error: ${e.message}`)
