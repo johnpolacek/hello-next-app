@@ -65,7 +65,7 @@ export default async (req, res) => {
           `updateSubscription new planData:: ${JSON.stringify(newPlanData)}`
         )
 
-      const setPlanResult = await setPlan(currPlanData.id, newPlanData)
+      const setPlanResult = await setPlan(currPlanData.id, uid, newPlanData)
       debug &&
         console.log(
           `updateSubscription: Successfully set plan data: ${JSON.stringify(

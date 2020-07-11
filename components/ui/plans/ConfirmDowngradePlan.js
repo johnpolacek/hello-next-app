@@ -1,5 +1,7 @@
 import React, { useState } from "react"
+import Router from "next/router"
 import appConfig from "../../../app.config"
+import { stringToSlug } from "../../../lib/util"
 import { Box, Card, Text, Button } from "theme-ui"
 import PlanSelected from "./PlanSelected"
 import ButtonLink from "../nav/ButtonLink"
@@ -21,7 +23,10 @@ export default (props) => {
             if (response.error) {
               setError(response.error)
             } else {
-              alert("success")
+              const freePlan = appConfig.plans.filter((plan) => {
+                return plan.price === 0
+              })[0]
+              Router.push("/plans/" + stringToSlug(freePlan.name) + "/ready")
             }
           }
         )
