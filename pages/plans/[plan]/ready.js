@@ -16,7 +16,7 @@ const PlanReadyPage = (props) => {
       }
       user={props.user}
     >
-      <PlanSignupSuccess plan={props.plan} />
+      <PlanSignupSuccess user={props.user} plan={props.plan} />
     </Layout>
   )
 }
