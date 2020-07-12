@@ -16,13 +16,11 @@ const updateEmail = withSession(async (req, res) => {
       return res.status(200).json({ data })
     } else {
       stripe.customers.update(stripeId, { email }, async (err, customer) => {
-        console.log("stripe.customers.update err", err)
-        console.log("stripe.customers.update customer", customer)
         return res.status(200).json({ data })
       })
     }
   } catch (error) {
-    console.log("error", error)
+    console.error("error", error)
     return res.status(401).json({ result: "error" }, error)
   }
 })

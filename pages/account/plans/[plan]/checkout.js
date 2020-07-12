@@ -67,7 +67,6 @@ export const getServerSideProps = withSession(async (ctx) => {
     setCookie(ctx, "paymentIntentId", paymentIntent.id)
 
     return await getPlan(user.uid).then((currPlan) => {
-      console.log("currPlan", currPlan)
       return {
         props: {
           paymentIntent,

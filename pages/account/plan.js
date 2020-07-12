@@ -6,7 +6,6 @@ import Layout from "../../components/layout/Layout"
 import ManagePlan from "../../components/views/ManagePlan"
 
 const ManagePlanPage = (props) => {
-  console.log("PlanPage props.plan", props.plan)
   return (
     <Layout
       url="/"

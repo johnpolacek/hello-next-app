@@ -15,10 +15,6 @@ const CheckoutForm = ({ paymentIntent, plan, user, subscriptionId }) => {
   const [checkoutSuccess, setCheckoutSuccess] = useState(null)
   const [subscription, setSubscription] = useState(null)
 
-  console.log("CheckoutForm user", user)
-
-  // const { accountEmail, uid } = parseCookies()
-
   const handleSubmit = async () => {
     try {
       const result = await stripe.createPaymentMethod({
@@ -56,7 +52,6 @@ const CheckoutForm = ({ paymentIntent, plan, user, subscriptionId }) => {
       )
 
       const subscription = await response.json()
-      console.log("updateSubscription response", subscription)
       handleSubscription(subscription)
     }
   }

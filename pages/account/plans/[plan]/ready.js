@@ -45,7 +45,6 @@ export const getServerSideProps = withSession(async (ctx) => {
     return
   } else {
     return await getPlan(user.uid).then((currPlan) => {
-      console.log("currPlan", currPlan)
       let newPlan = findBySlug(appConfig.plans, "name", ctx.params.plan)
       return {
         props: {
