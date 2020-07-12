@@ -44,10 +44,8 @@ export default (props) => {
                           ? -1
                           : props.plan.stripeId,
                     }),
-                  }).then((res) => {
-                    res.json().then((data) => {
-                      window.location.reload()
-                    })
+                  }).then(() => {
+                    window.location.reload()
                   })
                 } else {
                   setError(res.error)
@@ -74,6 +72,8 @@ export default (props) => {
                       token: res.token,
                       password: newPassword,
                     }),
+                  }).then(() => {
+                    window.location.reload()
                   })
                 } else {
                   setError(res.error)
