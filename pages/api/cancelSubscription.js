@@ -11,8 +11,7 @@ export default async (req, res) => {
     if (isValid) {
       try {
         stripe.subscriptions.del(subscriptionId, (err, confirmation) => {
-          console.log("err", err)
-          console.log("confirmation", confirmation)
+          console.error("err", err)
 
           const userData = { plan: 0 }
           const setUserResult = updateUserProperties(uid, userData).then(() => {

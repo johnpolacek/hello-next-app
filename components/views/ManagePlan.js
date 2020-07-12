@@ -6,8 +6,6 @@ import { stringToSlug, findBySlug } from "../../lib/util"
 import Pricing from "../ui/plans/Pricing"
 
 const ManagePlan = (props) => {
-  console.log("Plan props.plan.name", props.plan.name)
-
   const plan = findBySlug(
     appConfig.plans,
     "name",

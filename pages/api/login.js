@@ -8,7 +8,7 @@ export default withSession(async (req, res) => {
     await req.session.save()
     res.json(user)
   } catch (error) {
-    console.log(error)
+    console.error(error)
     const { response: fetchResponse } = error
     res.status(fetchResponse?.status || 500)
     res.json(error.data)

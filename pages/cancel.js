@@ -3,7 +3,7 @@ import withSession from "../lib/session"
 import appConfig from "../app.config"
 import Layout from "../components/layout/Layout"
 import Cancel from "../components/views/Cancel"
-import getPlan from "../lib/firebase/getPlan"
+import getPlan from "../lib/firebase/admin/getPlan"
 
 const CancelPage = (props) => {
   return (

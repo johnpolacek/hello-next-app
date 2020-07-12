@@ -18,6 +18,30 @@ describe("Account Page", () => {
       })
     })
 
+    it("can change card on file", () => {
+      cy.fixture("users").then((users) => {
+        cy.login(users.paid.email, users.paid.password)
+        cy.visit("/account")
+        cy.get("h2").contains("Your Account").should("be.visible")
+        cy.get(".update-billing").click()
+        cy.wait(2000)
+        const newExp =
+          "12" + (new Date().getFullYear() + 2).toString().substring(2)
+        cy.getWithinIframe('[name="cardnumber"]').type("4242424242424242")
+        cy.wait(2000)
+        cy.getWithinIframe('[name="exp-date"]').type(newExp)
+        cy.wait(500)
+        cy.getWithinIframe('[name="cvc"]').type("987")
+        cy.wait(500)
+        cy.getWithinIframe('[name="postal"]').type("12345")
+        cy.get("button").contains("Update Card").click()
+
+        cy.wait(4000)
+        cy.get("h2").contains("Your Account").should("be.visible")
+        cy.get("span").contains(newExp).should("be.visible")
+      })
+    })
+
     it("can change between paid plans", () => {
       cy.fixture("users").then((users) => {
         cy.login(users.paid.email, users.paid.password)

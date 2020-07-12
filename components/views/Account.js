@@ -12,8 +12,6 @@ export default (props) => {
     ? findBySlug(appConfig.plans, "name", stringToSlug(props.plan.name))
     : appConfig.plans[0]
 
-  console.log("props.plan", props.plan)
-
   return (
     <Box
       id="accountInfo"
@@ -76,10 +74,6 @@ export default (props) => {
                       token: res.token,
                       password: newPassword,
                     }),
-                  }).then((res) => {
-                    res.json().then((data) => {
-                      console.log("success data", data)
-                    })
                   })
                 } else {
                   setError(res.error)
