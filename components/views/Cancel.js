@@ -13,7 +13,7 @@ export default (props) => {
   const onCancel = async () => {
     getToken().then((res) => {
       if (res.success) {
-        cancelPlan(props.planId, props.subscriptionId, props.user.uid).then(
+        cancelPlan(props.plan.id, props.plan.subscription, props.user.uid).then(
           (response) => {
             if (response.error) {
               setError(response.error)
@@ -41,7 +41,7 @@ export default (props) => {
           </ButtonLink>
           <Button
             onClick={onCancel}
-            sx={{ ml: 4, fontSize: 3 }}
+            sx={{ ml: 4, fontSize: 3, color: "white" }}
             variant="secondary"
           >
             Yes, Cancel Account
@@ -55,23 +55,8 @@ export default (props) => {
         </Heading>
       )}
       {success && (
-        <Heading variant="subhead">
-          Your account status has been set to cancelled.
-        </Heading>
+        <Heading variant="subhead">Your account has been cancelled.</Heading>
       )}
-      <Box
-        as="pre"
-        sx={{
-          my: 4,
-          bg: "black",
-          textAlign: "left",
-          opacity: 0.75,
-          width: "100%",
-          overflow: "scroll",
-        }}
-      >
-        <code>{JSON.stringify(props, null, 2)}</code>
-      </Box>
     </Box>
   )
 }
