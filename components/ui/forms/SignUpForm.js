@@ -70,7 +70,7 @@ export default () => {
           }
         })
         .catch((err) => {
-          console.error("SignupForm error")
+          setError(err.message)
         })
     } else {
       setError("Please agree to the terms and conditions to create an account.")
