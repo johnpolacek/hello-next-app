@@ -4,7 +4,12 @@ export default withSession(async (req, res) => {
   const { user } = await req.body
 
   try {
-    req.session.set("user", user)
+    req.session.set("user", {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      emailVerified: user.emailVerified,
+    })
     await req.session.save()
     res.json(user)
   } catch (error) {
