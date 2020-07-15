@@ -8,7 +8,11 @@ describe("Sign Up", () => {
       cy.get("input[name=password]").type("aa" + Math.random())
       cy.get("#SignupForm button").contains("Sign Up").click()
       cy.wait(4000)
-      cy.get("p").contains("Please agree to the terms and conditions to create an account.").should("be.visible")
+      cy.get("p")
+        .contains(
+          "Please agree to the terms and conditions to create an account."
+        )
+        .should("be.visible")
       cy.get("h2")
         .contains("Choose the plan that’s right for you")
         .should("not.be.visible")
