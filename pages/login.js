@@ -3,7 +3,7 @@ import Layout from "../components/layout/Layout"
 import LoginForm from "../components/ui/forms/LoginForm"
 import appConfig from "../app.config"
 
-export default () => {
+const LoginPage = () => {
   return (
     <Layout
       url="/"
@@ -14,3 +14,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default LoginPage

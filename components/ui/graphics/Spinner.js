@@ -1,6 +1,6 @@
 import { Box } from "theme-ui"
 
-export default (props) => (
+const Spinner = (props) => (
   <Box
     sx={{
       mt: "-12px",
@@ -10,3 +10,5 @@ export default (props) => (
     <img width="48" height="48" src="/spinner.svg" alt="Processing request" />
   </Box>
 )
+
+export default Spinner

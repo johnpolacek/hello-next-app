@@ -8,7 +8,7 @@ import ButtonLink from "../nav/ButtonLink"
 import getToken from "../../../lib/firebase/getToken"
 import cancelPlan from "../../../lib/firebase/cancelPlan"
 
-export default (props) => {
+const ConfirmDowngradePlan = (props) => {
   const [error, setError] = useState(null)
 
   const freePlan = appConfig.plans.filter((plan) => {
@@ -73,3 +73,5 @@ export default (props) => {
     </Card>
   )
 }
+
+export default ConfirmDowngradePlan

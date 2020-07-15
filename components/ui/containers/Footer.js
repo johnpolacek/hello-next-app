@@ -4,7 +4,7 @@ import { shade } from "@theme-ui/color"
 import appConfig from "../../../app.config.js"
 import { SocialIcon } from "react-social-icons"
 
-export default (props) => (
+const Footer = (props) => (
   <Box
     as="footer"
     sx={{
@@ -80,3 +80,5 @@ export default (props) => (
     </Flex>
   </Box>
 )
+
+export default Footer

@@ -1,7 +1,9 @@
 import Nav from "../nav/Nav"
 
-export default (props) => (
+const Header = (props) => (
   <header>
     <Nav />
   </header>
 )
+
+export default Header

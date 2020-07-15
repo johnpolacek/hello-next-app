@@ -3,7 +3,7 @@ import Link from "next/link"
 import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
 
-export default (props) => (
+const About = (props) => (
   <Box sx={{ textAlign: "center", width: "100%", color: "white" }}>
     <Heading variant="headline">About {appConfig.name}</Heading>
     <Heading variant="subhead">
@@ -13,3 +13,5 @@ export default (props) => (
     </Heading>
   </Box>
 )
+
+export default About

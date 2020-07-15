@@ -5,7 +5,7 @@ import appConfig from "../../app.config"
 import loginWithEmail from "../../lib/firebase/loginWithEmail"
 import ResetPasswordForm from "../ui/forms/ResetPasswordForm"
 
-export default (props) => {
+const ResetPassword = (props) => {
   const isReady = typeof window !== "undefined"
 
   useEffect(() => {
@@ -16,3 +16,5 @@ export default (props) => {
 
   return <>{props.isSignedIn && <ResetPasswordForm />}</>
 }
+
+export default ResetPassword

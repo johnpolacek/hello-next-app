@@ -3,7 +3,7 @@ import appConfig from "../../../app.config"
 import ButtonLink from "../nav/ButtonLink"
 import { stringToSlug } from "../../../lib/util"
 
-export default (props) => (
+const PricingPlan = (props) => (
   <Card sx={{ width: "340px", m: 3, p: 4 }}>
     {props.isCurrent && (
       <Box sx={{ mt: -5, mb: 3 }}>
@@ -108,3 +108,5 @@ export default (props) => (
     </Box>
   </Card>
 )
+
+export default PricingPlan

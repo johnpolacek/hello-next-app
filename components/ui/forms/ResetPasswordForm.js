@@ -10,7 +10,7 @@ import Form from "./Form"
 // Init the Firebase app.
 initFirebase()
 
-export default () => {
+const ResetPasswordForm = () => {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -56,3 +56,5 @@ export default () => {
     </Flex>
   )
 }
+
+export default ResetPasswordForm

@@ -1,6 +1,6 @@
 import { Box } from "theme-ui"
 
-export default (props) => {
+const Container = (props) => {
   return (
     <Box
       sx={{
@@ -16,3 +16,5 @@ export default (props) => {
     />
   )
 }
+
+export default Container

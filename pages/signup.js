@@ -3,7 +3,7 @@ import Layout from "../components/layout/Layout"
 import SignUpForm from "../components/ui/forms/SignUpForm"
 import appConfig from "../app.config"
 
-export default () => {
+const SignUpPage = () => {
   return (
     <Layout
       url="/"
@@ -14,3 +14,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default SignUpPage

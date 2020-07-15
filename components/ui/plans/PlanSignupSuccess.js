@@ -3,7 +3,7 @@ import ButtonLink from "../nav/ButtonLink"
 import appConfig from "../../../app.config"
 import PricingPlan from "./PricingPlan"
 
-export default (props) => (
+const PlanSignupSuccess = (props) => (
   <Box
     sx={{
       textAlign: "center",
@@ -32,3 +32,5 @@ export default (props) => (
     </Box>
   </Box>
 )
+
+export default PlanSignupSuccess

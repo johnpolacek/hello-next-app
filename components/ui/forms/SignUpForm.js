@@ -20,7 +20,7 @@ const LoginLink = () => (
   </Text>
 )
 
-export default () => {
+const SignUpForm = () => {
   const [email, setEmail] = useState("")
   const [error, setError] = useState("")
   const [password, setPassword] = useState("")
@@ -118,3 +118,7 @@ export default () => {
     </Form>
   )
 }
+
+
+
+export default SignUpForm

@@ -6,7 +6,7 @@ import getToken from "../../lib/firebase/getToken"
 import cancelPlan from "../../lib/firebase/cancelPlan"
 import appConfig from "../../app.config"
 
-export default (props) => {
+const Cancel = (props) => {
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
 
@@ -60,3 +60,5 @@ export default (props) => {
     </Box>
   )
 }
+
+export default Cancel

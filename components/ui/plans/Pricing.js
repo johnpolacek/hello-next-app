@@ -2,7 +2,7 @@ import { Flex } from "theme-ui"
 import appConfig from "../../../app.config"
 import PricingPlan from "./PricingPlan"
 
-export default (props) => (
+const Pricing = (props) => (
   <Flex sx={{ flexWrap: "wrap", width: "100%", justifyContent: "center" }}>
     {appConfig.plans.map((plan, index) => (
       <PricingPlan
@@ -14,3 +14,5 @@ export default (props) => (
     ))}
   </Flex>
 )
+
+export default Pricing

@@ -3,7 +3,7 @@ import Link from "next/link"
 import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
 
-export default (props) => (
+const Demo = (props) => (
   <Box sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
     <Heading as="h1">{appConfig.name} Demo</Heading>
     <iframe
@@ -23,3 +23,5 @@ export default (props) => (
     </ButtonLink>
   </Box>
 )
+
+export default Demo

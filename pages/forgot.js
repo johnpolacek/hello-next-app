@@ -3,7 +3,7 @@ import Layout from "../components/layout/Layout"
 import ForgotPassword from "../components/views/ForgotPassword"
 import appConfig from "../app.config"
 
-export default () => {
+const ForgotPage = () => {
   return (
     <Layout
       url="/"
@@ -18,3 +18,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default ForgotPage
