@@ -3,7 +3,7 @@ import Link from "next/link"
 import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
 
-export default (props) => (
+const Index = (props) => (
   <Box sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
     {props.isSignedIn ? (
       <Text as="p">Signed In View of App</Text>
@@ -31,3 +31,5 @@ export default (props) => (
     )}
   </Box>
 )
+
+export default Index

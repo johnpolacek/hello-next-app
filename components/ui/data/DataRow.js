@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Flex, Box, Text, Button, Label, Input } from "theme-ui"
 import Router from "next/router"
 
-export default (props) => {
+const DataRow = (props) => {
   const [isEditing, setIsEditing] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [dataValue, setDataValue] = useState(props.value)
@@ -91,3 +91,5 @@ export default (props) => {
     </Flex>
   )
 }
+
+export default DataRow

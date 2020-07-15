@@ -2,7 +2,7 @@ import Layout from "../../components/layout/Layout"
 import appConfig from "../../app.config"
 import ChoosePlan from "../../components/ui/plans/ChoosePlan"
 
-export default (props) => (
+const PlansPage = () => (
   <Layout
     url="/"
     title={appConfig.name + " | Plans"}
@@ -12,3 +12,5 @@ export default (props) => (
     <ChoosePlan />
   </Layout>
 )
+
+export default PlansPage

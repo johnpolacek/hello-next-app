@@ -3,7 +3,7 @@ import { jsx } from "theme-ui"
 import NavLink from "./NavLink"
 import appConfig from "../../../app.config"
 
-export default (props) => (
+const NavHome = (props) => (
   <NavLink href="/">
     <h1
       sx={{
@@ -32,3 +32,5 @@ export default (props) => (
     </h1>
   </NavLink>
 )
+
+export default NavHome

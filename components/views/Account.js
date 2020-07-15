@@ -6,7 +6,7 @@ import appConfig from "../../app.config"
 import { stringToSlug, findBySlug } from "../../lib/util"
 import getToken from "../../lib/firebase/getToken"
 
-export default (props) => {
+const Account = (props) => {
   const [error, setError] = useState("")
   const plan = props.plan
     ? findBySlug(appConfig.plans, "name", stringToSlug(props.plan.name))
@@ -133,3 +133,5 @@ export default (props) => {
     </Box>
   )
 }
+
+export default Account

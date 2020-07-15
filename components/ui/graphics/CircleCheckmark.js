@@ -1,6 +1,6 @@
 import { Box } from "theme-ui"
 
-export default (props) => (
+const CircleCheckmark = (props) => (
   <Box
     sx={{
       color: props.color || "primary",
@@ -22,3 +22,5 @@ export default (props) => (
     ✓
   </Box>
 )
+
+export default CircleCheckmark

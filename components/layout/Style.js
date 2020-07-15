@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui"
 import theme from "../theme"
 
-export default (props) => (
+const Style = (props) => (
   <style jsx global>{`
     button,
     hr,
@@ -197,3 +197,5 @@ export default (props) => (
     }
   `}</style>
 )
+
+export default Style

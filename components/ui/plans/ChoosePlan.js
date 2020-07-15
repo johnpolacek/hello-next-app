@@ -3,7 +3,7 @@ import { Box, Heading } from "theme-ui"
 import Pricing from "./Pricing"
 import appConfig from "../../../app.config"
 
-export default (props) => {
+const ChoosePlan = (props) => {
   const subhead =
     appConfig.trial && appConfig.trial !== ""
       ? "All plans come with a free " + appConfig.trial + " trial."
@@ -21,3 +21,5 @@ export default (props) => {
     </Box>
   )
 }
+
+export default ChoosePlan

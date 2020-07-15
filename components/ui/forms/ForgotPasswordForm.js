@@ -3,7 +3,7 @@ import reset from "../../../lib/firebase/reset"
 import Form from "./Form"
 import { Label, Input } from "theme-ui"
 
-export default (props) => {
+const ForgotPasswordForm = (props) => {
   const [email, setEmail] = useState("")
 
   const handleSubmit = async () => {
@@ -28,3 +28,5 @@ export default (props) => {
     </Form>
   )
 }
+
+export default ForgotPasswordForm

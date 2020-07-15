@@ -1,6 +1,6 @@
 import { Flex } from "theme-ui"
 
-export default (props) => {
+const Main = (props) => {
   return (
     <Flex
       as="main"
@@ -15,3 +15,5 @@ export default (props) => {
     />
   )
 }
+
+export default Main
