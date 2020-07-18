@@ -23,8 +23,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# wip notes
+# wip notes, alt app configs
 _WIP.md
+_app.config
 
 # Local dotenv files.
 .env.*build
