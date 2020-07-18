@@ -27,7 +27,8 @@ describe("Account Page", () => {
         cy.wait(4000)
         const newExp =
           "12" + (new Date().getFullYear() + 2).toString().substring(2)
-        const newExpDisplay = "12/" + (new Date().getFullYear() + 2).toString().substring(2)
+        const newExpDisplay =
+          "12/" + (new Date().getFullYear() + 2).toString().substring(2)
         cy.getWithinIframe('[name="cardnumber"]').type("4242424242424242")
         cy.wait(4000)
         cy.getWithinIframe('[name="exp-date"]').type(newExp)
