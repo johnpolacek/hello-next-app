@@ -55,6 +55,9 @@ const Footer = (props) => (
         <NextLink href="./docs" passHref>
           <Link variant="footer">Documentation</Link>
         </NextLink>
+        <NextLink href="./store" passHref>
+          <Link variant="footer">Store</Link>
+        </NextLink>
         <NextLink href="./plans" passHref>
           <Link variant="footer">Pricing</Link>
         </NextLink>
