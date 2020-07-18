@@ -8,33 +8,31 @@ module.exports = {
   // if you wish to add google analytics, add your code here
   analytics: "YOUR_GA_CODE_HERE",
   // name : appears in page titles, header nav
-  name: "Your App",
+  name: "Hello Next App",
   // company : appears in footer
   company: {
-    name: "Your Company",
+    name: "Hello Next App",
     description:
-      "Short description to explain the purpose of your company and the things you stand for.",
+      "Helping you get from zero to production-ready serverless web app.",
   },
   // shortDescription : appears in landing page title
-  shortDescription: "Very Short App Description",
+  shortDescription: "Next.js Web App Template",
   // longDescription : appears in landing page meta description
   longDescription:
-    "Longer description of your app that will appear in search engine results and when people post links to your site on social media.",
+    "Web App Project Template for building application websites with the Next.js Framework, a Firebase Serverless Backend, Theme UI Components and more.",
   // headline: appears as landing page headline
-  headline: "High Converting Headline Goes Here",
+  headline: "From Zero to Web App",
   // subhead: appears below the landing page headline
   subhead:
-    "Subhead copy that explains the features and benefits of your app to your audience of potential users and captures their interest to get them to sign up or find out more.",
+    "Launch your next web application with serverless backend, user authentication, automated testing, Stripe integration, a custom design theme and more.",
   // contact appears in the privacy policy page
-  contact: "contact@yourappdomain.com",
+  contact: "support@hellonextapp.com",
   // support appears when errors happen
-  support: "support@yourappdomain.com",
+  support: "support@hellonextapp.com",
   // add all your social links, will get added automatically as long as they are supported by react-social-icons https://jaketrent.github.io/react-social-icons/
   social: [
-    "https://twitter.com/vercel",
-    "https://www.linkedin.com/company/vercel-llc/",
-    "https://www.facebook.com/zeitcompany/",
-    "https://github.com/zeit",
+    "https://twitter.com/johnpolacek",
+    "https://github.com/johnpolacek",
   ],
   // plans appears on pricing page and in account creation flow
   // assumes $ / month
