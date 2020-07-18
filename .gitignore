@@ -25,7 +25,7 @@ yarn-error.log*
 
 # wip notes, alt app configs
 _WIP.md
-_app.config
+_app.config*
 
 # Local dotenv files.
 .env.*build
