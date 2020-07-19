@@ -12,8 +12,7 @@ module.exports = {
   // company : appears in footer
   company: {
     name: "Hello Next App",
-    description:
-      "Helping you get from zero to production-ready serverless web app.",
+    description: "Helping you go from zero to production-ready web app.",
   },
   // shortDescription : appears in landing page title
   shortDescription: "Next.js Web App Template",
@@ -21,18 +20,23 @@ module.exports = {
   longDescription:
     "Web App Project Template for building application websites with the Next.js Framework, a Firebase Serverless Backend, Theme UI Components and more.",
   // headline: appears as landing page headline
-  headline: "From Zero to Web App",
+  headline: "High Converting Headline Goes Here",
   // subhead: appears below the landing page headline
   subhead:
-    "Launch your next web application with serverless backend, user authentication, automated testing, Stripe integration, a custom design theme and more.",
+    "Subhead copy that explains the features and benefits of your app to your audience of potential users and captures their interest to get them to sign up or find out more.",
   // contact appears in the privacy policy page
-  contact: "support@hellonextapp.com",
+  contact: "contact@yourappdomain.com",
   // support appears when errors happen
-  support: "support@hellonextapp.com",
+  support: "support@yourappdomain.com",
   // add all your social links, will get added automatically as long as they are supported by react-social-icons https://jaketrent.github.io/react-social-icons/
-  social: ["https://twitter.com/johnpolacek", "https://github.com/johnpolacek"],
+  social: [
+    "https://twitter.com/vercel",
+    "https://www.linkedin.com/company/vercel-llc/",
+    "https://www.facebook.com/zeitcompany/",
+    "https://github.com/zeit",
+  ],
   // use this to add a demo section to the site
-  // demo: "https://player.vimeo.com/video/330041609",
+  demo: "https://player.vimeo.com/video/330041609",
   // use this to add a link on the landing page to a product on gumroad
   gumroad: "https://gum.co/vUpFK",
   // plans appears on pricing page and in account creation flow
