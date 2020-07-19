@@ -4,7 +4,7 @@ import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
 
 const Index = (props) => (
-  <Box sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
+  <Box sx={{ textAlign: "center", width: "100%", color: "white", py: 5 }}>
     {props.isSignedIn ? (
       <Text as="p">Signed In View of App</Text>
     ) : (
@@ -15,7 +15,7 @@ const Index = (props) => (
         <Heading as="h2" variant="subhead">
           {appConfig.subhead}
         </Heading>
-        <Box>
+        <Box sx={{pb: 5}}>
           <Box sx={{ display: "inline-block", mx: 3 }}>
             <ButtonLink fontSize={4} bg="secondary" href="/signup">
               Create Account
