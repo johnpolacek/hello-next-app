@@ -26,10 +26,12 @@ const ButtonLink = (props) => {
     cursor: "pointer",
     display: "inline-block",
   }
-  return (
+  return props.href.includes("http") ? (
     <Link href={props.href} passHref>
       <A styles={styles}>{props.children}</A>
     </Link>
+  ) : (
+    <A styles={styles}>{props.children}</A>
   )
 }
 
