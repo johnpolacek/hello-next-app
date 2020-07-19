@@ -2,7 +2,6 @@ import appConfig from "../../app.config"
 import { Box, Heading, Text } from "theme-ui"
 import Link from "next/link"
 import ButtonLink from "../ui/nav/ButtonLink"
-import appConfig from "../../app.config"
 
 const Demo = (props) => (
   <Box sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
