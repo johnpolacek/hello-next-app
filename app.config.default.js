@@ -12,8 +12,7 @@ module.exports = {
   // company : appears in footer
   company: {
     name: "Hello Next App",
-    description:
-      "Helping you go from zero to production-ready web app.",
+    description: "Helping you go from zero to production-ready web app.",
   },
   // shortDescription : appears in landing page title
   shortDescription: "Next.js Web App Template",
