@@ -18,7 +18,7 @@ const Index = (props) => (
         <Box>
           <Box sx={{ display: "inline-block", mx: 3 }}>
             <ButtonLink fontSize={4} bg="red" href="/signup">
-              Get Started
+              Create Account
             </ButtonLink>
           </Box>
           <Box sx={{ display: "inline-block", mx: 3 }}>
