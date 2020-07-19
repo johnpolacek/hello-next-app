@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx, Box, Heading, Text } from "theme-ui"
+import { Box, Heading, Text } from "theme-ui"
 import Link from "next/link"
 import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
@@ -26,14 +25,13 @@ const Index = (props) => (
             <Box sx={{ display: "inline-block", mx: 3, position: "relative" }}>
               <script src="https://gumroad.com/js/gumroad.js"></script>
               <a
-                sx={{
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  opacity: 0,
                   position: "absolute",
                   top: 0,
                   left: 0,
-                  opacity: 0,
-                  bg: "yellow",
-                  width: "100%",
-                  height: "100%",
                 }}
                 class="gumroad-button"
                 href="https://gum.co/vUpFK"
