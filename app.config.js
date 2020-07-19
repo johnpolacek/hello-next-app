@@ -35,7 +35,7 @@ module.exports = {
     "https://www.facebook.com/zeitcompany/",
     "https://github.com/zeit",
   ],
-  // use this to add a demo section to the site
+  // use this to link to an external demo url or a demo section with an embedded video
   demo: "https://player.vimeo.com/video/330041609",
   // use this to add a link on the landing page to a product on gumroad
   // gumroad: "https://gum.co/vUpFK",
