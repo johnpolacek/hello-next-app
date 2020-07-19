@@ -22,7 +22,6 @@ const Nav = () => {
         <Box sx={{ pl: 3, display: "inline-block" }}>
           <NavLink href="/about">About</NavLink>
           <NavLink href="/docs">Docs</NavLink>
-          <NavLink href="/store">Store</NavLink>
         </Box>
       </Box>
       <Box
