@@ -1,3 +1,4 @@
+import appConfig from "../../app.config"
 import { Box, Heading, Text } from "theme-ui"
 import Link from "next/link"
 import ButtonLink from "../ui/nav/ButtonLink"
@@ -7,7 +8,7 @@ const Demo = (props) => (
   <Box sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
     <Heading as="h1">{appConfig.name} Demo</Heading>
     <iframe
-      src="https://player.vimeo.com/video/330041609"
+      src={appConfig.demo}
       width="800"
       height="420"
       frameBorder="0"
