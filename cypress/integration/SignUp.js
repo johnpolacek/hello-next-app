@@ -7,7 +7,7 @@ describe("Sign Up", () => {
       cy.get("#SignupForm button").contains("Sign Up").click()
       cy.get("input[name=password]").type("aa" + Math.random())
       cy.get("#SignupForm button").contains("Sign Up").click()
-      cy.wait(4000)
+      cy.wait(6000)
       cy.get("p")
         .contains(
           "Please agree to the terms and conditions to create an account."
@@ -25,7 +25,7 @@ describe("Sign Up", () => {
         cy.get("input[name=password]").type("aa" + Math.random())
         cy.get("input[type=checkbox]").parent().click()
         cy.get("#SignupForm button").contains("Sign Up").click()
-        cy.wait(4000)
+        cy.wait(6000)
         cy.get("h2")
           .contains("Choose the plan that’s right for you")
           .should("not.be.visible")
@@ -85,7 +85,7 @@ describe("Sign Up", () => {
       cy.fillOutCreditCardForm()
       cy.get("button").contains("Pay $100").click()
 
-      cy.wait(8000)
+      cy.wait(10000)
       cy.get("h2").contains("All Set!").should("be.visible")
 
       // then view account page
