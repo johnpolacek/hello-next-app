@@ -4,10 +4,10 @@ describe("Landing Page", function () {
     cy.get("h1").should("be.visible")
   })
 
-  describe("Get Started Button", function () {
+  describe("Create Account Button", function () {
     it("links to Sign Up Form", function () {
       cy.visit("/")
-      cy.get("a").contains("Get Started").click()
+      cy.get("a").contains("Create Account").click()
       cy.get("#SignupForm").should("be.visible")
     })
   })
