@@ -23,13 +23,13 @@ Cypress.Commands.add("getWithinIframe", (targetElement) =>
 
 Cypress.Commands.add("fillOutCreditCardForm", () => {
   const exp = "12" + (new Date().getFullYear() + 1).toString().substring(2)
-  cy.wait(500)
+  cy.wait(1000)
   cy.getWithinIframe('[name="cardnumber"]').type("4242424242424242")
-  cy.wait(2000)
+  cy.wait(4000)
   cy.getWithinIframe('[name="exp-date"]').type(exp)
-  cy.wait(500)
+  cy.wait(1000)
   cy.getWithinIframe('[name="cvc"]').type("987")
-  cy.wait(500)
+  cy.wait(1000)
   cy.getWithinIframe('[name="postal"]').type("12345")
 })
 
@@ -109,7 +109,7 @@ Cypress.Commands.add("canChangePassword", (userData) => {
   cy.get("input[name=email]").type(userData.email)
   cy.get("input[name=password]").type(newPassword)
   cy.get("form").find("button").contains("Login").click()
-  cy.wait(2000)
+  cy.wait(4000)
   cy.get("p").contains("Signed In View of App").should("be.visible")
 
   // change back
