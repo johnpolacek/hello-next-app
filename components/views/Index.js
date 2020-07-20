@@ -45,7 +45,7 @@ const Index = (props) => (
           )}
           {appConfig.demo && (
             <Box sx={{ display: "inline-block", mx: 3 }}>
-              <ButtonLink fontSize={4} bg="white" href={appConfig.demo}>
+              <ButtonLink fontSize={4} bg="white" href={appConfig.demo.includes("vimeo") ? "/demo" : appConfig.demo}>
                 View Demo
               </ButtonLink>
             </Box>
