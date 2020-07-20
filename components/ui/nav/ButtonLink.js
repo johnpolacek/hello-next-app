@@ -13,7 +13,6 @@ const A = React.forwardRef(({ onClick, href, styles, children }, ref) => {
 })
 
 const ButtonLink = (props) => {
-  
   const styles = {
     textDecoration: "none",
     fontSize: props.fontSize || 3,
@@ -28,7 +27,9 @@ const ButtonLink = (props) => {
     display: "inline-block",
   }
   return props.href.includes("http") ? (
-    <A href={props.href} styles={styles}>{props.children}</A>
+    <A href={props.href} styles={styles}>
+      {props.children}
+    </A>
   ) : (
     <Link href={props.href} passHref>
       <A styles={styles}>{props.children}</A>
