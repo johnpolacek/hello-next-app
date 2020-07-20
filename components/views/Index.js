@@ -15,7 +15,7 @@ const Index = (props) => (
         <Heading as="h2" variant="subhead">
           {appConfig.subhead}
         </Heading>
-        <Box sx={{pb: 5}}>
+        <Box sx={{ pb: 5 }}>
           <Box sx={{ display: "inline-block", mx: 3 }}>
             <ButtonLink fontSize={4} bg="secondary" href="/signup">
               Create Account
