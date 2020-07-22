@@ -98,11 +98,11 @@ Cypress.Commands.add("canChangePassword", (userData) => {
   cy.visit("/account")
 
   const newPassword = "asdfasdf1!"
-  cy.get("#accountInfo button").eq(1).click()
+  cy.get(".update-password").contains("update").click()
   cy.get("input[type=password]").clear()
   cy.get("input[type=password]").type(newPassword)
-  cy.get("button").contains("save").click()
-  cy.wait(4000)
+  cy.get(".update-password").contains("save").click()
+  cy.wait(8000)
 
   // logout then sign in with new password
   cy.get("button").contains("Logout").click()
@@ -115,11 +115,11 @@ Cypress.Commands.add("canChangePassword", (userData) => {
 
   // change back
   cy.visit("/account")
-  cy.get("#accountInfo button").eq(1).click()
+  cy.get(".update-password").contains("update").click()
   cy.get("input[type=password]").clear()
   cy.get("input[type=password]").type(userData.password)
-  cy.get("button").contains("save").click()
-  cy.wait(4000)
+  cy.get(".update-password").contains("save").click()
+  cy.wait(8000)
 })
 
 Cypress.Commands.add("canChangePlan", (userData, newPlanId) => {

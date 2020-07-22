@@ -128,7 +128,7 @@ describe("Sign Up", () => {
 
       cy.get("h2").contains("Cancel Account").should("be.visible")
       cy.get("button").contains("Yes, Cancel Account").click()
-      cy.wait(2000)
+      cy.wait(4000)
 
       cy.get("h2")
         .contains("Your account has been cancelled.")
