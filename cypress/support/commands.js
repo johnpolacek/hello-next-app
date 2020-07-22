@@ -23,9 +23,9 @@ Cypress.Commands.add("getWithinIframe", (targetElement) =>
 
 Cypress.Commands.add("fillOutCreditCardForm", () => {
   const exp = "12" + (new Date().getFullYear() + 1).toString().substring(2)
-  cy.wait(1000)
-  cy.getWithinIframe('[name="cardnumber"]').type("4242424242424242")
   cy.wait(4000)
+  cy.getWithinIframe('[name="cardnumber"]').type("4242424242424242")
+  cy.wait(2000)
   cy.getWithinIframe('[name="exp-date"]').type(exp)
   cy.wait(1000)
   cy.getWithinIframe('[name="cvc"]').type("987")
@@ -35,6 +35,7 @@ Cypress.Commands.add("fillOutCreditCardForm", () => {
 
 Cypress.Commands.add("login", (email, password) => {
   cy.visit("/login")
+  cy.wait(1000)
   cy.get("input[name=email]").type(email)
   cy.get("input[name=password]").type(password)
   cy.get("form").find("button").contains("Login").click()
