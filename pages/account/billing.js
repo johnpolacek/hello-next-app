@@ -37,6 +37,7 @@ const AccountBillingPage = (props) => {
       url="/"
       title={appConfig.name + " | Update Card"}
       description={"Update Credit Card on File"}
+      user={props.user}
     >
       <Elements stripe={stripePromise}>
         <UpdateCardForm stripeId={props.plan.stripeId} user={user} />
