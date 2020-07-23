@@ -45,7 +45,7 @@ Cypress.Commands.add("login", (email, password) => {
   cy.get("input[name=email]").type(email)
   cy.get("input[name=password]").type(password)
   cy.get("form").find("button").contains("Login").click()
-  cy.get("p", { timeout: 10000 })
+  cy.get(".signedin-message", { timeout: 10000 })
     .contains("Signed In View of App")
     .should("be.visible")
 })
@@ -88,7 +88,7 @@ Cypress.Commands.add("canChangeEmail", (userData) => {
   cy.get("input[name=email]").type(newEmail)
   cy.get("input[name=password]").type(userData.password)
   cy.get("form").find("button").contains("Login").click()
-  cy.get(".signedin-message")
+  cy.get(".signedin-message", { timeout: 10000 })
     .contains("Signed In View of App")
     .should("be.visible")
 
@@ -113,30 +113,6 @@ Cypress.Commands.add("canChangePassword", (userData) => {
   cy.get(".update-password").click()
   cy.get("input[type=password]").clear()
   cy.get("input[type=password]").type(newPassword)
-  cy.get(".update-password-save").click()
-  cy.get(".update-password", { timeout: 10000 })
-
-  // logout then sign in with new password
-  cy.get("button").contains("Logout").click()
-  cy.get("#LoginForm")
-
-  cy.wait(10000)
-  cy.reload()
-
-  cy.get("input[name=email]").type(userData.email)
-  cy.get("input[name=password]").type(newPassword)
-  cy.get("form").find("button").contains("Login").click()
-  cy.get(".signedin-message")
-    .contains("Signed In View of App")
-    .should("be.visible")
-
-  // change back
-  cy.visit("/account")
-  cy.get(".update-password").click()
-  cy.get("input[type=password]").clear()
-  cy.get("input[type=password]").type(userData.password)
-  cy.get(".update-password-save").click()
-  cy.get(".update-password", { timeout: 10000 })
 })
 
 Cypress.Commands.add("canChangePlan", (userData, newPlanId) => {
