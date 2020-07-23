@@ -6,7 +6,9 @@ import appConfig from "../../app.config"
 const Index = (props) => (
   <Box sx={{ textAlign: "center", width: "100%", color: "white", py: 5 }}>
     {props.isSignedIn ? (
-      <Text as="p">Signed In View of App</Text>
+      <Text className="signedin-message" as="p">
+        Signed In View of App
+      </Text>
     ) : (
       <>
         <Heading as="h1" variant="headline">

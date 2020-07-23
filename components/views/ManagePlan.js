@@ -13,7 +13,10 @@ const ManagePlan = (props) => {
   )
 
   return (
-    <Box sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
+    <Box
+      id="ManagePlan"
+      sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}
+    >
       <Heading variant="headline">Manage Plan</Heading>
       <Heading variant="subhead">
         Your current plan is <br />
