@@ -23,8 +23,14 @@ Cypress.Commands.add("getWithinIframe", (targetElement) =>
 
 Cypress.Commands.add("fillOutCreditCardForm", () => {
   const exp = "12" + (new Date().getFullYear() + 1).toString().substring(2)
-  cy.wait(4000)
-  cy.getWithinIframe('[name="cardnumber"]').type("4242424242424242")
+  cy.wait(8000)
+  cy.getWithinIframe('[name="cardnumber"]').type("4242")
+  cy.wait(400)
+  cy.getWithinIframe('[name="cardnumber"]').type("4242")
+  cy.wait(400)
+  cy.getWithinIframe('[name="cardnumber"]').type("4242")
+  cy.wait(400)
+  cy.getWithinIframe('[name="cardnumber"]').type("4242")
   cy.wait(2000)
   cy.getWithinIframe('[name="exp-date"]').type(exp)
   cy.wait(1000)
@@ -35,17 +41,19 @@ Cypress.Commands.add("fillOutCreditCardForm", () => {
 
 Cypress.Commands.add("login", (email, password) => {
   cy.visit("/login")
-  cy.wait(1000)
+  cy.get("#LoginForm")
   cy.get("input[name=email]").type(email)
   cy.get("input[name=password]").type(password)
   cy.get("form").find("button").contains("Login").click()
-  cy.wait(2000)
-  cy.get("p").contains("Signed In View of App").should("be.visible")
+  cy.get("p", { timeout: 10000 })
+    .contains("Signed In View of App")
+    .should("be.visible")
 })
 
 Cypress.Commands.add("canViewAccountInfo", (userData) => {
   cy.login(userData.email, userData.password)
   cy.visit("/account")
+  cy.get("#accountInfo")
   cy.get("label").contains("Email").should("be.visible")
   cy.get("label").contains("Password").should("be.visible")
   cy.get("label").contains("Plan").should("be.visible")
@@ -64,70 +72,80 @@ Cypress.Commands.add("canViewAccountInfo", (userData) => {
 Cypress.Commands.add("canChangeEmail", (userData) => {
   cy.login(userData.email, userData.password)
   cy.visit("/account")
+  cy.get("#accountInfo")
 
   const newEmail = "temp@hellonextapp.com"
-  cy.get("#accountInfo button").contains("update").eq(0).click()
+  cy.get(".update-email").click()
   cy.get("input[type=email]").clear()
   cy.get("input[type=email]").type(newEmail)
   cy.get("button").contains("save").click()
-  cy.wait(4000)
+  cy.get(".update-email", { timeout: 10000 })
   cy.get("div").contains(newEmail).should("be.visible")
 
   // logout then sign in with new email
   cy.get("button").contains("Logout").click()
-  cy.wait(1000)
+  cy.get("#LoginForm")
   cy.get("input[name=email]").type(newEmail)
   cy.get("input[name=password]").type(userData.password)
   cy.get("form").find("button").contains("Login").click()
-  cy.wait(2000)
-  cy.get("p").contains("Signed In View of App").should("be.visible")
+  cy.get(".signedin-message")
+    .contains("Signed In View of App")
+    .should("be.visible")
 
   // change back
   cy.visit("/account")
+  cy.get("#accountInfo")
   cy.get("div").contains(newEmail).should("be.visible")
-  cy.get("#accountInfo button").contains("update").eq(0).click()
+  cy.get(".update-email").click()
   cy.get("input[type=email]").clear()
   cy.get("input[type=email]").type(userData.email)
   cy.get("button").contains("save").click()
-  cy.wait(4000)
+  cy.get(".update-email", { timeout: 10000 })
   cy.get("div").contains(userData.email).should("be.visible")
 })
 
 Cypress.Commands.add("canChangePassword", (userData) => {
   cy.login(userData.email, userData.password)
   cy.visit("/account")
+  cy.get("#accountInfo")
 
   const newPassword = "asdfasdf1!"
-  cy.get(".update-password").contains("update").click()
+  cy.get(".update-password").click()
   cy.get("input[type=password]").clear()
   cy.get("input[type=password]").type(newPassword)
-  cy.get(".update-password").contains("save").click()
-  cy.wait(8000)
+  cy.get(".update-password-save").click()
+  cy.get(".update-password", { timeout: 10000 })
 
   // logout then sign in with new password
   cy.get("button").contains("Logout").click()
-  cy.wait(1000)
+  cy.get("#LoginForm")
+
+  cy.wait(10000)
+  cy.reload()
+
   cy.get("input[name=email]").type(userData.email)
   cy.get("input[name=password]").type(newPassword)
   cy.get("form").find("button").contains("Login").click()
-  cy.wait(4000)
-  cy.get("p").contains("Signed In View of App").should("be.visible")
+  cy.get(".signedin-message")
+    .contains("Signed In View of App")
+    .should("be.visible")
 
   // change back
   cy.visit("/account")
-  cy.get(".update-password").contains("update").click()
+  cy.get(".update-password").click()
   cy.get("input[type=password]").clear()
   cy.get("input[type=password]").type(userData.password)
-  cy.get(".update-password").contains("save").click()
-  cy.wait(8000)
+  cy.get(".update-password-save").click()
+  cy.get(".update-password", { timeout: 10000 })
 })
 
 Cypress.Commands.add("canChangePlan", (userData, newPlanId) => {
   cy.login(userData.email, userData.password)
   cy.visit("/account")
+  cy.get("#accountInfo")
 
   const newPassword = "asdfasdf1!"
-  cy.get("button[class='update-plan'").click()
+  cy.get(".update-plan").click()
 
   cy.get("h2").contains("Manage Plan").should("be.visible")
   cy.get("#currentPlanName").contains(userData.plan).should("be.visible")

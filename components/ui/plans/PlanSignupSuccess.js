@@ -5,6 +5,7 @@ import PricingPlan from "./PricingPlan"
 
 const PlanSignupSuccess = (props) => (
   <Box
+    id="PlanSignupSuccess"
     sx={{
       textAlign: "center",
       width: "100%",

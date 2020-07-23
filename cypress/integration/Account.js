@@ -22,9 +22,11 @@ describe("Account Page", () => {
       cy.fixture("users").then((users) => {
         cy.login(users.paid.email, users.paid.password)
         cy.visit("/account")
+        cy.get("#accountInfo")
         cy.get("h2").contains("Your Account").should("be.visible")
         cy.get(".update-billing").click()
-        cy.wait(8000)
+        cy.get("#UpdateCardForm")
+        cy.wait(4000)
         const newExp =
           "12" + (new Date().getFullYear() + 2).toString().substring(2)
         const newExpDisplay =
@@ -38,7 +40,7 @@ describe("Account Page", () => {
         cy.getWithinIframe('[name="postal"]').type("12345")
         cy.get("button").contains("Update Card").click()
 
-        cy.wait(8000)
+        cy.get("#accountInfo", { timeout: 10000 })
         cy.get("h2").contains("Your Account").should("be.visible")
         cy.get("span").contains(newExpDisplay).should("be.visible")
       })
@@ -48,19 +50,21 @@ describe("Account Page", () => {
       cy.fixture("users").then((users) => {
         cy.login(users.paid.email, users.paid.password)
         cy.visit("/account")
-
+        cy.get("#accountInfo")
         cy.get(".update-plan").click()
-        cy.wait(2000)
+
+        cy.get("#ManagePlan")
         cy.get("h2").contains("Manage Plan").should("be.visible")
         cy.get("#currentPlanName").contains("Pro").should("be.visible")
 
         cy.get("a[href='./plans/premium/checkout']").click()
+        cy.get("#CheckoutForm")
         cy.get("#planSelectedName").contains("Premium").should("be.visible")
 
         cy.fillOutCreditCardForm()
         cy.get("button").contains("Pay $200").click()
 
-        cy.wait(8000)
+        cy.get("#PlanSignupSuccess", { timeout: 10000 })
         cy.get("h2").contains("All Set!").should("be.visible")
 
         // then view account page
@@ -73,17 +77,18 @@ describe("Account Page", () => {
         cy.get("label").contains("Billing").should("be.visible")
 
         cy.get(".update-plan").click()
-        cy.wait(2000)
+        cy.get("#ManagePlan")
         cy.get("h2").contains("Manage Plan").should("be.visible")
         cy.get("#currentPlanName").contains("Premium").should("be.visible")
 
         cy.get("a[href='./plans/pro/checkout']").click()
+        cy.get("#CheckoutForm")
         cy.get("#planSelectedName").contains("Pro").should("be.visible")
 
         cy.fillOutCreditCardForm()
         cy.get("button").contains("Pay $100").click()
 
-        cy.wait(8000)
+        cy.get("#PlanSignupSuccess", { timeout: 10000 })
         cy.get("h2").contains("All Set!").should("be.visible")
 
         // then view account page
@@ -121,9 +126,10 @@ describe("Account Page", () => {
       cy.fixture("users").then((users) => {
         cy.login(users.free.email, users.free.password)
         cy.visit("/account")
-
+        cy.get("#accountInfo")
         cy.get(".update-plan").click()
-        cy.wait(2000)
+
+        cy.get("#ManagePlan")
         cy.get("h2").contains("Manage Plan").should("be.visible")
         cy.get("#currentPlanName").contains("Starter").should("be.visible")
 
@@ -133,7 +139,7 @@ describe("Account Page", () => {
         cy.fillOutCreditCardForm()
         cy.get("button").contains("Pay $100").click()
 
-        cy.wait(8000)
+        cy.get("#PlanSignupSuccess", { timeout: 10000 })
         cy.get("h2").contains("All Set!").should("be.visible")
 
         // then view account page
@@ -145,19 +151,33 @@ describe("Account Page", () => {
         cy.get("div").contains("Pro").should("be.visible")
         cy.get("label").contains("Billing").should("be.visible")
 
+        cy.get("button").contains("Logout").click()
+        cy.get("#LoginForm")
+
+        cy.wait(5000)
+        cy.reload()
+
+        cy.login(users.free.email, users.free.password)
+        cy.visit("/account")
+        cy.get("#accountInfo")
         cy.get(".update-plan").click()
-        cy.wait(2000)
+
+        cy.get("#ManagePlan")
         cy.get("h2").contains("Manage Plan").should("be.visible")
         cy.get("#currentPlanName").contains("Pro").should("be.visible")
 
         cy.get("a[href='./plans/starter/ready']").click()
-        cy.wait(2000)
 
+        cy.get("#planSelectedName")
+        cy.wait(5000)
         cy.get("button").contains("Yes, downgrade").click()
-        cy.wait(8000)
 
+        cy.get("#PlanSignupSuccess", { timeout: 10000 })
         cy.get("h2").contains("All Set!").should("be.visible")
+
         cy.get("a").contains("View Account Page").click()
+
+        cy.get("#accountInfo")
         cy.get("h2").contains("Your Account").should("be.visible")
 
         // Verify account details

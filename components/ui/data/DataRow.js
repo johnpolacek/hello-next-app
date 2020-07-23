@@ -65,7 +65,7 @@ const DataRow = (props) => {
         }}
       >
         <Button
-          className={"update-" + props.name}
+          className={"update-" + props.name + (isEditing ? "-save" : "")}
           onClick={() => {
             if (props.link) {
               Router.push(props.link)
