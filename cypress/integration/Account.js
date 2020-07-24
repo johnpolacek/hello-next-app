@@ -25,7 +25,7 @@ describe("Account Page", () => {
         cy.get("#accountInfo")
         cy.get("h2").contains("Your Account").should("be.visible")
         cy.get(".update-billing").click()
-        cy.get("#UpdateCardForm")
+        cy.get("#UpdateCardForm", { timeout: 10000 })
         cy.wait(4000)
         const newExp =
           "12" + (new Date().getFullYear() + 2).toString().substring(2)
