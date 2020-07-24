@@ -75,63 +75,63 @@ describe("Sign Up", () => {
       cy.get("label").contains("Billing").should("not.exist")
     })
 
-    it("creates paid pro account", () => {
-      cy.get("a[href='./plans/pro/checkout']").click()
-      cy.get("#CheckoutForm")
-      cy.get("h3").contains("You’ve selected ").should("be.visible")
-      cy.get("h3").contains("Pro").should("be.visible")
+    // it("creates paid pro account", () => {
+    //   cy.get("a[href='./plans/pro/checkout']").click()
+    //   cy.get("#CheckoutForm")
+    //   cy.get("h3").contains("You’ve selected ").should("be.visible")
+    //   cy.get("h3").contains("Pro").should("be.visible")
 
-      cy.fillOutCreditCardForm()
-      cy.get("button").contains("Pay $100").click()
+    //   cy.fillOutCreditCardForm()
+    //   cy.get("button").contains("Pay $100").click()
 
-      cy.get("#PlanSignupSuccess", { timeout: 10000 })
-      cy.get("h2").contains("All Set!").should("be.visible")
+    //   cy.get("#PlanSignupSuccess", { timeout: 10000 })
+    //   cy.get("h2").contains("All Set!").should("be.visible")
 
-      // then view account page
-      cy.get("a").contains("View Account Page").click()
-      cy.get("h2").contains("Your Account").should("be.visible")
+    //   // then view account page
+    //   cy.get("a").contains("View Account Page").click()
+    //   cy.get("h2").contains("Your Account").should("be.visible")
 
-      // Verify account details
-      cy.get("div").contains("test@hellonextapp.com").should("be.visible")
-      cy.get("label").contains("Plan").should("be.visible")
-      cy.get("div").contains("Pro").should("be.visible")
-      cy.get("label").contains("Billing").should("be.visible")
-      cy.get("span").contains("visa").should("be.visible")
-      cy.get("span").contains("4242").should("be.visible")
-      const exp = "12/" + (new Date().getFullYear() + 1).toString().substring(2)
-      cy.get("span").contains("exp").should("be.visible")
-    })
+    //   // Verify account details
+    //   cy.get("div").contains("test@hellonextapp.com").should("be.visible")
+    //   cy.get("label").contains("Plan").should("be.visible")
+    //   cy.get("div").contains("Pro").should("be.visible")
+    //   cy.get("label").contains("Billing").should("be.visible")
+    //   cy.get("span").contains("visa").should("be.visible")
+    //   cy.get("span").contains("4242").should("be.visible")
+    //   const exp = "12/" + (new Date().getFullYear() + 1).toString().substring(2)
+    //   cy.get("span").contains("exp").should("be.visible")
+    // })
 
-    it("can cancel account after creation", () => {
-      cy.get("a[href='./plans/pro/checkout']").click()
-      cy.get("#CheckoutForm")
-      cy.get("h3").contains("You’ve selected ").should("be.visible")
-      cy.get("h3").contains("Pro").should("be.visible")
+    // it("can cancel account after creation", () => {
+    //   cy.get("a[href='./plans/pro/checkout']").click()
+    //   cy.get("#CheckoutForm")
+    //   cy.get("h3").contains("You’ve selected ").should("be.visible")
+    //   cy.get("h3").contains("Pro").should("be.visible")
 
-      cy.fillOutCreditCardForm()
-      cy.get("button").contains("Pay $100").click()
+    //   cy.fillOutCreditCardForm()
+    //   cy.get("button").contains("Pay $100").click()
 
-      cy.get("#PlanSignupSuccess", { timeout: 10000 })
-      cy.get("h2").contains("All Set!").should("be.visible")
+    //   cy.get("#PlanSignupSuccess", { timeout: 10000 })
+    //   cy.get("h2").contains("All Set!").should("be.visible")
 
-      // then view account page
-      cy.get("a").contains("View Account Page").click()
-      cy.get("h2").contains("Your Account").should("be.visible")
+    //   // then view account page
+    //   cy.get("a").contains("View Account Page").click()
+    //   cy.get("h2").contains("Your Account").should("be.visible")
 
-      // Verify account details
-      cy.get(".update-plan").click()
+    //   // Verify account details
+    //   cy.get(".update-plan").click()
       
-      cy.get("#ManagePlan")
-      cy.get("a").contains("Cancel Account").click()
+    //   cy.get("#ManagePlan")
+    //   cy.get("a").contains("Cancel Account").click()
       
-      cy.get("#CancelAccount")
-      cy.get("h2").contains("Cancel Account").should("be.visible")
-      cy.get("button").contains("Yes, Cancel Account").click()
+    //   cy.get("#CancelAccount")
+    //   cy.get("h2").contains("Cancel Account").should("be.visible")
+    //   cy.get("button").contains("Yes, Cancel Account").click()
       
-      cy.get("#CancelSuccess")
-      cy.get("h2")
-        .contains("Your account has been cancelled.")
-        .should("be.visible")
-    })
+    //   cy.get("#CancelSuccess")
+    //   cy.get("h2")
+    //     .contains("Your account has been cancelled.")
+    //     .should("be.visible")
+    // })
   })
 })
