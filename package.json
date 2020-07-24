@@ -41,5 +41,6 @@
     "onchange": "^6.1.1",
     "prettier": "^2.0.5"
   },
-  "license": "SEE LICENSE IN EULA.txt"
+  "license": "SEE LICENSE IN EULA.txt",
+  "repository": "https://github.com/johnpolacek/hello-next-app"
 }
