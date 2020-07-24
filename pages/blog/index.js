@@ -15,7 +15,7 @@ const Blog = (props) => {
       description={"Read blog posts from the team at " + appConfig.name}
       user={props.user}
     >
-      <BlogView isSignedIn={isSignedIn} />
+      <BlogView />
     </Layout>
   )
 }
