@@ -18,11 +18,13 @@ const Index = (props) => (
           {appConfig.subhead}
         </Heading>
         <Box sx={{ pb: 5 }}>
-          <Box sx={{ display: "inline-block", mx: 3 }}>
-            <ButtonLink fontSize={4} bg="secondary" href="/signup">
-              Create Account
-            </ButtonLink>
-          </Box>
+          {appConfig.plans && appConfig.plans.length > 0 && (
+            <Box sx={{ display: "inline-block", mx: 3 }}>
+              <ButtonLink fontSize={4} bg="secondary" href="/signup">
+                Create Account
+              </ButtonLink>
+            </Box>
+          )}
           {appConfig.gumroad && (
             <Box sx={{ display: "inline-block", mx: 3, position: "relative" }}>
               <script src="https://gumroad.com/js/gumroad.js"></script>
