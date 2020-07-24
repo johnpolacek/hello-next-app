@@ -1,4 +1,5 @@
 import { useRouter } from "next/router"
+import MDX from "@mdx-js/runtime"
 import ErrorPage from "next/error"
 import { getPostBySlug, getAllPosts } from "../../lib/blog/api"
 
@@ -7,10 +8,13 @@ export default function Post({ post, morePosts, preview }) {
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
+
   return (
     <>
       <div>{post.title}</div>
-      <div>{post.content}</div>
+      <MDX>
+        {post.content}
+      </MDX>
     </>
   )
 }
