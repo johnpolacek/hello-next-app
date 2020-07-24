@@ -11,6 +11,7 @@ const ChoosePlan = (props) => {
 
   return (
     <Box
+      id="ChoosePlan"
       sx={{ textAlign: "center", width: "100%", color: "white", pt: 3, pb: 5 }}
     >
       <Heading variant="headline">Choose the plan that’s right for you</Heading>

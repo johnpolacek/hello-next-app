@@ -29,7 +29,7 @@ const Cancel = (props) => {
   }
 
   return (
-    <Box sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
+    <Box id="CancelAccount" sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}>
       <Heading variant="headline">Cancel Account</Heading>
       {!error && !success && (
         <>
@@ -55,7 +55,7 @@ const Cancel = (props) => {
         </Heading>
       )}
       {success && (
-        <Heading variant="subhead">Your account has been cancelled.</Heading>
+        <Heading id="CancelSuccess" variant="subhead">Your account has been cancelled.</Heading>
       )}
     </Box>
   )
