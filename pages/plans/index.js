@@ -9,7 +9,7 @@ const PlansPage = () => (
     description={"Choose the right " + appConfig.name + " plan for you"}
     bg="primary"
   >
-    <ChoosePlan />
+    {appConfig.plans && appConfig.plans.length && <ChoosePlan />}
   </Layout>
 )
 
