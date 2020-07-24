@@ -23,6 +23,7 @@
     "dotenv": "8.2.0",
     "firebase": "^7.17.0",
     "firebase-admin": "^8.13.0",
+    "gray-matter": "^4.0.2",
     "lodash": "^4.17.19",
     "next": "^9.4.4",
     "next-iron-session": "4.0.0",
