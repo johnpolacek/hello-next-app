@@ -38,48 +38,48 @@ module.exports = {
   // plans appears on pricing page and in account creation flow
   // assumes $ / month
   // customize
-  plans: [
-    {
-      name: "Starter",
-      price: 0,
-      description: "Get started for free",
-      includes: ["1 user", "1GB File Storage", "Email Support"],
-      isMonthly: true,
-      planId: null, // free plans do not have a Stripe Product Id so do not get an ad
-      planIdTest: null,
-    },
-    {
-      name: "Pro",
-      price: 100,
-      description: "The right plan for most people",
-      includes: [
-        "10 users",
-        "10GB File Storage",
-        "Email Support",
-        "White Label Branding",
-        "Custom Design Theme",
-      ],
-      isMonthly: true,
-      planId: "plan_H98v4Soymn4QE3", // Stripe Product Id
-      planIdTest: "plan_H98v4Soymn4QE3", // Stripe Product Id Test
-    },
-    {
-      name: "Premium",
-      price: 200,
-      description: "Serious power users and businesses",
-      includes: [
-        "25 users",
-        "25GB File Storage",
-        "Priority Email Support",
-        "White Label Branding",
-        "Custom Design Theme",
-        "Personalized Onboarding",
-        "Custom Domain",
-      ],
-      isMonthly: true,
-      planId: "plan_H98v1kie0YIbxG", // Stripe Product Id
-      planIdTest: "plan_H98v1kie0YIbxG", // Stripe Product Id Test
-    },
-  ],
-  trial: "30 day",
+  // plans: [
+  //   {
+  //     name: "Starter",
+  //     price: 0,
+  //     description: "Get started for free",
+  //     includes: ["1 user", "1GB File Storage", "Email Support"],
+  //     isMonthly: true,
+  //     planId: null, // free plans do not have a Stripe Product Id so do not get an ad
+  //     planIdTest: null,
+  //   },
+  //   {
+  //     name: "Pro",
+  //     price: 100,
+  //     description: "The right plan for most people",
+  //     includes: [
+  //       "10 users",
+  //       "10GB File Storage",
+  //       "Email Support",
+  //       "White Label Branding",
+  //       "Custom Design Theme",
+  //     ],
+  //     isMonthly: true,
+  //     planId: "plan_H98v4Soymn4QE3", // Stripe Product Id
+  //     planIdTest: "plan_H98v4Soymn4QE3", // Stripe Product Id Test
+  //   },
+  //   {
+  //     name: "Premium",
+  //     price: 200,
+  //     description: "Serious power users and businesses",
+  //     includes: [
+  //       "25 users",
+  //       "25GB File Storage",
+  //       "Priority Email Support",
+  //       "White Label Branding",
+  //       "Custom Design Theme",
+  //       "Personalized Onboarding",
+  //       "Custom Domain",
+  //     ],
+  //     isMonthly: true,
+  //     planId: "plan_H98v1kie0YIbxG", // Stripe Product Id
+  //     planIdTest: "plan_H98v1kie0YIbxG", // Stripe Product Id Test
+  //   },
+  // ],
+  // trial: "30 day",
 }
