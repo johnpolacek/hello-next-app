@@ -120,14 +120,14 @@ describe("Sign Up", () => {
 
     //   // Verify account details
     //   cy.get(".update-plan").click()
-      
+
     //   cy.get("#ManagePlan")
     //   cy.get("a").contains("Cancel Account").click()
-      
+
     //   cy.get("#CancelAccount")
     //   cy.get("h2").contains("Cancel Account").should("be.visible")
     //   cy.get("button").contains("Yes, Cancel Account").click()
-      
+
     //   cy.get("#CancelSuccess")
     //   cy.get("h2")
     //     .contains("Your account has been cancelled.")
