@@ -16,4 +16,14 @@ module.exports = withMDX({
     STRIPE_SECRET_KEY_TEST: process.env.STRIPE_SECRET_KEY_TEST,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
   },
+  webpack: (config, { isServer }) => {
+    // Fixes npm packages (mdx) that depend on `fs` module
+    if (!isServer) {
+      config.node = {
+        fs: "empty",
+      }
+    }
+
+    return config
+  },
 })
