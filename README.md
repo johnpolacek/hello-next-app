@@ -2,35 +2,6 @@
 
 ---
 
-## Setup Firebase
-
-First, you will need to create a new Firebase account at [firebase.google.com](https://firebase.google.com/) then create a project at the Firebase console. Under the General Settings, give your app a Public-facing name.
-
-Get your account credentials from the Firebase console at _Project settings > Service accounts_ where you can click on Generate new private key and download the credentials as a json file. It will contain keys such as `project_id`, `client_email` and `client_id`. Set them as environment variables in the `.env` file at the root of this project.
-
-Additionally, the Firebase Admin SDK requires access to this json file, so move it into the `lib/firebase/admin` directory. This file contains private keys for access to your Firebase project, so it should not get committed to source control. It is already excluded via the `.gitignore` file in the top level of the Hello Next App project.
-
-We will also need to set up the Authentication settings for our app. In the Firebase console, go to the Authentication section for your app. Under Sign-in providers, enable 'Email/Password' and Email link (passwordless login).
-
-Next, add a new Web App to your project.
-
-Set the environment variables SESSION_SECRET_CURRENT and SESSION_SECRET_PREVIOUS in the .env file. These are used by cookie-session.
-
-Duplicate the `.env` as `.env.build` and add the `FIREBASE_PRIVATE_KEY` var and set it to the value from the json credentials file you downloaded from Firebase (tt should start with `-----BEGIN PRIVATE KEY-----` and end with `\n-----END PRIVATE KEY-----\n`).
-
-Initially your Firebase account will have [security rules](https://firebase.google.com/docs/firestore/security/overview) that allow open access during development. These rules will expire 30 days after you sign up for an account. You will need to [follow the directions from the Firebase docs](https://firebase.google.com/docs/firestore/security/insecure-rules) to update your security rules to to allow only signed-in users to write data.
-
-```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth.uid != null;
-    }
-  }
-}
-```
-
 ## Install
 
 Rename the `hello-next-app` project directory to your project name. At the top level of the project directory, open a terminal window and install the dependencies.
@@ -64,6 +35,19 @@ Duplicate the `.env` as `.env.build` then uncomment and set the `FIREBASE_PRIVAT
 The `.env-build` file should never enter our source control as it has private keys that should only be used in our local environment.
 
 When it comes time for deployment, we will add these environment variables to the remote environment via the console (see the Deployment section).
+
+Initially your Firebase account will have [security rules](https://firebase.google.com/docs/firestore/security/overview) that allow open access during development. These rules will expire 30 days after you sign up for an account. You will need to [follow the directions from the Firebase docs](https://firebase.google.com/docs/firestore/security/insecure-rules) to update your security rules to to allow only signed-in users to write data.
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth.uid != null;
+    }
+  }
+}
+```
 
 ## Config Files
 
