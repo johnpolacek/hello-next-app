@@ -24,7 +24,7 @@ const Footer = (props) => (
         mx: "auto",
       }}
     >
-      <Box sx={{ width: "40%", px: 4 }}>
+      <Box sx={{ width: "40%", pl: 4, pr: 6 }}>
         <Text sx={{ fontWeight: 600, fontSize: 3, pb: 2, pr: 3 }}>
           <span
             sx={{
