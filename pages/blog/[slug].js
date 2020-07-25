@@ -4,6 +4,8 @@ import MDX from "@mdx-js/runtime"
 import ErrorPage from "next/error"
 import appConfig from "../../app.config"
 import Layout from "../../components/layout/Layout"
+import { Box, Heading } from "theme-ui"
+
 import { getPostBySlug, getAllPosts } from "../../lib/blog/api"
 
 export default function Post({ post, morePosts, preview, user }) {
@@ -19,17 +21,19 @@ export default function Post({ post, morePosts, preview, user }) {
       description={"Read blog posts from the team at " + appConfig.name}
       user={user}
     >
-      <div>
-        <h1>{post.title}</h1>
-        <MDX>
-          {post.content}
-        </MDX>
-      </div>
+      <Box sx={{ maxWidth: "960px", mx: "auto", px: 3, py: 4 }}>
+        <Heading as="h1">{post.title}</Heading>
+        <MDX>{post.content}</MDX>
+      </Box>
     </Layout>
   )
 }
 
-export const getServerSideProps = withSession(async function ({ params, req, res }) {
+export const getServerSideProps = withSession(async function ({
+  params,
+  req,
+  res,
+}) {
   const post = getPostBySlug(params.slug, [
     "title",
     "date",
@@ -44,12 +48,12 @@ export const getServerSideProps = withSession(async function ({ params, req, res
   const user = userSession === undefined ? null : req.session.get("user")
 
   return {
-    props: {user, post}
+    props: { user, post },
   }
 })
 
 // export async function getStaticProps({ params }) {
-  
+
 //   return {
 //     props: {
 //       post: {
