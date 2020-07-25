@@ -1,4 +1,5 @@
 import React, { useContext } from "react"
+import appConfig from "../../../app.config"
 import { UserContext } from "../../context/UserContext"
 import NavHome from "./NavHome"
 import NavLink from "./NavLink"
@@ -20,9 +21,11 @@ const Nav = () => {
       >
         <NavHome />
         <Box sx={{ pl: 3, display: "inline-block" }}>
-          <NavLink href="/about">About</NavLink>
-          <NavLink href="/blog">Blog</NavLink>
-          <NavLink href="/docs">Docs</NavLink>
+          {Object.keys(appConfig.nav).map((link) => (
+            <NavLink key={link} href={appConfig.nav[link]}>
+              {link}
+            </NavLink>
+          ))}
         </Box>
       </Box>
       <Box
