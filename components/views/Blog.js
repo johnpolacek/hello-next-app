@@ -11,8 +11,7 @@ const Blog = (props) => (
       textAlign: "left",
       width: "100%",
       color: "white",
-      px: 3,
-      py: 5,
+      p: 4,
       mx: "auto",
       maxWidth: "640px",
     }}
@@ -24,17 +23,17 @@ const Blog = (props) => (
         textTransform: "uppercase",
         letterSpacing: 2,
         opacity: 0.75,
-        pb: 5,
+        pb: 4,
       }}
     >
       {appConfig.name} Blog
     </Heading>
     {props.posts &&
       props.posts.map((post) => (
-        <Box key={post.slug}>
+        <Box sx={{ pb: 5 }} key={post.slug}>
           <Heading>{post.title}</Heading>
           <Text sx={{ pb: 3 }}>{post.excerpt}</Text>
-          <Link href={"./" + post.slug} passHref>
+          <Link href={"/blog/" + post.slug} passHref>
             <a sx={{ color: "white", fontWeight: "bold", fontStyle: "italic" }}>
               Read more...
             </a>
