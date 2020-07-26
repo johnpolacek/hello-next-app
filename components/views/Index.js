@@ -38,6 +38,7 @@ const Index = (props) => (
                   left: 0,
                 }}
                 className="gumroad-button"
+                rel="noopener"
                 href="https://gum.co/vUpFK"
               >
                 Download
