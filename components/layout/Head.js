@@ -32,10 +32,6 @@ DocHead.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  appConfig.shareImage: PropTypes.string,
-  appConfig.shareImageAlt: PropTypes.string,
-  twitter: PropTypes.string,
-  twitterAuthor: PropTypes.string,
 }
 
 export default DocHead
