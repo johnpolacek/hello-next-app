@@ -35,7 +35,7 @@ module.exports = {
     "https://www.facebook.com/zeitcompany/",
     "https://github.com/zeit",
   ],
-  twitter: "hellonextapp"
+  twitter: "hellonextapp",
   // the share image will show up when the site is shared on social media
   shareImage: "https://hellonextapp.com/screenshot.png",
   shareImageAlt: "Hello Next App Screenshot", 
