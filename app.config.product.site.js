@@ -31,6 +31,12 @@ module.exports = {
   support: "support@hellonextapp.com",
   // add all your social links, will get added automatically as long as they are supported by react-social-icons https://jaketrent.github.io/react-social-icons/
   social: ["https://twitter.com/johnpolacek", "https://github.com/johnpolacek"],
+  // use this to set the links in the main nav
+  nav: {
+    About: "/about",
+    Blog: "/blog",
+    Docs: "/docs",
+  },
   // use this to add a demo section to the site
   demo: "https://hello-next-app.now.sh",
   // use this to add a link on the landing page to a product on gumroad
