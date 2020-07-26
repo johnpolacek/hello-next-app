@@ -38,7 +38,7 @@ module.exports = {
   twitter: "hellonextapp",
   // the share image will show up when the site is shared on social media
   shareImage: "https://hellonextapp.com/screenshot.png",
-  shareImageAlt: "Hello Next App Screenshot", 
+  shareImageAlt: "Hello Next App Screenshot",
   // use this to set the links in the main nav
   nav: {
     About: "/about",

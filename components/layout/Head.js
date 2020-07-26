@@ -11,8 +11,12 @@ const DocHead = (props) => (
       <meta name="description" content={props.description} />
       <meta property="og:title" content={props.title} />
       <meta property="og:description" content={props.description} />
-      {appConfig.shareImage && <meta property="og:image" content={appConfig.shareImage} />}
-      {appConfig.shareImageAlt && <meta property="og:image:alt" content={appConfig.shareImageAlt} />}
+      {appConfig.shareImage && (
+        <meta property="og:image" content={appConfig.shareImage} />
+      )}
+      {appConfig.shareImageAlt && (
+        <meta property="og:image:alt" content={appConfig.shareImageAlt} />
+      )}
       <meta property="og:url" content={props.url} />
       <meta
         name="twitter:card"
@@ -22,8 +26,12 @@ const DocHead = (props) => (
       <meta name="twitter:creator" content={appConfig.twitter} />
       <meta name="twitter:title" content={props.title} />
       <meta name="twitter:description" content={props.description} />
-      {appConfig.shareImage && <meta property="twitter:image" content={appConfig.shareImage} />}
-      {appConfig.shareImageAlt && <meta property="twitter:image:alt" content={appConfig.shareImageAlt} />}
+      {appConfig.shareImage && (
+        <meta property="twitter:image" content={appConfig.shareImage} />
+      )}
+      {appConfig.shareImageAlt && (
+        <meta property="twitter:image:alt" content={appConfig.shareImageAlt} />
+      )}
     </Head>
   </>
 )
