@@ -7,13 +7,13 @@ import { useRouter } from "next/router"
 
 const NavLink = (props) => {
   const router = useRouter()
-  const isCurrent = router.pathname === props.href && props.href !== "/"
+  const isCurrent = router.pathname === props.href
   // If you want to apply custom styling, use isCurrent
   // (not used by default)
 
   const styles = {
-    py: [2, 3],
     px: 3,
+    py: [2, 3],
     fontSize: 3,
     display: "inline-block",
     textDecoration: "none",
