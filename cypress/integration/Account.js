@@ -57,7 +57,7 @@ describe("Account Page", () => {
         cy.get("h2").contains("Manage Plan").should("be.visible")
         cy.get("#currentPlanName").contains("Pro").should("be.visible")
 
-        cy.get("a[href='./plans/premium/checkout']").click()
+        cy.get("a[href='/account/plans/premium/checkout']").click()
         cy.get("#CheckoutForm")
         cy.get("#planSelectedName").contains("Premium").should("be.visible")
 
@@ -81,7 +81,7 @@ describe("Account Page", () => {
         cy.get("h2").contains("Manage Plan").should("be.visible")
         cy.get("#currentPlanName").contains("Premium").should("be.visible")
 
-        cy.get("a[href='./plans/pro/checkout']").click()
+        cy.get("a[href='/account/plans/pro/checkout']").click()
         cy.get("#CheckoutForm")
         cy.get("#planSelectedName").contains("Pro").should("be.visible")
 
@@ -133,7 +133,7 @@ describe("Account Page", () => {
         cy.get("h2").contains("Manage Plan").should("be.visible")
         cy.get("#currentPlanName").contains("Starter").should("be.visible")
 
-        cy.get("a[href='./plans/pro/checkout']").click()
+        cy.get("a[href='/account/plans/pro/checkout']").click()
         cy.get("#planSelectedName").contains("Pro").should("be.visible")
 
         cy.fillOutCreditCardForm()
@@ -166,7 +166,7 @@ describe("Account Page", () => {
         cy.get("h2").contains("Manage Plan").should("be.visible")
         cy.get("#currentPlanName").contains("Pro").should("be.visible")
 
-        cy.get("a[href='./plans/starter/ready']").click()
+        cy.get("a[href='/account/plans/starter/ready']").click()
 
         cy.get("#planSelectedName")
         cy.wait(5000)
