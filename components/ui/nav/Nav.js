@@ -28,51 +28,54 @@ const Nav = () => {
           ))}
         </Box>
       </Box>
-      <Box
-        sx={{
-          width: ["100%", "50%"],
-          textAlign: ["center", "right"],
-          pr: [0, 3],
-          opacity: user === null ? 0 : 1,
-        }}
-      >
-        {user ? (
-          <>
-            <Button
-              sx={{
-                color: "white",
-                fontWeight: "lite",
-                fontSize: 3,
-              }}
-              onClick={async () => {
-                await fetch("/api/logout")
-                Router.push("/login")
-              }}
-            >
-              Logout
-            </Button>
-            <NavLink href="/account">Account</NavLink>
-          </>
-        ) : (
-          <>
-            <NavLink href="/login">Login</NavLink>
-            <NavLink href="/signup">
+      {
+        typeof appConfig.plans === "object" && 
+        <Box
+          sx={{
+            width: ["100%", "50%"],
+            textAlign: ["center", "right"],
+            pr: [0, 3],
+            opacity: user === null ? 0 : 1,
+          }}
+        >
+          {user ? (
+            <>
               <Button
                 sx={{
-                  bg: "rgba(0,0,0,.25)",
-                  fontWeight: "lite",
                   color: "white",
-                  px: 3,
-                  py: 1,
-                  my: -2,
+                  fontWeight: "lite",
+                  fontSize: 3,
+                }}
+                onClick={async () => {
+                  await fetch("/api/logout")
+                  Router.push("/login")
                 }}
               >
-                Sign Up
+                Logout
               </Button>
-            </NavLink>
-          </>
-        )}
-      </Box>
+              <NavLink href="/account">Account</NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink href="/login">Login</NavLink>
+              <NavLink href="/signup">
+                <Button
+                  sx={{
+                    bg: "rgba(0,0,0,.25)",
+                    fontWeight: "lite",
+                    color: "white",
+                    px: 3,
+                    py: 1,
+                    my: -2,
+                  }}
+                >
+                  Sign Up
+                </Button>
+              </NavLink>
+            </>
+          )}
+        </Box>
+      }
     </Flex>
   )
 }
