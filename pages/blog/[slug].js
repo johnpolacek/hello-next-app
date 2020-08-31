@@ -33,11 +33,8 @@ export default function Post({ post, morePosts, preview, user }) {
   )
 }
 
-export const getServerSideProps = withSession(async function ({
-  params,
-  req,
-  res,
-}) {
+export async function getStaticProps({ params }) {
+
   const post = getPostBySlug(params.slug, [
     "title",
     "date",
@@ -48,34 +45,20 @@ export const getServerSideProps = withSession(async function ({
     "coverImage",
   ])
 
-  const userSession = req.session.get("user")
-  const user = userSession === undefined ? null : req.session.get("user")
+  return {
+    props: { post },
+  }
+}
+
+export async function getStaticPaths() {
+  const posts = getAllPosts(["slug"])
 
   return {
-    props: { user, post },
+    paths: posts.map((post) => {
+      return {
+        params: { ...post },
+      }
+    }),
+    fallback: false,
   }
-})
-
-// export async function getStaticProps({ params }) {
-
-//   return {
-//     props: {
-//       post: {
-//         ...post,
-//       },
-//     },
-//   }
-// }
-
-// export async function getStaticPaths() {
-//   const posts = getAllPosts(["slug"])
-
-//   return {
-//     paths: posts.map((post) => {
-//       return {
-//         params: { ...post },
-//       }
-//     }),
-//     fallback: false,
-//   }
-// }
+}

@@ -19,10 +19,7 @@ const Blog = (props) => {
   )
 }
 
-export const getServerSideProps = withSession(async function ({ req, res }) {
-  const userSession = req.session.get("user")
-  const user = userSession === undefined ? null : req.session.get("user")
-
+export async function getStaticProps() {
   const posts = getAllPosts([
     "title",
     "date",
@@ -33,8 +30,8 @@ export const getServerSideProps = withSession(async function ({ req, res }) {
   ])
 
   return {
-    props: { user, posts },
+    props: { posts },
   }
-})
+}
 
 export default Blog
