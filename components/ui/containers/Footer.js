@@ -49,21 +49,11 @@ const Footer = (props) => (
         <Text sx={{ fontSize: 1 }}>{appConfig.company.description}</Text>
       </Box>
       <Box sx={{ width: "20%", px: 4 }}>
-        <NextLink href="./about" passHref>
-          <Link variant="footer">About</Link>
-        </NextLink>
-        <NextLink href="./docs" passHref>
-          <Link variant="footer">Documentation</Link>
-        </NextLink>
-        <NextLink href="./plans" passHref>
-          <Link variant="footer">Pricing</Link>
-        </NextLink>
-        <NextLink href="./privacy" passHref>
-          <Link variant="footer">Privacy Policy</Link>
-        </NextLink>
-        <NextLink href="./terms" passHref>
-          <Link variant="footer">Terms of Service</Link>
-        </NextLink>
+        {Object.keys(appConfig.links.footer).map((link) => (
+          <NextLink key={link} href={appConfig.links.footer[link]} passHref>
+            <Link variant="footer">{link}</Link>
+          </NextLink>
+        ))}
       </Box>
       <Box sx={{ width: "40%", px: 4 }}>
         {appConfig.social.map((url, i) => (
