@@ -21,8 +21,8 @@ const Nav = () => {
       >
         <NavHome />
         <Box sx={{ pl: 3, display: "inline-block" }}>
-          {Object.keys(appConfig.nav).map((link) => (
-            <NavLink key={link} href={appConfig.nav[link]}>
+          {Object.keys(appConfig.links.nav).map((link) => (
+            <NavLink key={link} href={appConfig.links.nav[link]}>
               {link}
             </NavLink>
           ))}
