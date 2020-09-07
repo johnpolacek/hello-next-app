@@ -36,6 +36,16 @@ The `.env-build` file should never enter our source control as it has private ke
 
 When it comes time for deployment, we will add these environment variables to the remote environment via the console (see the Deployment section).
 
+Additionally, we need admin rights for our API to access our Cloud Firestore so in the Firebase console, navigate to the Service Accounts tab under Settings, and click the Generate new private key button. This will generate a json file that will be downloaded by your browser.
+
+Find this file and move it to the `lib/firebase/admin` folder and rename it to `firebase-adminsdk.json`.
+
+Return to the Firebase console, and under Cloud Firestore, click the Create Database button and then select the Start in test mode option. Choose a location based on proximity to where most of your users will be.
+
+Once the database is provisioned, create a new `users` collection where you can store user data. You will be prompted to create an initial record. Click the Auto-ID option and create a plan field with a Type of String and a value of 0, then click Save. This is where we will be able to tie our authenticated users to a plan id they can sign up for.
+
+Create another collection named `plans` where we can store data every time a user signs up for a plan. Again user the Auto-ID option and then click Save.
+
 Initially your Firebase account will have [security rules](https://firebase.google.com/docs/firestore/security/overview) that allow open access during development. These rules will expire 30 days after you sign up for an account. You will need to [follow the directions from the Firebase docs](https://firebase.google.com/docs/firestore/security/insecure-rules) to update your security rules to to allow only signed-in users to write data.
 
 ```
