@@ -1,11 +1,11 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+import { Text } from "theme-ui"
 import NavLink from "./NavLink"
 import appConfig from "../../../app.config"
 
 const NavHome = (props) => (
   <NavLink href="/">
-    <h1
+    <Text
+      as="h1"
       sx={{
         color: "white",
         fontWeight: "inherit",
@@ -13,7 +13,8 @@ const NavHome = (props) => (
         fontSize: "inherit",
       }}
     >
-      <span
+      <Text
+        as="span"
         sx={{
           pr: "12px",
           position: "relative",
@@ -27,9 +28,9 @@ const NavHome = (props) => (
           src="/logo-app.svg"
           alt={appConfig.name + " Logo"}
         />
-      </span>
+      </Text>
       <span>{appConfig.name}</span>
-    </h1>
+    </Text>
   </NavLink>
 )
 
