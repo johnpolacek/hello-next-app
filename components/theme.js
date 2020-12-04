@@ -109,6 +109,11 @@ export const base = {
       px: 4,
       py: 3,
     },
+    inline: {
+      display: "inline-block",
+      mr: 2,
+      mb: 2, 
+    },
   },
   forms: {
     input: inputStyles,

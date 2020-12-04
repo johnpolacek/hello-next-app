@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
 import React from "react"
 import PropTypes from "prop-types"
 import Link from "next/link"

@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+import { Link as A } from "theme-ui"
 import React from "react"
 import PropTypes from "prop-types"
 import Link from "next/link"
@@ -23,7 +22,7 @@ const NavLink = (props) => {
   }
   return (
     <Link href={props.href} passHref>
-      <a sx={styles}>{props.children}</a>
+      <A sx={styles}>{props.children}</A>
     </Link>
   )
 }

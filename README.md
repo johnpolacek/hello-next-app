@@ -32,7 +32,7 @@ Uncomment then set the environment variables SESSION_SECRET_CURRENT and SESSION_
 
 Duplicate the `.env` as `.env.build` then uncomment and set the `FIREBASE_PRIVATE_KEY` var and set it to the value from the json credentials file you downloaded from Firebase (it should start with `-----BEGIN PRIVATE KEY-----` and end with `\n-----END PRIVATE KEY-----\n`).
 
-The `.env-build` file should never enter our source control as it has private keys that should only be used in our local environment.
+The `.env.build` file should never enter our source control as it has private keys that should only be used in our local environment.
 
 When it comes time for deployment, we will add these environment variables to the remote environment via the console (see the Deployment section).
 
@@ -100,7 +100,16 @@ Refer to the [Next.js docs](https://nextjs.org/docs/routing/introduction) for mo
 
 To set up payment plans, sign up for a Stripe account if you do not already have one. 
 
-API Keys...
+After you’ve signed up for an account, you will get access to your API keys. Add these keys to your `.env.build` config file so that the Stripe API will work in your local environment
+
+*.env.build*
+```
+# Stripe secret
+STRIPE_PUBLIC_KEY_TEST=pk_test_A12...
+STRIPE_SECRET_KEY_TEST=sk_test_B34...
+STRIPE_PUBLIC_KEY=pk_test_C56...
+STRIPE_SECRET_KEY=sk_test_D78...
+```
 
 The default settings in *app.config.js* are for one free and two paid monthly plans that begin with a 30-day free trial. Edit the config file to reflect the payment plans you would like to attach to your app.
 
@@ -167,59 +176,20 @@ This package comes with pre-configured tests. To get them to pass, you will need
 
 ## Deployment
 
-For deployment to `now`, you will need to get a zeit.co account at [zeit.co/signup](https://zeit.co/signup). Once you have an account, you will need to install the Now CLI:
+If you haven’t already, you will need to set up source control for the project. Create a new private github repository and commit your codebase.
+
+We will use vercel for deployment. Create an account at [vercel.com/signup](https://vercel.com/signup) and connect it to your github account. 
+
+Once you have your account, install the Vercel CLI:
 
 ```
-npm install -g now
+npm install -g vercel
 ```
 
-Next, we will use the Now CLI to add the secret vars for Firebase that correspond our local `.env`. _Note that for the multiline private key, you will need the `--` modifier and to enclose the value in quotes._
-
-For the `session-secret-previous` and `session-secret-current` variables, generate your own random 32-character key unique to your app.
+With that done, we can issue the `vercel` command to deploy a new project. Follow the prompts to set it up for our first deployment:
 
 ```
-now secrets add session-secret-previous <secret-value>
-now secrets add session-secret-current <secret-value>
-now secrets add firebase-public-api-key <secret-value>
-now secrets add firebase-project-id <secret-value>
-now secrets add firebase-database-url <secret-value>
-now secrets add firebase-client-email <secret-value>
-now secrets add firebase-auth-domain <secret-value>
-now secrets add firebase-private-key -- "<secret-value>"
-```
-
-Now that we have stored these to our zeit account, we need to create a `now.json` deployment config file in our root directory so that the environment can access them.
-
-```
-{
-  "env": {
-    "FIREBASE_PUBLIC_API_KEY": "@firebase-public-api-key",
-    "FIREBASE_AUTH_DOMAIN": "@firebase-auth-domain",
-    "FIREBASE_DATABASE_URL": "@firebase-database-url",
-    "FIREBASE_PROJECT_ID": "@firebase-project-id",
-    "FIREBASE_CLIENT_EMAIL": "@firebase-client-email",
-    "SESSION_SECRET_CURRENT": "@session-secret-current",
-    "SESSION_SECRET_PREVIOUS": "@session-secret-previous"
-  },
-  "build": {
-    "env": {
-      "FIREBASE_PUBLIC_API_KEY": "@firebase-public-api-key",
-      "FIREBASE_AUTH_DOMAIN": "@firebase-auth-domain",
-      "FIREBASE_DATABASE_URL": "@firebase-database-url",
-      "FIREBASE_PROJECT_ID": "@firebase-project-id",
-      "FIREBASE_CLIENT_EMAIL": "@firebase-client-email",
-      "FIREBASE_PRIVATE_KEY": "@firebase-private-key",
-      "SESSION_SECRET_CURRENT": "@session-secret-current",
-      "SESSION_SECRET_PREVIOUS": "@session-secret-previous"
-    }
-  }
-}
-```
-
-With that done, we can issue the `now` command from the Now CLI. This is a new project (not existing) in `zeit` so we will follow the prompts to set it up for our first deployment:
-
-```
-now
+vercel
 ```
 
 For future deployments, we can run the deploy script which will check that tests pass then push to master and deploy to production.
@@ -227,3 +197,5 @@ For future deployments, we can run the deploy script which will check that tests
 ```
 npm run deploy
 ```
+
+Last, we need to add our environment variables to our deployment configuration. For every variable in our local `.env.build` file, we will need a matching environment variable to be added in the settings for our project in the Vercel console.
