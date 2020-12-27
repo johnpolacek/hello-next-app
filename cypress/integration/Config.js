@@ -28,14 +28,14 @@ describe("Config", function () {
     it("hides create account button when no plans in config", function () {
       cy.visit("/")
       cy.get("h1").contains("From Zero to Web App")
-      cy.get("a").contains("Create Account").should("not.be.visible")
+      cy.get("a").contains("Create Account").should("not.exist")
     })
 
     it("hides login and signup nav when no plans in config", function () {
       cy.visit("/")
       cy.get("h1").contains("From Zero to Web App")
-      cy.get("a").contains("Login").should("not.be.visible")
-      cy.get("a").contains("Sign Up").should("not.be.visible")
+      cy.get("a").contains("Login").should("not.exist")
+      cy.get("a").contains("Sign Up").should("not.exist")
     })
   })
 
