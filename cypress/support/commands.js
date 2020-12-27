@@ -41,8 +41,8 @@ Cypress.Commands.add("fillOutCreditCardForm", () => {
 
 Cypress.Commands.add("login", (email, password) => {
   cy.visit("/login")
-  cy.get("#LoginForm")
-  cy.get("input[name=email]").type(email)
+  cy.get("#LoginForm", { timeout: 10000 })
+  cy.get("input[name=email]", { timeout: 10000 }).type(email)
   cy.get("input[name=password]").type(password)
   cy.get("form").find("button").contains("Login").click()
   cy.get(".signedin-message", { timeout: 10000 })
