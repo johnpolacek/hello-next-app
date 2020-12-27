@@ -10,7 +10,7 @@
     "format-watch": "npm run format && onchange \"**/*.{js,jsx,json,md}\" -- prettier --write {{changed}}",
     "test": "cypress run",
     "cypress": "cypress open",
-    "deploy": "npm run test && git push origin main && now --prod"
+    "deploy": "npm run test && git push origin main && vercel --prod"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.6.22",
