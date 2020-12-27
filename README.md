@@ -103,6 +103,7 @@ To set up payment plans, sign up for a Stripe account if you do not already have
 After you’ve signed up for an account, you will get access to your API keys. Add these keys to your `.env.build` config file so that the Stripe API will work in your local environment
 
 *.env.build*
+
 ```
 # Stripe secret
 STRIPE_PUBLIC_KEY_TEST=pk_test_A12...
