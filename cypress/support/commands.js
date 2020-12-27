@@ -62,7 +62,7 @@ Cypress.Commands.add("canViewAccountInfo", (userData) => {
   cy.get("div").contains(userData.plan).should("be.visible")
 
   const billingVisible =
-    userData.plan === "Starter" ? "not.be.visible" : "be.visible"
+    userData.plan === "Starter" ? "not.exist" : "be.visible"
 
   cy.get("label").contains("Billing").should(billingVisible)
   cy.get("div").contains("visa").should(billingVisible)

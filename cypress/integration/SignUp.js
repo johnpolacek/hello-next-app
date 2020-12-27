@@ -14,7 +14,7 @@ describe("Sign Up", () => {
         .should("be.visible")
       cy.get("h2")
         .contains("Choose the plan that’s right for you")
-        .should("not.be.visible")
+        .should("not.exist")
     })
 
     it("blocks using existing email", function () {
@@ -31,7 +31,7 @@ describe("Sign Up", () => {
           .should("be.visible")
         cy.get("h2")
           .contains("Choose the plan that’s right for you")
-          .should("not.be.visible")
+          .should("not.exist")
       })
     })
   })
@@ -39,7 +39,7 @@ describe("Sign Up", () => {
   describe("valid form submit", () => {
     beforeEach(() => {
       cy.exec(
-        "export GOOGLE_APPLICATION_CREDENTIALS='./lib/firebase/admin/firebase-adminsdk-ykx60-eb3ef0c1c5.json' && node ./lib/firebase/admin/deleteTestUser.js",
+        "export GOOGLE_APPLICATION_CREDENTIALS='./lib/firebase/admin/firebase-adminsdk.json' && node ./lib/firebase/admin/deleteTestUser.js",
         { failOnNonZeroExit: false }
       )
       cy.visit("/signup")
@@ -56,13 +56,13 @@ describe("Sign Up", () => {
 
     afterEach(() => {
       cy.exec(
-        "export GOOGLE_APPLICATION_CREDENTIALS='./lib/firebase/admin/firebase-adminsdk-ykx60-eb3ef0c1c5.json' && node ./lib/firebase/admin/deleteTestUser.js",
+        "export GOOGLE_APPLICATION_CREDENTIALS='./lib/firebase/admin/firebase-adminsdk.json' && node ./lib/firebase/admin/deleteTestUser.js",
         { failOnNonZeroExit: false }
       )
     })
 
     it("creates free starter account", () => {
-      cy.get("a[href='./plans/starter/ready']").click()
+      cy.get("a[href='/plans/starter/ready']").click()
       cy.get("#PlanSignupSuccess", { timeout: 10000 })
       cy.get("h2").contains("All Set!").should("be.visible")
       // No checkout form, can view account page
