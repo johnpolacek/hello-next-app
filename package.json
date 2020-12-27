@@ -13,7 +13,6 @@
     "deploy": "npm run test && git push origin main && now --prod"
   },
   "dependencies": {
-    "@emotion/react": "^11.1.4",
     "@mdx-js/loader": "^1.6.22",
     "@mdx-js/runtime": "^1.6.22",
     "@next/mdx": "^10.0.4",

@@ -3,6 +3,8 @@ import Link from "next/link"
 import ButtonLink from "../ui/nav/ButtonLink"
 import appConfig from "../../app.config"
 
+console.log("appConfig.plans", appConfig.plans)
+
 const Index = (props) => (
   <Box sx={{ textAlign: "center", width: "100%", color: "white", py: 5 }}>
     {props.isSignedIn ? (
@@ -20,7 +22,7 @@ const Index = (props) => (
         <Box sx={{ pb: 5 }}>
           {appConfig.plans && appConfig.plans.length > 0 && (
             <Box sx={{ display: "inline-block", mx: 3 }}>
-              <ButtonLink fontSize={4} bg="secondary" href="/signup">
+              <ButtonLink id="CreateAccount" fontSize={4} bg="secondary" href="/signup">
                 Create Account
               </ButtonLink>
             </Box>
