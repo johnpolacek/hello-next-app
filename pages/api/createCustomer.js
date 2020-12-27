@@ -4,7 +4,7 @@ import Stripe from "stripe"
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST)
 
 export default async (req, res) => {
-  const debug = true
+  const debug = false
 
   if (req.method === "POST") {
     const {
