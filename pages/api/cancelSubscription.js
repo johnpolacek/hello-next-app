@@ -15,17 +15,10 @@ export default async (req, res) => {
 
           const userData = { plan: 0 }
           const setUserResult = updateUserProperties(uid, userData).then(() => {
-            console.log(
-              `cancelSubscription: Successfully set user data: ${JSON.stringify(
-                userData
-              )}`
-            )
-
             res.status(200).json({ err, confirmation })
           })
         })
       } catch (e) {
-        console.log(`create-customer:: Error: ${e.message}`)
         res.status(500).json({ statusCode: 500, message: e.message })
       }
     } else {

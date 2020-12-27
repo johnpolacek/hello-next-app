@@ -6,7 +6,6 @@ import Layout from "../components/layout/Layout"
 import Account from "../components/views/Account"
 
 const AccountPage = (props) => {
-  console.log("AccountPage props.user", props.user)
   return (
     <Layout
       url="/"
