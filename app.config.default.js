@@ -40,10 +40,17 @@ module.exports = {
   shareImage: "https://hellonextapp.com/screenshot.png",
   shareImageAlt: "Hello Next App Screenshot",
   // use this to set the links in the main nav
-  nav: {
-    About: "/about",
-    Blog: "/blog",
-    Docs: "/docs",
+  links: {
+    footer: {
+      Pricing: "/pricing",
+      "Privacy Policy": "/privacy",
+      "Terms of Service": "/terms",
+    },
+    nav: {
+      About: "/about",
+      Blog: "/blog",
+      Docs: "/docs",
+    },
   },
   // use this to link to an external demo url or a demo section with an embedded video
   demo: "https://player.vimeo.com/video/330041609",
