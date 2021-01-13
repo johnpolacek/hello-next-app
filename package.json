@@ -10,7 +10,7 @@
     "format-watch": "npm run format && onchange \"**/*.{js,jsx,json,md}\" -- prettier --write {{changed}}",
     "test": "cypress run",
     "cypress": "cypress open",
-    "deploy": "npm run test && git push origin main && vercel --prod"
+    "release": "npm run test && git push origin main && vercel --prod"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.6.22",
@@ -34,7 +34,7 @@
     "react-ga": "^3.3.0",
     "react-social-icons": "^4.1.0",
     "stripe": "^8.130.0",
-    "swr": "^0.4.0",
+    "swr": "^0.3.11",
     "theme-ui": "^0.3.5"
   },
   "devDependencies": {
