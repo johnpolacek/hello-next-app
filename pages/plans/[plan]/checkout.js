@@ -39,7 +39,7 @@ export const getServerSideProps = async (ctx) => {
     currency: "usd",
   })
 
-  setCookie(ctx, "paymentIntentId", paymentIntent.id)
+  setCookie(ctx, "paymentIntentId", paymentIntent.id, {})
 
   return {
     props: {

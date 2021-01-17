@@ -64,7 +64,7 @@ export const getServerSideProps = withSession(async (ctx) => {
       currency: "usd",
     })
 
-    setCookie(ctx, "paymentIntentId", paymentIntent.id)
+    setCookie(ctx, "paymentIntentId", paymentIntent.id, {})
 
     return await getPlan(user.uid).then((currPlan) => {
       return {
