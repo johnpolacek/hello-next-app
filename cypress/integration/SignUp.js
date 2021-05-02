@@ -26,7 +26,7 @@ describe("Sign Up", () => {
         cy.get("input[name=password]").type("aa" + Math.random())
         cy.get("input[type=checkbox]").parent().click()
         cy.get("#SignupForm button").click()
-        cy.get("p", { timeout: 10000 })
+        cy.get("div", { timeout: 10000 })
           .contains("The email address is already in use by another account.")
           .should("be.visible")
         cy.get("h2")

@@ -47,12 +47,12 @@ const ConfirmDowngradePlan = (props) => {
       }}
     >
       <PlanSelected plan={freePlan.name} />
-      <Text sx={{ pb: 5, mt: -2 }}>
+      <Text as="p" sx={{ pb: 5, mt: -2 }}>
         After making this change, you will no longer have the benefits of your
         paid plan. Are you sure you want to downgrade to {freePlan.name}?
       </Text>
       {error && (
-        <Text sx={{ color: "red", py: 3 }}>
+        <Text as="p" sx={{ color: "red", py: 3 }}>
           Sorry there was an error downgrading your account. Please contact
           support at {appConfig.support}
         </Text>

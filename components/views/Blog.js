@@ -37,7 +37,7 @@ const Blog = (props) => (
               <a sx={{color:"white", textDecoration: "none"}}>{post.title}</a>
             </Link>
           </Heading>
-          <Text sx={{ pb: 3 }}>{post.excerpt}</Text>
+          <Text as="p" sx={{ pb: 3 }}>{post.excerpt}</Text>
           <Link href={"/blog/" + post.slug} passHref>
             <a sx={{ color: "white", fontWeight: "bold", fontStyle: "italic" }}>
               Read more...

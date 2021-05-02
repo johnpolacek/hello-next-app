@@ -8,6 +8,7 @@ const PricingPlan = (props) => (
     {props.isCurrent && (
       <Box sx={{ mt: -5, mb: 3 }}>
         <Text
+          as="div"
           id="currentPlanLabel"
           data-plan={props.name}
           sx={{
@@ -44,7 +45,7 @@ const PricingPlan = (props) => (
       </Text>
     </Box>
     {props.isMonthly && (
-      <Text sx={{ fontSize: 2, opacity: 0.75 }}>per month</Text>
+      <Text as="p" sx={{ fontSize: 2, opacity: 0.75 }}>per month</Text>
     )}
     <Box sx={{ py: 4 }}>
       {props.isCurrent ? (

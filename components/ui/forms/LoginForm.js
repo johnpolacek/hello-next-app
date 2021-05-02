@@ -10,7 +10,7 @@ import Form from "./Form"
 initFirebase()
 
 const SignupLink = () => (
-  <Text sx={{ pt: 4, width: "100%", textAlign: "center" }}>
+  <Text as="p" sx={{ pt: 4, width: "100%", textAlign: "center" }}>
     Don’t have an account?{" "}
     <Link href="/signup" passHref>
       <a>Sign Up</a>
