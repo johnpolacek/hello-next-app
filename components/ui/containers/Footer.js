@@ -25,7 +25,7 @@ const Footer = (props) => (
       }}
     >
       <Box sx={{ width: "40%", pl: 4, pr: 6 }}>
-        <Text sx={{ fontWeight: 600, fontSize: 3, pb: 2, pr: 3 }}>
+        <Text as="p" sx={{ fontWeight: 600, fontSize: 3, pb: 2, pr: 3 }}>
           <span
             sx={{
               pr: "12px",
@@ -46,7 +46,7 @@ const Footer = (props) => (
             {appConfig.company.name}
           </Text>
         </Text>
-        <Text sx={{ fontSize: 1 }}>{appConfig.company.description}</Text>
+        <Text as="p" sx={{ fontSize: 1 }}>{appConfig.company.description}</Text>
       </Box>
       <Box sx={{ width: "20%", px: 4 }}>
         {Object.keys(appConfig.links.footer).map((link) => (

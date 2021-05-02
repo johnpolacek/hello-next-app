@@ -18,7 +18,7 @@ const Account = (props) => {
       sx={{ textAlign: "center", width: "100%", color: "white", pb: 5 }}
     >
       <Heading variant="headline">Your Account</Heading>
-      <Text sx={{ pb: 4, fontStyle: "italic" }}>{error}&nbsp;</Text>
+      <Text as="p" sx={{ pb: 4, fontStyle: "italic" }}>{error}&nbsp;</Text>
       {plan ? (
         <>
           <DataRow
