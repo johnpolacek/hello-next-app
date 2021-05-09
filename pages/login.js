@@ -8,7 +8,7 @@ const LoginPage = () => {
     <Layout
       url="/"
       title={appConfig.name + " | Login"}
-      description="The account login page for Hello Next App"
+      description={"The account login page for "+appConfig.name}
     >
       <LoginForm />
     </Layout>
