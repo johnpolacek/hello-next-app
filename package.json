@@ -19,6 +19,7 @@
     "@stripe/react-stripe-js": "^1.2.0",
     "@stripe/stripe-js": "^1.11.0",
     "@theme-ui/color": "^0.7.5",
+    "caniuse-lite": "^1.0.30001344",
     "cookie-session": "1.4.0",
     "dotenv": "8.2.0",
     "firebase": "^8.2.4",
