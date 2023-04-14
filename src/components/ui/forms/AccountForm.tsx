@@ -1,25 +1,62 @@
 import React, { useState } from "react";
-import { useAuth } from "../../../context/AuthContext";
-import { useRouter } from "next/router";
 import Input from "../controls/Input";
 import { UserType } from "../../../context/AuthContext";
 
 const AccountForm = ({ user }: { user: UserType }) => {
-  const [name, setName] = useState<string>(user.displayName || "");
+  const DEFAULT_PASSWORD = "**********";
+  const [displayName, setDisplayName] = useState<string>(
+    user.displayName || ""
+  );
   const [email, setEmail] = useState<string>(user.email || "");
-  const [password, setPassword] = useState<string>("********");
+  const [password, setPassword] = useState<string>(DEFAULT_PASSWORD);
   const [error, setError] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isUpdated, setIsUpdated] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setIsUpdated(false);
+    try {
+      const options: { displayName: string; email: string; password?: string } =
+        { displayName, email };
+      if (password !== DEFAULT_PASSWORD) {
+        options.password = password;
+      }
+      const response = await fetch("/api/user/update", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uid: user.uid,
+          options,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setIsUpdated(true);
+      } else {
+        setError(result.message);
+      }
+      setIsSubmitting(false);
+    } catch (error) {
+      setError("Sorry there was a problem.");
+    }
   };
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
-      <h2 className="font-bold text-2xl sm:text-4xl pb-20 text-center">
+      <h2 className="font-bold text-2xl sm:text-4xl text-center">
         Manage Account
       </h2>
+      <p
+        className={`text-center pt-4 pb-16 text-green-600 ${
+          isUpdated ? "" : "opacity-0"
+        }`}
+      >
+        ✓ Account Updated
+      </p>
       <div
         className="text-sm sm:text-lg sm:grid gap-x-2 gap-y-6 w-[480px]"
         style={{ gridTemplateColumns: "1fr 2fr" }}
@@ -31,9 +68,9 @@ const AccountForm = ({ user }: { user: UserType }) => {
           Display Name
         </label>
         <Input
-          value={name}
+          value={displayName}
           onChange={(e) => {
-            setName(e.target.value);
+            setDisplayName(e.target.value);
           }}
           name="name"
           type="text"
@@ -71,7 +108,7 @@ const AccountForm = ({ user }: { user: UserType }) => {
         />
       </div>
       <div
-        className={`py-2 text-sm sm:text-base text-red-600 ${
+        className={`py-2 text-sm sm:text-base text-red-600 text-center ${
           error ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -82,7 +119,7 @@ const AccountForm = ({ user }: { user: UserType }) => {
           disabled={isSubmitting}
           type="submit"
           className={`font-sans ${
-            isSubmitting ? "bg-gray-600" : "bg-indigo-600"
+            isSubmitting ? "bg-gray-600 opacity-20" : "bg-indigo-600"
           } w-full sm:w-auto text-white rounded-xl py-3 px-8 text-xl`}
         >
           Update Account
