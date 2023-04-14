@@ -4,6 +4,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import UserIcon from "../graphics/icon/UserIcon";
 
 export default function AccountDropdown({
   displayName,
@@ -22,10 +23,11 @@ export default function AccountDropdown({
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-8 py-3 text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-          {displayName}
+        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-lg bg-white px-4 py-3 opacity-60 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+          <UserIcon />
+          <span className="pl-1">{displayName}</span>
           <ChevronDownIcon
-            className="-mr-1 h-5 w-5 text-gray-400"
+            className="-mr-1 h-5 w-5 text-gray-800"
             aria-hidden="true"
           />
         </Menu.Button>
