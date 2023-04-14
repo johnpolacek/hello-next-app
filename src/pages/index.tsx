@@ -1,5 +1,7 @@
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
+import MyStatusCard from "@/components/ui/cards/MyStatusCard";
+import StatusesList from "@/components/ui/lists/StatusesList";
 
 export default function Home() {
   const { user } = useAuth();
@@ -9,6 +11,7 @@ export default function Home() {
       {user?.uid ? (
         <>
           <h2 className="text-4xl font-bold">Welcome back!</h2>
+          <MyStatusCard />
         </>
       ) : (
         <>
@@ -21,6 +24,9 @@ export default function Home() {
           </Link>
         </>
       )}
+      <div>
+        <StatusesList />
+      </div>
     </div>
   );
 }

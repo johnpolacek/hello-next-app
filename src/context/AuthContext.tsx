@@ -9,19 +9,44 @@ import {
   signOut as signOutUser,
   updateProfile,
   updatePassword,
+  getIdToken,
+  UserCredential,
 } from "firebase/auth";
 import { auth } from "../lib/firebase/client/auth";
 import appConfig from "@/app.config";
 
+// Define the type for the context
+interface AuthContextType {
+  user: UserType;
+  signUp: (
+    email: string,
+    password: string,
+    displayName: string
+  ) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<UserCredential>;
+  signOut: () => Promise<void>;
+  requestPasswordReset: (email: string) => Promise<void>;
+  isSignInWithLink: (emailLink: string) => Promise<boolean>;
+  signInWithLink: (email: string, emailLink: string) => Promise<UserCredential>;
+  setNewPassword: (password: string) => Promise<void | { error: string }>;
+  loading: boolean;
+  getAuthToken: () => Promise<string>;
+}
 export interface UserType {
   email: string | null;
   uid: string | null;
   displayName: string | null;
 }
 
-const AuthContext = createContext({});
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const useAuth = () => useContext<any>(AuthContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
 
 export const AuthContextProvider = ({
   children,
@@ -112,6 +137,13 @@ export const AuthContextProvider = ({
     return requestPasswordResetResult;
   };
 
+  const getAuthToken = async (): Promise<string> => {
+    if (auth.currentUser) {
+      return await getIdToken(auth.currentUser);
+    }
+    return "";
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -124,6 +156,7 @@ export const AuthContextProvider = ({
         signInWithLink,
         setNewPassword,
         loading,
+        getAuthToken,
       }}
     >
       {loading ? null : children}
