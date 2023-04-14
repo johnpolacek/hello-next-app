@@ -51,7 +51,7 @@ const AccountForm = ({ user }: { user: UserType }) => {
         Manage Account
       </h2>
       <p
-        className={`text-center pt-4 pb-16 text-green-600 ${
+        className={`text-center pt-4 pb-12 text-green-600 ${
           isUpdated ? "" : "opacity-0"
         }`}
       >
@@ -114,7 +114,7 @@ const AccountForm = ({ user }: { user: UserType }) => {
       >
         {error && error.replace("Firebase: ", "")}
       </div>
-      <div className="flex justify-end mb-2">
+      <div className="flex justify-end mt-4 mb-2">
         <button
           disabled={isSubmitting}
           type="submit"

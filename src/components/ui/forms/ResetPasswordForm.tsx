@@ -15,10 +15,12 @@ const ResetPasswordForm = () => {
   const { isSignInWithLink, signInWithLink, setNewPassword, auth } = useAuth();
 
   useEffect(() => {
-    isSignInWithLink(window.location.href).then((linkCheck: boolean) => {
-      setIsValidLink(linkCheck);
-    });
-  }, []);
+    if (isSignInWithLink) {
+      isSignInWithLink(window.location.href).then((linkCheck: boolean) => {
+        setIsValidLink(linkCheck);
+      });
+    }
+  }, [isSignInWithLink]);
 
   useEffect(() => {
     if (isValidLink && signInWithLink) {
