@@ -1,8 +1,8 @@
-import admin from "firebase-admin"
-import { firebaseConfig } from "../config"
+import admin from "firebase-admin";
+import { firebaseConfig } from "../config";
 
 try {
-  admin.instanceId()
+  admin.instanceId();
 } catch (err) {
   admin.initializeApp({
     credential: admin.credential.cert({
@@ -11,10 +11,10 @@ try {
       privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
     }),
     databaseURL: `https://${firebaseConfig.projectId}.firebaseio.com`,
-  })
+  });
 }
 
-const db = admin.firestore()
-const auth = admin.auth()
+const db = admin.firestore();
+const auth = admin.auth();
 
-export { db, auth }
+export { db, auth };
