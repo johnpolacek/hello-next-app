@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import AccountDropdown from "./controls/AccountDropdown";
+import AccountDropdown from "../controls/AccountDropdown";
 
 export default function Header() {
   const { user } = useAuth();

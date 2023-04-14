@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import Layout from "@/components/ui/Layout";
+import Layout from "@/components/ui/layout/Layout";
 import Head from "next/head";
 import appConfig from "@/app.config";
 import { AuthContextProvider } from "@/context/AuthContext";

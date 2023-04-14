@@ -3,7 +3,7 @@ import {
   updateUser,
   UpdateUserOptions,
   UpdateUserResult,
-} from "../../lib/firebase/admin";
+} from "@/lib/firebase/admin/user";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
