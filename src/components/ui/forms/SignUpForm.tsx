@@ -95,7 +95,7 @@ const SignUpForm = () => {
           disabled={isSubmitting}
           type="submit"
           className={`font-sans ${
-            isSubmitting ? "bg-gray-600" : "bg-indigo-600"
+            isSubmitting ? "bg-gray-600 opacity-20" : "bg-indigo-600"
           } w-full sm:w-auto text-white rounded-xl py-3 px-8 text-xl`}
         >
           Sign Up

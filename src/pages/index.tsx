@@ -6,16 +6,20 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center py-16 gap-8">
-      <h2 className="text-2xl font-bold">HOME</h2>
       {user?.uid ? (
-        <h3>Welcome back {user.displayName}</h3>
+        <>
+          <h2 className="text-4xl font-bold">Welcome back!</h2>
+        </>
       ) : (
-        <Link
-          className="bg-indigo-600 text-lg text-white rounded-lg px-8 py-3"
-          href="/signup"
-        >
-          Sign Up
-        </Link>
+        <>
+          <h2 className="text-4xl font-bold">Welcome!</h2>
+          <Link
+            className="bg-indigo-600 text-lg text-white rounded-lg px-8 py-3"
+            href="/signup"
+          >
+            Sign Up
+          </Link>
+        </>
       )}
     </div>
   );
