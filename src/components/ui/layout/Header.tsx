@@ -9,7 +9,7 @@ export default function Header() {
 
   return (
     <header className="flex items-center px-16 py-8 bg-white w-full">
-      <Link href="/" className="text-xl tracking-wide text-gray-800">
+      <Link href="/" className="text-xl tracking-wide text-gray-700">
         <Image
           className="inline -mt-1"
           width={32}
