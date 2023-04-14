@@ -77,7 +77,7 @@ const SignInForm = () => {
           disabled={isSubmitting}
           type="submit"
           className={`${
-            isSubmitting ? "bg-gray-500" : "bg-indigo-600"
+            isSubmitting ? "bg-gray-500 opacity-20" : "bg-indigo-600"
           } text-white rounded-xl py-3 px-8 text-xl`}
         >
           Sign In
