@@ -12,7 +12,7 @@ const ResetPasswordForm = () => {
   const [emailMissing, setEmailMissing] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [isValidLink, setIsValidLink] = useState<boolean>(false);
-  const { isSignInWithLink, signInWithLink, setNewPassword, auth } = useAuth();
+  const { isSignInWithLink, signInWithLink, setNewPassword } = useAuth();
 
   useEffect(() => {
     if (isSignInWithLink) {
