@@ -21,7 +21,7 @@ export default function Header() {
       </Link>
       <nav className="flex flex-1 justify-end">
         {user?.uid ? (
-          <AccountDropdown displayName={user.displayName} />
+          <AccountDropdown displayName={user.displayName || ""} />
         ) : (
           <Link className="py-2 px-6 border-2 rounded-lg" href="/signin">
             Sign In
