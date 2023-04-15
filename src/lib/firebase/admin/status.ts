@@ -4,7 +4,7 @@ export interface Status {
   status: string;
   uid: string;
   timestamp: number;
-  displayName?: string;
+  displayName?: string | null;
 }
 
 export const saveStatus = async (status: string, userToken: string) => {
