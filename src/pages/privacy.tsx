@@ -7,7 +7,7 @@ const PrivacyPage: NextPage = () => {
     <div className="container mx-auto px-6 py-12 max-w-3xl">
       <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
       <p className="mb-4">
-        Your privacy is important to us. It is {appConfig.name}'s policy to
+        Your privacy is important to us. It is {appConfig.name}’s policy to
         respect your privacy regarding any information we may collect from you
         across our website,{" "}
         <a href={appConfig.url} className="text-indigo-600">
