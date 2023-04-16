@@ -18,7 +18,7 @@ const SignUpForm = () => {
       setIsSubmitting(true);
       try {
         await signUp(email, password, name);
-        router.push("/");
+        window.location.href = "/";
       } catch (error: any) {
         setError(error.message);
         setIsSubmitting(false);
