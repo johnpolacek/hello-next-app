@@ -8,7 +8,7 @@ export default function Header() {
   const { user } = useAuth();
 
   return (
-    <header className="flex items-center px-16 py-8 bg-white w-full">
+    <header className="flex flex-col sm:flex-row gap-6 items-center sm:px-8 md:px-12 py-8 bg-white w-full border-b">
       <Link href="/" className="text-xl tracking-wide text-gray-700">
         <Image
           className="inline -mt-1"
