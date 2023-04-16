@@ -2,6 +2,7 @@ import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 import MyStatusCard from "@/components/ui/cards/MyStatusCard";
 import StatusesList from "@/components/ui/lists/StatusesList";
+import About from "@/components/views/About";
 
 export default function Home() {
   const { user } = useAuth();
@@ -24,8 +25,9 @@ export default function Home() {
           </Link>
         </>
       )}
-      <div>
-        <StatusesList />
+      <StatusesList />
+      <div className="max-w-[960px] mx-auto mt-16 border-t pt-16">
+        <About />
       </div>
     </div>
   );
