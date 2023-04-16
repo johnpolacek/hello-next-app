@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "npx playwright test",
+    "test-watch": "npx playwright test --headed",
+    "test-write": "npx playwright codegen localhost:3000/"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
@@ -28,8 +31,11 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.32.3",
+    "dotenv": "^16.0.3",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "playwright": "^1.32.3",
     "prettier": "^2.8.7"
   }
 }

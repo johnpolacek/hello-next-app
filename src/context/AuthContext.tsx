@@ -89,6 +89,7 @@ export const AuthContextProvider = ({
       password,
       displayName,
     });
+    console.log("updateProfile", { displayName });
     return updateProfile(result.user, {
       displayName,
     });

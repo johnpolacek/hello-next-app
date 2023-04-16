@@ -48,6 +48,9 @@ const MyStatusCard = () => {
     }
   };
 
+  console.log({ status });
+  console.log("status !== '' " + status !== "");
+
   return (
     <div className="bg-white shadow-md rounded-lg pt-8 px-8 pb-12 w-full max-w-sm text-center">
       <h2 className="text-xl mb-4">Your Current Status</h2>
@@ -62,13 +65,7 @@ const MyStatusCard = () => {
       ) : (
         <>
           <div className="border text-9xl py-16 mb-4">
-            <span
-              className={`transition-all duration-1000 ${
-                status ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              {status || "😀"}
-            </span>
+            <span>{status !== "" ? status : "😀"}</span>
           </div>
           <button
             onClick={() => {
