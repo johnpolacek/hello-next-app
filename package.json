@@ -1,7 +1,7 @@
 {
   "name": "hello-next-app",
   "description": "Next.js Starter Project to get you up and running in production quickly with Firebase Authentication, Cloud Firestore Database, Serverless Edge Functions, Playwright Testing and more.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "https://github.com/johnpolacek/hello-next-app",
   "repository": {
     "type": "git",
