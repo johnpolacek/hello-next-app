@@ -1,7 +1,7 @@
 import { existingUser } from "../../playwright/users";
 import { updateUser } from "./user";
 
-import { auth } from "./firebaseInit";
+import { auth, db } from "./firebaseInit";
 
 export const deleteTestUser = async (testUserEmail: string) => {
   const collectionName = "users-test";
@@ -37,6 +37,17 @@ export const resetTestUser = async () => {
       email: existingUser.email,
       password: existingUser.password,
     });
+
+    // Query the status-test collection for documents with the target uid
+    const querySnapshot = await db
+      .collection("status-test")
+      .where("uid", "==", uid)
+      .get();
+
+    // Delete each document that matches the target uid
+    const deletePromises = querySnapshot.docs.map((doc) => doc.ref.delete());
+    await Promise.all(deletePromises);
+
     return { result: "success" };
   } catch (error) {
     console.log("deleteTestUser error, probably already deleted");

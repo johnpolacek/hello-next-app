@@ -1,7 +1,8 @@
+import { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import SignUpForm from "@/components/ui/forms/SignUpForm";
 
-export default function Signup() {
+const SignupPage: NextPage = () => {
   return (
     <div className="flex flex-col items-center justify-center py-24">
       <SignUpForm />
@@ -13,4 +14,14 @@ export default function Signup() {
       </p>
     </div>
   );
-}
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=100000, stale-while-revalidate=1000000"
+  );
+  return { props: { title: "Sign Up" } };
+};
+
+export default SignupPage;

@@ -1924,6 +1924,137 @@ jobs:
 
 In your Github repository settings, enable ”Allow auto-merge” and you will be able to have your pull requests get merged once tests pass.
 
+Let’s write some tests for existing users. First, we can make a `signIn` helper function.
+
+```
+// src/lib/playwright/commands.ts
+import { Page } from "@playwright/test";
+import { existingUser } from "./users";
+
+export const signIn = async (page: Page) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "Sign In" }).click();
+  await page.locator('input[name="email"]').fill(existingUser.email);
+  await page.locator('input[name="email"]').press("Tab");
+  await page.locator('input[name="password"]').fill(existingUser.password);
+  await page.getByRole("button", { name: "Sign In" }).click();
+};
+```
+
+Then we need a new cleanup function to reset the test user data:
+
+```
+// src/lib/firebase/admin/test.ts
+import { existingUser } from "../../playwright/users";
+import { updateUser } from "./user";
+
+import { auth, db } from "./firebaseInit";
+
+export const deleteTestUser = async (testUserEmail: string) => {
+  const collectionName = "users-test";
+
+  try {
+    // Get the user's UID by email address from Firebase Authentication
+    const userRecord = await auth.getUserByEmail(testUserEmail);
+    const uid = userRecord.uid;
+
+    console.log("Deleting test user...");
+
+    // Delete the user from Firebase Authentication
+    await auth.deleteUser(uid);
+    console.log(
+      `User with UID ${uid} has been deleted from Firebase Authentication.`
+    );
+
+    return { result: "success" };
+  } catch (error) {
+    console.log("deleteTestUser error, probably already deleted");
+    return { result: "error" };
+  }
+};
+
+export const resetTestUser = async () => {
+  try {
+    // Get the user's UID by email address from Firebase Authentication
+    const userRecord = await auth.getUserByEmail(existingUser.email);
+    const uid = userRecord.uid;
+
+    updateUser(uid, {
+      displayName: existingUser.name,
+      email: existingUser.email,
+      password: existingUser.password,
+    });
+
+    // Query the status-test collection for documents with the target uid
+    const querySnapshot = await db
+      .collection("status-test")
+      .where("uid", "==", uid)
+      .get();
+
+    // Delete each document that matches the target uid
+    const deletePromises = querySnapshot.docs.map((doc) => doc.ref.delete());
+    await Promise.all(deletePromises);
+
+    return { result: "success" };
+  } catch (error) {
+    console.log("deleteTestUser error, probably already deleted");
+    return { result: "error" };
+  }
+};
+```
+
+Now we can write the tests:
+
+```
+import { test } from "@playwright/test";
+import { signIn } from "../src/lib/playwright/commands";
+import { resetTestUser } from "../src/lib/firebase/admin/test";
+
+test.describe("Existing User", () => {
+  test.beforeEach(async ({ page }) => {
+    const resetResult = await resetTestUser();
+    console.log(`Reset test user result: ${resetResult.result}`);
+    await signIn(page);
+  });
+
+  test.afterEach(async () => {
+    const resetResult = await resetTestUser();
+    console.log(`Reset test user result: ${resetResult.result}`);
+  });
+
+  test("can update status", async ({ page }) => {
+    await page
+      .getByRole("heading", { name: "Your Current Status" })
+      .isVisible();
+    await page.getByText("😀").isVisible();
+    await page.getByRole("button", { name: "Change" }).click();
+    await page
+      .getByRole("button", { name: "rolling on the floor laughing" })
+      .click();
+    await page.getByText("🤣").isVisible();
+  });
+
+  test("can update account settings", async ({ page }) => {
+    await page.getByRole("button", { name: "Old Guy" }).click();
+    await page.getByRole("menuitem", { name: "Account settings" }).click();
+    await page.getByRole("heading", { name: "Manage Account" }).click();
+    await page.locator('input[name="name"]').click();
+    await page.locator('input[name="name"]').fill("Old Guy1");
+    await page.getByRole("button", { name: "Update Account" }).click();
+    await page.getByText("✓ Account Updated").click();
+    await page.getByRole("button", { name: "Old Guy1" }).isVisible();
+  });
+
+  test("can logout", async ({ page }) => {
+    await page.getByRole("button", { name: "Old Guy" }).click();
+    await page.getByRole("menuitem", { name: "Sign out" }).click();
+    await page.getByRole("heading", { name: "Welcome!" }).isVisible();
+    await page.getByRole("link", { name: "Sign In" }).click();
+    await page.getByRole("heading", { name: "Sign In" }).isVisible();
+  });
+});
+```
+
 
 ## Learn More
 

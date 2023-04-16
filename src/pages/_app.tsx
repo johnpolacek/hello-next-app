@@ -4,36 +4,18 @@ import Layout from "@/components/ui/layout/Layout";
 import Head from "next/head";
 import appConfig from "@/app.config";
 import { AuthContextProvider } from "@/context/AuthContext";
-
-interface OpenGraphDataItem {
-  property?: string;
-  name?: string;
-  content: string;
-}
-
-const defaultOpenGraphData = [
-  { property: "og:type", content: "website" },
-  { property: "og:site_name", content: appConfig.name },
-  { property: "og:description", content: appConfig.description },
-  { property: "og:title", content: appConfig.name },
-  { property: "og:image", content: appConfig.image },
-  { name: "twitter:card", content: "summary_large_image" },
-  { name: "twitter:title", content: appConfig.name },
-  { name: "twitter:description", content: appConfig.description },
-  { name: "twitter:image", content: appConfig.image },
-];
+import { getOpengraphData, OpenGraphDataItem } from "@/util/opengraph";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const {
-    openGraphData = defaultOpenGraphData,
-    title,
-    description,
-  } = pageProps;
+  const { title, description, image } = pageProps;
+  const openGraphData = getOpengraphData({ title, description, image });
   return (
     <AuthContextProvider>
       {openGraphData.length > 0 && (
         <Head>
-          <title>{title || appConfig.name}</title>
+          <title>
+            {title ? appConfig.name + " | " + title : appConfig.name}
+          </title>
           <meta
             name="description"
             content={description || appConfig.description}
