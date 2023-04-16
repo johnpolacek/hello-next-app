@@ -6,25 +6,6 @@
 
 Starting from nothing, we'll go through the process of creating a production-ready web application, integrating Firebase Authentication and Playwright for end-to-end testing.
 
-- **tRPC**: A cutting-edge framework for building typesafe APIs, offering:
-  - End-to-end typing
-  - Streamlined API calls
-  - Enhanced developer experience
-  - [trpc.io](https://trpc.io/)
-
-- **Next.js**: A widely used React framework that simplifies building server-rendered applications, boasting features such as:
-  - Hybrid static and server rendering
-  - TypeScript support
-  - Intelligent bundling
-  - Route pre-fetching
-  - [nextjs.org](https://nextjs.org/)
-
-- **Cloud Firestore**: A flexible and scalable NoSQL cloud database provided by Firebase, designed for:
-  - Storing and syncing data
-  - Client- and server-side development
-  - [firebase.google.com](https://firebase.google.com/)
-
-
 ## Setting Up the Project
 
 Open a CLI in a directory where you keep your projects. Then we will use [Create Next App](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) to bootstrap our project. Use the following command, choose a name for your project and accept all the defaults:
@@ -110,7 +91,7 @@ export default function Document() {
 Now, let's make a `Layout` component with a simple placeholder `Header`.
 
 ```
-// src/components/ui/Layout.tsx
+// src/components/ui/layout/Layout.tsx
 import React from "react";
 import Header from "./Header";
 
@@ -128,7 +109,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => (
 export default Layout;
 ```
 ```
-// src/components/ui/Header.tsx
+// src/components/ui/layout/Header.tsx
 export default function Header() {
   return (
     <header className="flex px-16 py-8 bg-white w-full">
@@ -145,7 +126,7 @@ Last, we want to make some updates our Custom App:
 // src/pages/_app.tsx
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import Layout from "@/components/ui/Layout";
+import Layout from "@/components/ui/layout/Layout";
 import Head from "next/head";
 import appConfig from "@/app.config";
 
@@ -593,10 +574,10 @@ npm i @headlessui/react @heroicons/react
 Now we will update our `Header` component with a sign in link when signed out, and an `AccountDropdown` to sign out.
 
 ```
-// src/components/ui/Header.tsx
+// src/components/ui/layout/Header.tsx
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import AccountDropdown from "./controls/AccountDropdown";
+import AccountDropdown from "../controls/AccountDropdown";
 
 export default function Header() {
   const { user } = useAuth();
@@ -1076,10 +1057,872 @@ We have users now. What happens when they want to make an updates to their accou
 
 Rather than using the client-side auth from Firebase, we are going to use their Admin SDK. This will let us apply the update with a single save and will be something we use in the future to interact with a Firestore database.
 
-We will need to set up two secrets and add them to the 
+To initialize the Admin SDK, we will need to set up `FIREBASE_CLIENT_EMAIL` and `FIREBASE_PRIVATE_KEY` environment variables. Create a new `.env` file in the top level of your project. You can get these variables by going to your project settings in the Firebase console. Go to the Service Accounts tab and in the Firebase Admin SDK panel, click "Generate new private key" then confirm and download the json file. Open it up and use them to configure your `.env`.
+
+```
+FIREBASE_CLIENT_EMAIL="firebase-adminsdk-asdf12@your-app.iam.gserviceaccount.com"
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYOURPRIVATEKEY\n-----END PRIVATE KEY-----\n"
+```
+
+That done, we can set up our admin function with an initializer for the app that our various Firebase functions can use.
+
+```
+// src/lib/firebase/admin/firebaseInit.ts
+import admin from "firebase-admin"
+import { firebaseConfig } from "../config"
+
+try {
+  admin.instanceId()
+} catch (err) {
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      projectId: firebaseConfig.projectId,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    }),
+    databaseURL: `https://${firebaseConfig.projectId}.firebaseio.com`,
+  })
+}
+
+const db = admin.firestore()
+const auth = admin.auth()
+
+export { db, auth }
+```
+
+For example, our `updateUser` function:
+```
+// src/lib/firebase/admin/user.ts
+import { auth } from "./firebaseInit";
+import { UserRecord } from "firebase-admin/lib/auth/user-record";
+import { FirebaseError } from "firebase-admin";
+
+export interface UpdateUserOptions {
+  displayName?: string;
+  email?: string;
+  password?: string;
+}
+
+export interface UpdateUserResult {
+  success: boolean;
+  message: string;
+  updatedUser?: UserRecord;
+  error?: FirebaseError;
+}
+
+export const updateUser = async (
+  uid: string,
+  options: UpdateUserOptions
+): Promise<UpdateUserResult> => {
+  try {
+    const updatedUser = await auth.updateUser(uid, { ...options });
+    return {
+      success: true,
+      message: "User updated successfully.",
+      updatedUser,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Failed to update user.",
+      error: error as FirebaseError,
+    };
+  }
+};
+``` 
+
+Which we can now access via a Next.js API route:
+
+```
+// src/pages/api/user/update.ts
+import { NextApiRequest, NextApiResponse } from "next";
+import {
+  updateUser,
+  UpdateUserOptions,
+  UpdateUserResult,
+} from "@/lib/firebase/admin/user";
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method === "POST") {
+    const { uid, options } = req.body as {
+      uid: string;
+      options: UpdateUserOptions;
+    };
+
+    if (!uid || typeof uid !== "string") {
+      return res.status(400).json({ message: "User ID is required." });
+    }
+
+    try {
+      const result: UpdateUserResult = await updateUser(uid, options);
+      res.status(200).json(result);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "An error occurred while updating the user.", error });
+    }
+  } else {
+    res.status(405).json({ message: "Method not allowed. Use POST." });
+  }
+};
+
+export default handler;
+```
+
+We can send requests to update the user from our account page and form.
+
+```
+// src/pages/account.tsx
+import AccountForm from "@/components/ui/forms/AccountForm";
+import { useAuth } from "@/context/AuthContext";
+
+export default function Account() {
+  const { user } = useAuth();
+
+  return (
+    <div className="flex flex-col items-center justify-center py-24">
+      {user.uid && <AccountForm user={user} />}
+    </div>
+  );
+}
+```
+
+```
+// src/components/ui/forms/AccountForm.tsx
+import React, { useState } from "react";
+import Input from "../controls/Input";
+import { UserType } from "../../../context/AuthContext";
+
+const AccountForm = ({ user }: { user: UserType }) => {
+  const DEFAULT_PASSWORD = "**********";
+  const [displayName, setDisplayName] = useState<string>(
+    user.displayName || ""
+  );
+  const [email, setEmail] = useState<string>(user.email || "");
+  const [password, setPassword] = useState<string>(DEFAULT_PASSWORD);
+  const [error, setError] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isUpdated, setIsUpdated] = useState<boolean>(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setIsUpdated(false);
+    try {
+      const options: { displayName: string; email: string; password?: string } =
+        { displayName, email };
+      if (password !== DEFAULT_PASSWORD) {
+        options.password = password;
+      }
+      const response = await fetch("/api/user/update", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uid: user.uid,
+          options,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setIsUpdated(true);
+      } else {
+        setError(result.message);
+      }
+      setIsSubmitting(false);
+    } catch (error) {
+      setError("Sorry there was a problem.");
+    }
+  };
+  return (
+    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+      <h2 className="font-bold text-2xl sm:text-4xl text-center">
+        Manage Account
+      </h2>
+      <p
+        className={`text-center pt-4 pb-12 text-green-600 ${
+          isUpdated ? "" : "opacity-0"
+        }`}
+      >
+        ✓ Account Updated
+      </p>
+      <div
+        className="text-sm sm:text-lg sm:grid gap-x-2 gap-y-6 w-[480px]"
+        style={{ gridTemplateColumns: "1fr 2fr" }}
+      >
+        <label
+          htmlFor="name"
+          className="pt-2 px-2 pb-1 text-base w-full block text-left sm:text-right"
+        >
+          Display Name
+        </label>
+        <Input
+          value={displayName}
+          onChange={(e) => {
+            setDisplayName(e.target.value);
+          }}
+          name="name"
+          type="text"
+          required={true}
+        />
+        <label
+          htmlFor="email"
+          className="pt-2 px-2 pb-1 text-base w-full block text-left sm:text-right"
+        >
+          Email
+        </label>
+        <Input
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          name="email"
+          type="email"
+          required={true}
+        />
+        <label
+          htmlFor="password"
+          className="pt-2 px-2 pb-1 text-base w-full block text-left sm:text-right"
+        >
+          Password
+        </label>
+        <Input
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+          name="password"
+          type="password"
+          required={true}
+        />
+      </div>
+      <div
+        className={`py-2 text-sm sm:text-base text-red-600 text-center ${
+          error ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        {error && error.replace("Firebase: ", "")}
+      </div>
+      <div className="flex justify-end mt-4 mb-2">
+        <button
+          disabled={isSubmitting}
+          type="submit"
+          className={`font-sans ${
+            isSubmitting ? "bg-gray-600 opacity-20" : "bg-indigo-600"
+          } w-full sm:w-auto text-white rounded-xl py-3 px-8 text-xl`}
+        >
+          Update Account
+        </button>
+      </div>
+    </form>
+  );
+};
+
+export default AccountForm;
+```
+
+## Data
+
+We will be using [Cloud Firestore](https://firebase.google.com/docs/firestore) as our database. 
 
 
+First, let's set up some functions saving and reading statuses from a Firebase Firestore database to store the statuses with Firebase Authentication to verify the user tokens.
 
+First, we import the `db` and `auth` instances from the firebaseInit module and define a Status interface that represents the structure of a status object.
+
+The `saveStatus` function verifies the user token using Firebase Authentication's `verifyIdToken` method, and then stores the status in the Firestore database along with the user ID and a timestamp. The function determines the appropriate Firestore collection name based on the environment, either "status" or "status-test" for production and testing environments, respectively. By using the "-test" suffix on our collection, we can keep our production data free of test data.
+
+The `getCurrentStatus` function is another asynchronous function that verifies the user token. It retrieves the user's latest status from the Firestore database and orders the results by timestamp in descending order, then limits the results to a single document. If a status document is found, the function returns the latest status; otherwise, it returns an empty status with the current timestamp.
+
+Lastly, the `getRecentStatuses` function is an asynchronous function that retrieves a list of recent statuses from the Firestore database, including pulling in the `displayName` for each associated user. It accepts an optional `startAfterTimestamp` parameter for pagination and a `pageSize` parameter for the number of results per page. The function creates an initial query to fetch the most recent statuses, and applies pagination if `startAfterTimestamp` is provided then  returns the statuses along with the last timestamp to support pagination.
+
+```
+// src/lib/firebase/admin/status.ts
+import { db, auth } from "./firebaseInit";
+
+export interface Status {
+  status: string;
+  uid: string;
+  timestamp: number;
+  displayName?: string;
+}
+
+export const saveStatus = async (status: string, userToken: string) => {
+  try {
+    // Verify the user token
+    const decodedToken = await auth.verifyIdToken(userToken);
+
+    // Use the UID from the decoded token
+    const uid = decodedToken.uid;
+
+    const statusRecord: Status = {
+      status,
+      uid,
+      timestamp: Date.now(),
+    };
+    const collectionName =
+      process.env.NODE_ENV === "production" ? "status" : "status-test";
+    await db.collection(collectionName).add(statusRecord);
+    return { success: true, message: "Status saved successfully." };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Failed to save status.",
+      error,
+    };
+  }
+};
+
+export const getCurrentStatus = async (
+  userToken: string
+): Promise<Status | null> => {
+  try {
+    // Verify the user token
+    const decodedToken = await auth.verifyIdToken(userToken);
+
+    // Use the UID from the decoded token
+    const uid = decodedToken.uid;
+
+    // Define the collection name based on the environment
+    const collectionName =
+      process.env.NODE_ENV === "production" ? "status" : "status-test";
+
+    // Query the status collection to get the latest status for the user
+    const querySnapshot = await db
+      .collection(collectionName)
+      .where("uid", "==", uid)
+      .orderBy("timestamp", "desc")
+      .limit(1)
+      .get();
+
+    // If there's a result, return the latest status
+    if (!querySnapshot.empty) {
+      const doc = querySnapshot.docs[0];
+      const statusData: Status = {
+        status: doc.data().status,
+        uid: doc.data().uid,
+        timestamp: doc.data().timestamp,
+      };
+      return statusData;
+    } else {
+      return {
+        status: "",
+        uid,
+        timestamp: Date.now(),
+      };
+    }
+  } catch (error) {
+    console.error("Error fetching current status:", error);
+    throw error;
+  }
+};
+
+// Helper function to get user's displayName by UID
+const getUserDisplayName = async (uid: string): Promise<string | null> => {
+  try {
+    const userRecord = await auth.getUser(uid);
+    return userRecord.displayName || null;
+  } catch (error) {
+    console.error("Error fetching user display name:", error);
+    return null;
+  }
+};
+
+export const getRecentStatuses = async (
+  startAfterTimestamp?: number,
+  pageSize: number = 24
+): Promise<{ statuses: Status[]; lastTimestamp: number | null }> => {
+  try {
+    // Define the collection name based on the environment
+    const collectionName =
+      process.env.NODE_ENV === "production" ? "status" : "status-test";
+
+    // Create the initial query to get the most recent statuses
+    let query = db
+      .collection(collectionName)
+      .orderBy("timestamp", "desc")
+      .limit(pageSize);
+
+    // Apply pagination using the startAfterTimestamp parameter, if provided
+    if (startAfterTimestamp) {
+      query = query.startAfter(startAfterTimestamp);
+    }
+
+    // Execute the query and get the statuses
+    const querySnapshot = await query.get();
+
+    // Map the query results to an array of Status objects
+    const statusesPromises: Promise<Status>[] = querySnapshot.docs.map(
+      async (doc) => {
+        const data = doc.data();
+        const displayName = await getUserDisplayName(data.uid);
+        return {
+          status: data.status,
+          uid: data.uid,
+          displayName,
+          timestamp: data.timestamp,
+        };
+      }
+    );
+
+    const statuses = await Promise.all(statusesPromises);
+
+    // Determine the last timestamp for pagination
+    const lastTimestamp =
+      querySnapshot.docs.length > 0
+        ? querySnapshot.docs[querySnapshot.docs.length - 1].data().timestamp
+        : null;
+
+    // Return the statuses and the last timestamp for pagination
+    return { statuses, lastTimestamp };
+  } catch (error) {
+    console.error("Error fetching recent statuses:", error);
+    throw error;
+  }
+};
+```
+
+Next, we can set up our API routes. For example, this route makes use of the saveStatus function to store the user status in the Firestore database, utilizing Firebase Authentication to verify user tokens. The API route ensures that only POST requests are accepted and checks for the presence of the required status and authorization header before proceeding.
+
+
+```
+// src/pages/api/status/update.ts
+import { NextApiRequest, NextApiResponse } from "next";
+import { saveStatus } from "@/lib/firebase/admin/status";
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
+    return res.status(405).end("Method Not Allowed");
+  }
+
+  const { status } = req.body;
+  const authHeader = req.headers.authorization;
+
+  if (!status || !authHeader) {
+    return res.status(400).json({ message: "Missing status or user token" });
+  }
+
+  const userToken = authHeader.replace("Bearer ", ""); // Remove the "Bearer " part from the token
+
+  try {
+    const result = await saveStatus(status, userToken);
+    if (result.success) {
+      return res.status(200).json(result);
+    } else {
+      return res
+        .status(500)
+        .json({ message: result.message, error: result.error });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to save status.", error });
+  }
+};
+
+export default handler;
+```
+
+We will set up a similar route for reading the user’s current status. Then we can use these in a `MyStatusCard` component for users to view and update their current status using emojis. It leverages the power of hooks and context to manage state and interact with the custom API routes for fetching and updating the user's status in the Firestore database.
+
+```
+import React, { useState, useEffect, useCallback } from "react";
+import { useAuth } from "@/context/AuthContext";
+import EmojiPicker from "emoji-picker-react";
+
+const MyStatusCard = () => {
+  const { user, getAuthToken } = useAuth();
+  const [status, setStatus] = useState("");
+  const [openPicker, setOpenPicker] = useState(false);
+
+  const fetchUserStatus = useCallback(async () => {
+    if (user && getAuthToken) {
+      try {
+        const response = await fetch(`/api/status/read`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${await getAuthToken()}`,
+          },
+        });
+        const data = await response.json();
+        setStatus(data.status);
+      } catch (error) {
+        console.error("Failed to fetch user status:", error);
+      }
+    }
+  }, [user, getAuthToken]);
+
+  useEffect(() => {
+    fetchUserStatus();
+  }, [fetchUserStatus]);
+
+  const onEmojiSelect = async (emoji: string) => {
+    setStatus(emoji);
+    setOpenPicker(false);
+    try {
+      const response = await fetch("/api/status/update", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${await getAuthToken()}`,
+        },
+        body: JSON.stringify({ status: emoji }),
+      });
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+    }
+  };
+
+  return (
+    <div className="bg-white shadow-md rounded-lg pt-8 px-8 pb-12 w-full max-w-sm text-center">
+      <h2 className="text-xl mb-4">Your Current Status</h2>
+      {openPicker ? (
+        <>
+          <EmojiPicker
+            onEmojiClick={(selection) => {
+              onEmojiSelect(selection.emoji);
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <div className="border text-9xl py-16 mb-4">{status || "😀"}</div>
+          <button
+            onClick={() => {
+              setOpenPicker(true);
+            }}
+            className="bg-indigo-600 text-white px-8 py-3 rounded-lg text-xl"
+          >
+            Change
+          </button>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default MyStatusCard;
+```
+This request will fail the first time. Check the network response and you will see that Firebase will prompt us to set up an index for this query. Go to the link provided and create the index.
+
+Next, we want to show all the user statuses on the home page. We need a new route that uses our `getRecentStatuses` function
+
+```
+// src/pages/api/status/read/all.ts
+import { NextApiRequest, NextApiResponse } from "next";
+import { getRecentStatuses, Status } from "@/lib/firebase/admin/status";
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method !== "GET") {
+    res.setHeader("Allow", "GET");
+    return res.status(405).end("Method Not Allowed");
+  }
+
+  const startAfterTimestamp = req.query.startAfter
+    ? parseInt(req.query.startAfter as string)
+    : undefined;
+  const pageSize = req.query.pageSize
+    ? parseInt(req.query.pageSize as string)
+    : 24;
+
+  try {
+    const result: {
+      statuses: Status[];
+      lastTimestamp: number | null;
+    } = await getRecentStatuses(startAfterTimestamp, pageSize);
+
+    return res.status(200).json(result);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Failed to fetch recent statuses.", error });
+  }
+};
+
+export default handler;
+```
+
+And then a component to show all the statuses:
+
+```
+// src/components/ui/lists/StatusesList.tsx
+import React, { useState, useEffect } from "react";
+import { Status } from "@/lib/firebase/admin/status";
+
+interface StatusCardProps {
+  status: Status;
+}
+
+const StatusCard: React.FC<StatusCardProps> = ({ status }) => {
+  return (
+    <div className="bg-white shadow-md rounded-lg p-4 text-center mb-4">
+      <p className="text-7xl text-gray-500 border p-8 mb-1">{status.status}</p>
+      <p className="text-lg py-1 font-bold">{status.displayName}</p>
+      <p className="text-sm text-gray-500">
+        {new Date(status.timestamp).toLocaleString()}
+      </p>
+    </div>
+  );
+};
+
+const StatusesList: React.FC = () => {
+  const [statuses, setStatuses] = useState<Status[]>([]);
+
+  useEffect(() => {
+    const fetchStatuses = async () => {
+      try {
+        const response = await fetch("/api/status/read/all");
+        const data = await response.json();
+        setStatuses(data.statuses);
+      } catch (error) {
+        console.error("Failed to fetch statuses:", error);
+      }
+    };
+
+    fetchStatuses();
+  }, []);
+
+  return (
+    <div className="text-center">
+      <h3 className="py-8 text-2xl font-bold">Recent Statuses</h3>
+      <div className="flex flex-wrap justify-center gap-4 w-[100vw]">
+        {statuses.map((status) => (
+          <StatusCard key={status.timestamp} status={status} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default StatusesList;
+```
+
+## Testing
+
+Next up, we will set up tests with Playwright, a modern end-to-end testing framework built by Microsoft. Playwright enables developers to write reliable, fast, and scalable tests for web applications. 
+
+```
+npm init playwright@latest
+```
+
+We want to make tests that cover a new user and an existing user. Let's set up some data for these test users:
+
+```
+// src/lib/playwright/users.ts
+import appConfig from "@/app.config";
+
+const domain = appConfig.url.replace("https://", "");
+
+type TestUser = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+const TEST_USER_PASSWORD = "TestPassword1!";
+
+export const existingUser: TestUser = {
+  name: "Old Guy",
+  email: "existingtestuser@" + domain,
+  password: TEST_USER_PASSWORD,
+};
+
+export const newUser: TestUser = {
+  name: "New Guy",
+  email: "newusertest@" + domain,
+  password: TEST_USER_PASSWORD,
+};
+```
+
+Let's update our `package.json` with some new commands for testing:
+
+```
+"scripts": {
+	"dev": "next dev",
+	"build": "next build",
+	"start": "next start",
+	"lint": "next lint",
+	"test": "npx playwright test",
+	"test-watch": "npx playwright test --headed",
+	"test-write": "npx playwright codegen localhost:3000/"
+},
+```
+
+We want our local tests to have access to our `.env` so we need to create a helper file:
+
+```
+import { defineConfig, devices } from "@playwright/test"
+
+const PORT = process.env.PORT || 3000
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`
+
+export default defineConfig({
+  testDir: "./tests",
+  globalSetup: "./src/lib/playwright/global-setup.ts",
+  ...
+```
+
+Then we need to update `playwright.config.ts`
+
+```
+globalSetup: "./lib/playwright/global-setup.ts",
+```
+
+We will also need to install the `dotenv` dependency.
+
+```
+npm install --save-dev 
+```
+  
+Now let's write a test using Playwright's utility. Run:
+
+```
+npm run test-write
+```
+
+This will open up our app in Playwright and we can use it to generate the test. We can click on some elements to verify they exist, then fill out the sign up form to create an account.
+
+```
+import { test } from "@playwright/test";
+import { newUser } from "../src/lib/playwright/users";
+import { deleteTestUser } from "../src/lib/firebase/admin/test";
+import appConfig from "../src/app.config";
+
+let newUserEmail: string;
+
+test.describe("New User", () => {
+  test.beforeEach(async () => {
+    newUserEmail =
+      "newuser" +
+      Math.random().toString(36).substring(2, 10) +
+      "@" +
+      appConfig.url.replace("https://", "");
+  });
+
+  test.afterEach(async () => {
+    const deleteResult = await deleteTestUser(newUserEmail);
+    console.log(`Delete user result: ${deleteResult.result}`);
+  });
+
+  test("can sign up for new account", async ({ page }) => {
+    await page.goto("http://localhost:3000/");
+    await page.getByRole("link", { name: "Hello Next App" }).isVisible();
+    await page.getByRole("heading", { name: "Welcome!" }).isVisible();
+    await page.getByRole("link", { name: "Sign Up" }).click();
+    await page.locator('input[name="name"]').click();
+    await page.locator('input[name="name"]').fill(newUser.name);
+    await page.locator('input[name="name"]').press("Tab");
+    await page.locator('input[name="email"]').fill(newUserEmail);
+    await page.locator('input[name="email"]').press("Tab");
+    await page.locator('input[name="password"]').fill(newUser.password);
+    await page.getByRole("button", { name: "Sign Up" }).click();
+    await page.getByRole("button", { name: "New Guy" }).isVisible();
+    await page.getByRole("heading", { name: "Welcome back!" }).click();
+    await page
+      .getByRole("heading", { name: "Your Current Status" })
+      .isVisible();
+    await page.getByText("😀").isVisible();
+  });
+});
+```
+
+In the code above, we are using `beforeEach` to create a unique email address each time the test runs so there won't be any issues with race conditions on other tests we may create in the future. 
+
+There is also an `afterEach` that removes the test user account that is created by the account with a new `deleteTestUser` firebase function.
+
+```
+// src/lib/firebase/admin/test.ts
+import { auth } from "./firebaseInit";
+
+export const deleteTestUser = async (testUserEmail: string) => {
+  const collectionName = "users-test";
+
+  try {
+    // Get the user's UID by email address from Firebase Authentication
+    const userRecord = await auth.getUserByEmail(testUserEmail);
+    const uid = userRecord.uid;
+
+    console.log("Deleting test user...");
+
+    // Delete the user from Firebase Authentication
+    await auth.deleteUser(uid);
+    console.log(
+      `User with UID ${uid} has been deleted from Firebase Authentication.`
+    );
+
+    return { result: "success" };
+  } catch (error) {
+    console.log("deleteTestUser error, probably already deleted");
+    return { result: "error" };
+  }
+};
+```
+
+We can see the test run by using one of our test commands.
+
+```
+npm run test-watch
+```
+
+Additionally, we'd like these tests to run with a Github action every time we push to make sure we aren't breaking anything. We need to install the `start-server-and-test package` in the project:
+
+```
+npm install --save-dev start-server-and-test
+```
+
+And update the scripts in `package.json`:
+
+```
+"scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "start-server-and-test": "start-server-and-test 'npm run dev' http://localhost:3000 'npx playwright test'",
+    "test": "npx playwright test",
+    "test-watch": "npx playwright test --headed",
+    "test-write": "npx playwright codegen localhost:3000/"
+  },
+```
+
+Finally, here is our `playwright.yml` configuration for Github actions
+
+```
+// .github/workflows/playwright.yml
+name: Playwright Tests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Start server and run Playwright tests
+      run: npm run start-server-and-test
+    - uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
+```
+
+In your Github repository settings, enable ”Allow auto-merge” and you will be able to have your pull requests get merged once tests pass.
 
 
 ## Learn More
