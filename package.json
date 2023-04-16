@@ -1,6 +1,12 @@
 {
   "name": "hello-next-app",
-  "version": "1.0.0",
+  "description": "Next.js Starter Project to get you up and running in production quickly with Firebase Authentication, Cloud Firestore Database, Serverless Edge Functions, Playwright Testing and more.",
+  "version": "1.0.1",
+  "homepage": "https://github.com/johnpolacek/hello-next-app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnpolacek/hello-next-app.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -38,5 +44,10 @@
     "playwright": "^1.32.3",
     "prettier": "^2.8.7",
     "start-server-and-test": "^2.0.0"
-  }
+  },
+  "author": {
+    "name": "John Polacek",
+    "url": "https://johnpolacek.com/"
+  },
+  "license": "MIT"
 }
