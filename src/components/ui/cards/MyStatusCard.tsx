@@ -5,6 +5,7 @@ import EmojiPicker from "emoji-picker-react";
 const MyStatusCard = () => {
   const { user, getAuthToken } = useAuth();
   const [status, setStatus] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
   const [openPicker, setOpenPicker] = useState(false);
 
   const fetchUserStatus = useCallback(async () => {
@@ -19,6 +20,7 @@ const MyStatusCard = () => {
         });
         const data = await response.json();
         setStatus(data.status);
+        setIsLoaded(true);
       } catch (error) {
         console.error("Failed to fetch user status:", error);
       }
@@ -65,7 +67,13 @@ const MyStatusCard = () => {
       ) : (
         <>
           <div className="border text-9xl py-16 mb-4">
-            <span>{status !== "" ? status : "😀"}</span>
+            <span
+              className={`${
+                isLoaded ? "opacity-100" : "opacity-0"
+              } transition-opacity duration-1000`}
+            >
+              {status && status !== "" ? status : "😀"}
+            </span>
           </div>
           <button
             onClick={() => {
