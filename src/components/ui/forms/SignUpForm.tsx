@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
-import { useRouter } from "next/router";
 import Input from "../controls/Input";
 
 const SignUpForm = () => {
@@ -9,8 +8,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const { signUp } = useAuth();
-  const router = useRouter();
+  const { signUp, signInWithGoogle } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,6 +23,18 @@ const SignUpForm = () => {
       }
     }
   };
+
+  const handleGoogleSignUp = async () => {
+    setIsSubmitting(true);
+    try {
+      await signInWithGoogle();
+      window.location.href = "/";
+    } catch (error: any) {
+      setError(error.message);
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -99,6 +109,23 @@ const SignUpForm = () => {
           } w-full sm:w-auto text-white rounded-xl py-3 px-8 text-xl`}
         >
           Sign Up
+        </button>
+      </div>
+      <div className="w-full text-center mt-12 mb-4 border-t py-4">
+        <div className="tracking-widest uppercase text-sm pt-8 pb-4">OR</div>
+        <button
+          disabled={isSubmitting}
+          onClick={(e) => {
+            e.preventDefault();
+            handleGoogleSignUp();
+          }}
+          className={`font-sans ${
+            isSubmitting
+              ? "opacity-50 border-2 border-gray-600"
+              : "border-2 border-indigo-600"
+          } text-indigo-600 bg-indigo-50 rounded-xl py-4 px-12 text-xl w-full`}
+        >
+          Sign Up with Google
         </button>
       </div>
     </form>

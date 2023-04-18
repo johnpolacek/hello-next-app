@@ -11,6 +11,8 @@ import {
   updatePassword,
   getIdToken,
   UserCredential,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../lib/firebase/client/auth";
 import appConfig from "@/app.config";
@@ -28,6 +30,7 @@ interface AuthContextType {
   requestPasswordReset: (email: string) => Promise<void>;
   isSignInWithLink: (emailLink: string) => Promise<boolean>;
   signInWithLink: (email: string, emailLink: string) => Promise<UserCredential>;
+  signInWithGoogle: () => Promise<UserCredential>;
   setNewPassword: (password: string) => Promise<void | { error: string }>;
   loading: boolean;
   getAuthToken: () => Promise<string>;
@@ -109,6 +112,12 @@ export const AuthContextProvider = ({
     return result;
   };
 
+  const signInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    const result = signInWithPopup(auth, provider);
+    return result;
+  };
+
   const signOut = async () => {
     setUser({ email: null, uid: null, displayName: null });
     await signOutUser(auth);
@@ -155,6 +164,7 @@ export const AuthContextProvider = ({
         requestPasswordReset,
         isSignInWithLink,
         signInWithLink,
+        signInWithGoogle,
         setNewPassword,
         loading,
         getAuthToken,

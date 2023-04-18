@@ -8,7 +8,7 @@ const SignInForm = () => {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const { signIn } = useAuth();
+  const { signIn, signInWithGoogle } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -21,6 +21,17 @@ const SignInForm = () => {
       } catch (error: any) {
         setError(error.message);
       }
+    }
+  };
+
+  const handleGoogleSignUp = async () => {
+    setIsSubmitting(true);
+    try {
+      await signInWithGoogle();
+      window.location.href = "/";
+    } catch (error: any) {
+      setError(error.message);
+      setIsSubmitting(false);
     }
   };
 
@@ -81,6 +92,23 @@ const SignInForm = () => {
           } text-white rounded-xl py-3 px-8 text-xl`}
         >
           Sign In
+        </button>
+      </div>
+      <div className="w-full text-center mt-12 mb-4 border-t py-4">
+        <div className="tracking-widest uppercase text-sm py-4">OR</div>
+        <button
+          disabled={isSubmitting}
+          onClick={(e) => {
+            e.preventDefault();
+            handleGoogleSignUp();
+          }}
+          className={`font-sans ${
+            isSubmitting
+              ? "opacity-50 border-2 border-gray-600"
+              : "border-2 border-indigo-600"
+          } text-indigo-600 bg-indigo-50 rounded-xl py-4 px-12 text-xl w-full`}
+        >
+          Sign In with Google
         </button>
       </div>
     </form>
