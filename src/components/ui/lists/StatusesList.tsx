@@ -38,9 +38,13 @@ const StatusesList: React.FC = () => {
     <div className="text-center">
       <h3 className="py-8 text-2xl font-bold">Recent Statuses</h3>
       <div className="flex flex-wrap justify-center gap-4 w-[100vw]">
-        {statuses.map((status) => (
+        {statuses?.map((status) => (
           <StatusCard key={status.timestamp} status={status} />
-        ))}
+        )) || (
+          <div className="text-xl italic text-gray-400 py-8">
+            No Statuses yet...
+          </div>
+        )}
       </div>
     </div>
   );
