@@ -30,7 +30,7 @@ test.describe("New User", () => {
     await page.locator('input[name="email"]').fill(newUserEmail);
     await page.locator('input[name="email"]').press("Tab");
     await page.locator('input[name="password"]').fill(newUser.password);
-    await page.getByRole("button", { name: "Sign Up" }).click();
+    await page.getByRole("button", { name: "Sign Up", exact: true }).click();
     await page.getByRole("button", { name: "New Guy" }).isVisible();
     await page.getByRole("heading", { name: "Welcome back!" }).click();
     await page

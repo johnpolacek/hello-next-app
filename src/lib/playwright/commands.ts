@@ -7,6 +7,6 @@ export const signIn = async (page: Page) => {
   await page.locator('input[name="email"]').fill(existingUser.email);
   await page.locator('input[name="email"]').press("Tab");
   await page.locator('input[name="password"]').fill(existingUser.password);
-  await page.getByRole("button", { name: "Sign In" }).click();
+  await page.getByRole("button", { name: "Sign In", exact: true }).click();
   await page.getByRole("heading", { name: "Welcome back!" }).isVisible();
 };

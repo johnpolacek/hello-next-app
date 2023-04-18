@@ -39,8 +39,6 @@ To run locally, do:
 npm run dev
 ```
 
-To deploy, you will need to add secrets for the environment variables from your `.env` to the server. 
-
 To run tests, do `npm run test` or `npm run test-watch`.
 
 
@@ -49,3 +47,8 @@ To run tests, do `npm run test` or `npm run test-watch`.
 Sign up for Vercel and link your project on Github. When you push your code, it should deploy to Vercel. 
 
 You will need to set environment variables on your project with the values from your local `.env` file. You will also need to add your production domain to the list of Authorized Domains under your Firebase Project’s Authentication settings.
+
+You will also need to add the same environment variables to the "Settings" tab in your GitHub repository for them to be available to the CI test runner.
+
+
+
