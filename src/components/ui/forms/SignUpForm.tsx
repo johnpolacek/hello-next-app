@@ -111,8 +111,10 @@ const SignUpForm = () => {
           Sign Up
         </button>
       </div>
-      <div className="w-full text-center mt-12 mb-4 border-t py-4">
-        <div className="tracking-widest uppercase text-sm pt-8 pb-4">OR</div>
+      <div className="w-full text-center mt-12 mb-4 border-t-2 border-gray-300 py-4">
+        <div className="tracking-widest uppercase text-sm pb-8 -mt-7">
+          <span className="bg-white px-4 text-gray-700">OR</span>
+        </div>
         <button
           disabled={isSubmitting}
           onClick={(e) => {
